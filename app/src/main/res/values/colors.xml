@@ -6,6 +6,7 @@
     <color name="colorText">#fff</color>
 
     <!-- color palette -->
+    <color name="white">#fff</color>
     <color name="yellow">#f1e616</color>
     <color name="darkOrange">#F0512A</color>
     <color name="lightOrange">#ff7640</color>
