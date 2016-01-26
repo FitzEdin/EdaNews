@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#085860</color>
+    <color name="colorPrimaryDark">#f0512a</color>
+    <color name="colorPrimary">#ff7640</color>
+    <color name="colorText">#fff</color>
+
+    <!-- color palette -->
+    <color name="yellow">#f1e616</color>
+    <color name="darkOrange">#F0512A</color>
+    <color name="lightOrange">#ff7640</color>
+    <color name="darkGreen">#085860</color>
+    <color name="lightGreen">#478d95</color>
+</resources>
