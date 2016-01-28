@@ -7,10 +7,14 @@
     android:layout_height="68dp"
 
     android:layout_marginTop="8dp"
-    android:layout_marginLeft="2dp"
-    android:layout_marginRight="2dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
 
     android:padding="8dp"
+
+    android:focusable="true"
+    android:clickable="true"
 
     android:background="@drawable/round"
     android:elevation="@dimen/elevation" >
@@ -22,7 +26,9 @@
         android:layout_width="60dp"
         android:layout_height="48dp"
 
-        android:paddingTop="2dp"/>
+        android:paddingTop="2dp"
+
+        android:tint="@color/lightOrange"/>
 
     <LinearLayout
         android:orientation="vertical"

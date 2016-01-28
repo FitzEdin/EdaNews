@@ -42,6 +42,13 @@ public class ArticleListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+        searchBar = (LinearLayout)findViewById(R.id.search_bar);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        noNetworkRetry = (TextView)findViewById(R.id.no_network_retry);
+
+        tryForNetwork();
+
         //set up layout manager
         layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -55,12 +62,9 @@ public class ArticleListActivity extends AppCompatActivity
         articleListView.setLayoutManager(layoutManager);
         articleListView.setAdapter(listAdapter);
 
-        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
-        searchBar = (LinearLayout)findViewById(R.id.search_bar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        noNetworkRetry = (TextView)findViewById(R.id.no_network_retry);
-
-        tryForNetwork();
+        //kill progressBar
+        mProgressBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.VISIBLE);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,8 +72,12 @@ public class ArticleListActivity extends AppCompatActivity
             /*    Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             */
-                searchBar.setVisibility(View.VISIBLE);
-                searchBar.hasFocus();
+                if(searchBar.getVisibility() == View.VISIBLE) {
+                    searchBar.setVisibility(View.INVISIBLE);
+                }else{
+                    searchBar.setVisibility(View.VISIBLE);
+                    searchBar.hasFocus();
+                }
             }
         });
 
@@ -126,12 +134,6 @@ public class ArticleListActivity extends AppCompatActivity
     @Override
     public void onStop() {
         super.onStop();
-
-        //TODO: remove this
-        //hide progress bar
-        mProgressBar.setVisibility(View.INVISIBLE);
-        searchBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.INVISIBLE);
 
         //save data
     }

@@ -29,11 +29,11 @@
         android:layout_height="wrap_content"
 
         android:layout_marginTop="64dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
 
         android:elevation="@dimen/elevation"
-        android:background="@drawable/round" >
+        android:background="@drawable/round_bordered" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -53,9 +53,11 @@
             android:textColor="@color/colorTextPrimary"
             android:textSize="16sp"
 
-            android:paddingLeft="10dp"
+            android:paddingLeft="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
+
+            android:layout_margin="2dp"
 
             android:background="@color/white"
             android:inputType="textCapWords"
