@@ -15,12 +15,34 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_article_list" tools:context=".ArticleListActivity">
 
-    <TextView
-        android:id="@+id/txVw"
-        android:text="Hello World!"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:progressTint="@color/colorPrimaryDark"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/no_network_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+        android:padding="8dp"
+
+        android:clickable="true"
+
+        android:text="@string/no_network_retry"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextPrimary"
+
+        android:background="@drawable/round"
+        android:elevation="3dp"/>
+
+    <!-- Below is a floating text bar with rounded edges and an icon
     <LinearLayout
         android:orientation="horizontal"
 
@@ -32,7 +54,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginRight="12dp"
 
-        android:layout_below="@+id/txVw">
+        android:elevation="2dp">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -57,4 +79,5 @@
             android:background="@drawable/round"/>
 
     </LinearLayout>
+    -->
 </RelativeLayout>

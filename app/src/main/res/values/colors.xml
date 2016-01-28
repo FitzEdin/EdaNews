@@ -3,7 +3,9 @@
     <color name="colorAccent">#085860</color>
     <color name="colorPrimaryDark">#f0512a</color>
     <color name="colorPrimary">#ff7640</color>
-    <color name="colorText">#fff</color>
+    <color name="colorBackground">#fafafa</color>
+    <color name="colorTextPrimary">#085860</color>
+    <color name="colorTextSecondary">#8A085860</color>
 
     <!-- color palette -->
     <color name="white">#fff</color>

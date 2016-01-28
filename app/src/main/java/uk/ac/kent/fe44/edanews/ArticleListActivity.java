@@ -1,5 +1,8 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,13 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class ArticleListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private TextView noNetworkRetry;
     static private FloatingActionButton fab;
+    static private LinearLayout searchBar;
+    protected ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,12 +36,29 @@ public class ArticleListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //set up visual elements
+        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+        searchBar = (LinearLayout)findViewById(R.id.search_bar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
+        noNetworkRetry = (TextView)findViewById(R.id.no_network_retry);
+
+        tryForNetwork();
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
+            /*    Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            */
+                searchBar.setVisibility(View.VISIBLE);
+                searchBar.hasFocus();
+            }
+        });
+
+        noNetworkRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tryForNetwork();
             }
         });
 
@@ -43,6 +70,52 @@ public class ArticleListActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void tryForNetwork(){
+        //check that there is a connection before starting async thread
+
+        //hide everything
+        mProgressBar.setVisibility(View.INVISIBLE);
+        searchBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.INVISIBLE);
+        noNetworkRetry.setVisibility(View.INVISIBLE);
+
+        if(isNetworkAvailable()){   //network is there? grab things
+            //hide no network message if present, show fab+progress bar
+            mProgressBar.setVisibility(View.VISIBLE);
+            /*create object to get blog posts
+            GetBlogPostsTask getBlogPosts = new GetBlogPostsTask();
+            //run that object
+            getBlogPosts.execute(); */
+        }else {        //no network? hide progress bar and tell the user
+            noNetworkRetry.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        //release resources, files and sensors
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        //TODO: remove this
+        //hide progress bar
+        mProgressBar.setVisibility(View.INVISIBLE);
+        searchBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.INVISIBLE);
+
+        //save data
     }
 
     @Override
@@ -83,11 +156,9 @@ public class ArticleListActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            TextView txVw = (TextView)findViewById(R.id.txVw);
-            txVw.setText("Welcome HOME !!!");
+            Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_faves) {
-            TextView txVw = (TextView)findViewById(R.id.txVw);
-            txVw.setText("My favourite place !!!");
+            Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_EDA) {
             Toast.makeText(this, "School at Kent Uni", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_developer) {
@@ -99,4 +170,22 @@ public class ArticleListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    //Source: previous project kn.muscovado.thadailygeek
+    //check that the network is available
+    private boolean isNetworkAvailable() {
+        ConnectivityManager mngr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = mngr.getActiveNetworkInfo();
+
+        boolean isAvailable = false;
+
+        //checks that the network is present && it's connected
+        if( ( networkInfo != null ) && ( networkInfo.isConnected() ) ){
+            isAvailable = true;		//network is up & running
+        }
+
+        return isAvailable;
+    }//end isNetworkAvailable() method
 }

@@ -8,4 +8,6 @@
     <string name="action_search">Search</string>
 
     <string name="search_titles">Search Titles...</string>
+    <string name="no_network">No network is available.</string>
+    <string name="no_network_retry">No network is available. \n Tap to retry.</string>
 </resources>
