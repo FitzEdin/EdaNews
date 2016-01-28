@@ -40,7 +40,7 @@
         android:textColor="@color/colorTextPrimary"
 
         android:background="@drawable/round"
-        android:elevation="3dp"/>
+        android:elevation="@dimen/elevation"/>
 
     <!-- Below is a floating text bar with rounded edges and an icon
     <LinearLayout
