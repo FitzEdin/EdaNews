@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="2dp"
+    android:layout_marginRight="2dp"
+
+    android:padding="8dp"
+
+    android:background="@drawable/round"
+    android:elevation="@dimen/elevation" >
+
+    <ImageView
+        android:id="@+id/article_photo"
+        android:src="@drawable/ic_uok_logo_new"
+
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+
+        android:paddingTop="2dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        android:layout_marginStart="8dp" >
+
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingBottom="2dp"
+
+            android:text="Degree and prize giving day for postgraduate students"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
+
+            android:lines="1"
+            android:maxLength="20" />
+
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="14/12/1988"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp"
+
+            android:lines="1"
+            android:maxLength="10" />
+    </LinearLayout>
+
+</LinearLayout>

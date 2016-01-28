@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,6 +31,10 @@ public class ArticleListActivity extends AppCompatActivity
     static private LinearLayout searchBar;
     protected ProgressBar mProgressBar;
 
+    private RecyclerView articleListView;
+    private LinearLayoutManager layoutManager;
+    private ArticleListAdapter listAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +42,19 @@ public class ArticleListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //set up layout manager
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.scrollToPosition(0);
+
+        //set up list adapter
+        listAdapter = new ArticleListAdapter();
+
         //set up visual elements
+        articleListView = (RecyclerView)findViewById(R.id.article_list_view);
+        articleListView.setLayoutManager(layoutManager);
+        articleListView.setAdapter(listAdapter);
+
         mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
