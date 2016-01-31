@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,14 +13,20 @@ import java.util.List;
 
 /**
  * Created by fitzroy on 28/01/2016.
+ *
+ * Feeds the data into the listview
  */
 public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.ViewHolder> {
 
     private ArticleModel model = ArticleModel.getInstance();
+    private ArticleListFragment fragment;
+
 
     //constructor
-    public ArticleListAdapter() {
+    public ArticleListAdapter(ArticleListFragment fragment) {
         super();
+
+        this.fragment = fragment;
     }
 
     //called when a new row should be created
@@ -62,7 +69,15 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(itemView.getContext(), "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+                /*  resize cell on-click
+                    Issues: resized view is recycled with changes for other cell
+                    LinearLayout cell = (LinearLayout)itemView;
+
+                    ViewGroup.LayoutParams params = cell.getLayoutParams();
+                    params.height = 300;
+                    cell.setLayoutParams(params);
+                */
+                    fragment.onItemClicked(getPosition());
                 }
             });
 

@@ -10,7 +10,7 @@ public class ArticleModel {
     private static ArticleModel ourInstance = new ArticleModel();
 
     //list of Articles
-    private ArrayList<Article> articleList = new ArrayList<Article>();
+    private ArrayList<Article> articleList = new ArrayList<>();
 
     /*Constructor*/
     private ArticleModel() {

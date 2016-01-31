@@ -65,7 +65,13 @@
 
     </LinearLayout>
 
-    <include layout="@layout/content_article_list" />
+    <fragment
+        android:id="@+id/details_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        class="uk.ac.kent.fe44.edanews.ArticleListFragment"
+        tools:layout="@layout/fragment_article_list" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

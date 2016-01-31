@@ -1,6 +1,7 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -24,16 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ArticleListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ArticleListFragment.OnListItemClickedListener {
 
-    private TextView noNetworkRetry;
     static private FloatingActionButton fab;
     static private LinearLayout searchBar;
-    protected ProgressBar mProgressBar;
-
-    private RecyclerView articleListView;
-    private LinearLayoutManager layoutManager;
-    private ArticleListAdapter listAdapter;
+    private String ITEM_ID = "ITEM_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +38,14 @@ public class ArticleListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+
+        Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
+
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-        noNetworkRetry = (TextView)findViewById(R.id.no_network_retry);
 
-        tryForNetwork();
-
-        //set up layout manager
-        layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-
-        //set up list adapter
-        listAdapter = new ArticleListAdapter();
-
-        //set up visual elements
-        articleListView = (RecyclerView)findViewById(R.id.article_list_view);
-        articleListView.setLayoutManager(layoutManager);
-        articleListView.setAdapter(listAdapter);
-
-        //kill progressBar
-        mProgressBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.VISIBLE);
+        searchBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.INVISIBLE);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +62,6 @@ public class ArticleListActivity extends AppCompatActivity
             }
         });
 
-        noNetworkRetry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tryForNetwork();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -96,27 +70,6 @@ public class ArticleListActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    public void tryForNetwork(){
-        //check that there is a connection before starting async thread
-
-        //hide everything
-        mProgressBar.setVisibility(View.INVISIBLE);
-        searchBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.INVISIBLE);
-        noNetworkRetry.setVisibility(View.INVISIBLE);
-
-        if(isNetworkAvailable()){   //network is there? grab things
-            //hide no network message if present, show fab+progress bar
-            mProgressBar.setVisibility(View.VISIBLE);
-            /*create object to get blog posts
-            GetBlogPostsTask getBlogPosts = new GetBlogPostsTask();
-            //run that object
-            getBlogPosts.execute(); */
-        }else {        //no network? hide progress bar and tell the user
-            noNetworkRetry.setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
@@ -191,21 +144,14 @@ public class ArticleListActivity extends AppCompatActivity
         return true;
     }
 
+    /*define what happens on choosing a list item*/
+    @Override
+    public void onItemClicked(int position) {
+        Intent i = new Intent(this, ArticleDetailsActivity.class);
+        i.putExtra(ITEM_ID, position);
+        startActivity(i);
 
-    //Source: previous project kn.muscovado.thadailygeek
-    //check that the network is available
-    private boolean isNetworkAvailable() {
-        ConnectivityManager mngr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = mngr.getActiveNetworkInfo();
-
-        boolean isAvailable = false;
-
-        //checks that the network is present && it's connected
-        if( ( networkInfo != null ) && ( networkInfo.isConnected() ) ){
-            isAvailable = true;		//network is up & running
-        }
-
-        return isAvailable;
-    }//end isNetworkAvailable() method
+        //TODO: remove
+        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+    }
 }
