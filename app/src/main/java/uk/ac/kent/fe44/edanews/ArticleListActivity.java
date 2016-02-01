@@ -30,22 +30,30 @@ public class ArticleListActivity extends AppCompatActivity
     static private FloatingActionButton fab;
     static private LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
+    //private boolean hasTwoPanes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article_list);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        /*uncomment for two-pane
+        if(findViewById(R.id.details_fragment) == null) {
+            hasTwoPanes = false;
+        }else {
+            hasTwoPanes = true;
+        }
+        /*end of pc to remove*/
 
+
+        //TODO: remove this
         Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        searchBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.INVISIBLE);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +69,9 @@ public class ArticleListActivity extends AppCompatActivity
                 }
             }
         });
+
+        searchBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.VISIBLE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -147,11 +158,22 @@ public class ArticleListActivity extends AppCompatActivity
     /*define what happens on choosing a list item*/
     @Override
     public void onItemClicked(int position) {
+        //TODO: remove
+        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
         startActivity(i);
 
-        //TODO: remove
-        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+        /*TODO: uncomment for two-pane
+        if(hasTwoPanes) {
+            ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
+            fragment.updateDetails(position);
+        }else {
+            Intent i = new Intent(this, ArticleDetailsActivity.class);
+            i.putExtra(ITEM_ID, position);
+            startActivity(i);
+        }
+        /*end of section for two-panes*/
     }
 }

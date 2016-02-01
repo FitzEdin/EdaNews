@@ -35,6 +35,8 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
         fragment.updateDetails(itemId);
+
+
     }
 
 }

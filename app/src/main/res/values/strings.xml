@@ -12,7 +12,9 @@
     <string name="no_network_retry">No network is available. \n Tap to retry.</string>
     <string name="checking_network">Checking for network.</string>
 
+    <string name="get_articles">http://www.efstratiou.info/projects/newsfeed/getList.php</string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_article_details">ArticleDetailsActivity</string>
+    <string name="title_activity_article_details">EDA News</string>
 </resources>
