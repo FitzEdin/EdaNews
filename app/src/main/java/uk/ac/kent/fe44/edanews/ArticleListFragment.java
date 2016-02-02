@@ -41,7 +41,8 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_article_list, container, false);
@@ -75,15 +76,23 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         articleListView.setLayoutManager(layoutManager);
         articleListView.setAdapter(listAdapter);
 
-        //get data
-        ArticleModel model = ArticleModel.getInstance();
-        model.setOnListUpdateListener(this);
-        model.loadData();
+        //grab data from network
+        getData();
 
         //kill progressBar
         mProgressBar.setVisibility(View.INVISIBLE);
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void getData() {
+        //get data
+        ArticleModel model = ArticleModel.getInstance();
+        model.setOnListUpdateListener(this);
+        model.loadData();
+
+        //kill the progress bar
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -157,6 +166,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         if(isNetworkAvailable()){   //network is there? grab things
             //hide no network message if present, show fab+progress bar
             mProgressBar.setVisibility(View.VISIBLE);
+            getData();
             /*create object to get blog posts
             GetBlogPostsTask getBlogPosts = new GetBlogPostsTask();
             //run that object

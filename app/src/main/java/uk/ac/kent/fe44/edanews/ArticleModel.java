@@ -72,6 +72,7 @@ public class ArticleModel {
     /*grab data from the network*/
     public void loadData() {
         //TODO: modify URL for grabbing sets of data
+        //Note: can make multiple request and listener objects
         //create a request object
         JsonArrayRequest request = new JsonArrayRequest(CLIENT_URL, netListener, errorListener);
         //make request
