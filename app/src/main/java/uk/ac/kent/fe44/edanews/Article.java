@@ -6,7 +6,6 @@ package uk.ac.kent.fe44.edanews;
  */
 public class Article {
     private String imageURL;
-    private int imgResource;
     private int recordID;
     private String title;
     private String date;
@@ -14,8 +13,8 @@ public class Article {
     private String web_page;
 
     /*Constructor*/
-    public Article(int imgResource, int recordID, String title, String date) {
-        this.imgResource = imgResource;
+    public Article(String imageURL, int recordID, String title, String date) {
+        this.imageURL = imageURL;
         this.recordID = recordID;
         this.title = title;
         this.date = date;
@@ -28,14 +27,6 @@ public class Article {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
-    }
-
-    public int getImgResource() {
-        return imgResource;
-    }
-
-    public void setImgResource(int imgResource) {
-        this.imgResource = imgResource;
     }
 
     public int getRecordID() {

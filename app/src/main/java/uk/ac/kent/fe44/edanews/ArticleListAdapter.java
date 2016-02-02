@@ -91,7 +91,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         public void setData(Article article) {
             title.setText(article.getTitle());
             date.setText(article.getDate());
-            photo.setImageResource(article.getImgResource());
+            //photo.setImageResource(article.getImgResource());
         }
     }
 }

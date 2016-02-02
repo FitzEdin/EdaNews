@@ -15,6 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +24,7 @@ import android.widget.Toast;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class ArticleListFragment extends Fragment {
+public class ArticleListFragment extends Fragment implements ArticleModel.OnListUpdateListener {
 
     private TextView noNetworkRetry;
     protected ProgressBar mProgressBar;
@@ -73,6 +75,11 @@ public class ArticleListFragment extends Fragment {
         articleListView.setLayoutManager(layoutManager);
         articleListView.setAdapter(listAdapter);
 
+        //get data
+        ArticleModel model = ArticleModel.getInstance();
+        model.setOnListUpdateListener(this);
+        model.loadData();
+
         //kill progressBar
         mProgressBar.setVisibility(View.INVISIBLE);
         // Inflate the layout for this fragment
@@ -94,6 +101,14 @@ public class ArticleListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    /*refresh data set with new information*/
+    @Override
+    public void onListUpdate(ArrayList<Article> articleList) {
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     /**
