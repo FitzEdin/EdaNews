@@ -141,7 +141,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
 
     //Source: previous project kn.muscovado.thadailygeek
     //check that the network is available
-    private boolean isNetworkAvailable() {
+    private boolean networkIsAvailable() {
         ConnectivityManager mngr = (ConnectivityManager)
                 getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = mngr.getActiveNetworkInfo();
@@ -154,7 +154,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         }
 
         return isAvailable;
-    }//end isNetworkAvailable() method
+    }//end networkIsAvailable() method
 
     public void tryForNetwork(){
         //check that there is a connection before starting async thread
@@ -163,7 +163,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         mProgressBar.setVisibility(View.INVISIBLE);
         noNetworkRetry.setVisibility(View.INVISIBLE);
 
-        if(isNetworkAvailable()){   //network is there? grab things
+        if(networkIsAvailable()){   //network is there? grab things
             //hide no network message if present, show fab+progress bar
             mProgressBar.setVisibility(View.VISIBLE);
             getData();

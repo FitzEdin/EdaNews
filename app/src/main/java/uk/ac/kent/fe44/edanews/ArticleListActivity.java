@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,18 +56,16 @@ public class ArticleListActivity extends AppCompatActivity
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        //add functionality to the FAB
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             /*    Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             */
-                if(searchBar.getVisibility() == View.VISIBLE) {
-                    searchBar.setVisibility(View.INVISIBLE);
-                }else{
-                    searchBar.setVisibility(View.VISIBLE);
-                    searchBar.hasFocus();
-                }
+                fab.setVisibility(View.INVISIBLE);
+                searchBar.setVisibility(View.VISIBLE);
+                searchBar.hasFocus();
             }
         });
 
@@ -81,6 +80,11 @@ public class ArticleListActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void closeSearchBar(View v) {
+        searchBar.setVisibility(View.INVISIBLE);
+        fab.setVisibility(View.VISIBLE);
     }
 
     @Override
