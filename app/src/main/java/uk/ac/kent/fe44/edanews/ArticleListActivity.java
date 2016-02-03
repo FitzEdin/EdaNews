@@ -102,6 +102,28 @@ public class ArticleListActivity extends AppCompatActivity
         //save data
     }
 
+    /*define what happens on choosing a list item*/
+    @Override
+    public void onItemClicked(int position) {
+        //TODO: remove
+        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, ArticleDetailsActivity.class);
+        i.putExtra(ITEM_ID, position);
+        startActivity(i);
+
+        /*TODO: uncomment for two-pane
+        if(hasTwoPanes) {
+            ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
+            fragment.updateDetails(position);
+        }else {
+            Intent i = new Intent(this, ArticleDetailsActivity.class);
+            i.putExtra(ITEM_ID, position);
+            startActivity(i);
+        }
+        /*end of section for two-panes*/
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -153,27 +175,5 @@ public class ArticleListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    /*define what happens on choosing a list item*/
-    @Override
-    public void onItemClicked(int position) {
-        //TODO: remove
-        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
-
-        Intent i = new Intent(this, ArticleDetailsActivity.class);
-        i.putExtra(ITEM_ID, position);
-        startActivity(i);
-
-        /*TODO: uncomment for two-pane
-        if(hasTwoPanes) {
-            ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
-            fragment.updateDetails(position);
-        }else {
-            Intent i = new Intent(this, ArticleDetailsActivity.class);
-            i.putExtra(ITEM_ID, position);
-            startActivity(i);
-        }
-        /*end of section for two-panes*/
     }
 }

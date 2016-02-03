@@ -21,12 +21,11 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/search_bar"
-        android:orientation="horizontal"
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
 
         android:layout_marginTop="64dp"
         android:layout_marginLeft="18dp"
@@ -35,18 +34,11 @@
         android:elevation="@dimen/elevation"
         android:background="@drawable/round_bordered" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:paddingLeft="10dp"
-
-            android:src="@drawable/ic_search_black_24dp"
-            android:tint="@color/colorAccent"/>
-
         <EditText
+            android:id="@+id/search_text"
+
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
 
             android:hint="@string/search_titles"
             android:textColorHint="@color/colorTextSecondary"
@@ -59,11 +51,28 @@
 
             android:layout_margin="2dp"
 
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:drawableTint="@color/colorAccent"
+
             android:background="@color/white"
-            android:inputType="textCapWords"
+            android:imeOptions="actionSearch"
             android:hapticFeedbackEnabled="true"/>
 
-    </LinearLayout>
+        <!-- this image view needs to respond to clicks -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+
+            android:layout_alignParentRight="true"
+
+            android:paddingRight="10dp"
+
+            android:src="@drawable/ic_close_black_24dp"
+            android:tint="@color/colorAccent"
+
+            android:clickable="true"/>
+
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/list_fragment"
