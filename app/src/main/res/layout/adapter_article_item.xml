@@ -49,7 +49,7 @@
             android:textSize="18sp"
 
             android:lines="1"
-            android:maxLength="20" />
+            android:maxLength="25" />
 
         <TextView
             android:id="@+id/article_date"

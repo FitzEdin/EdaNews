@@ -89,7 +89,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
         //add values from data model to each row
         public void setData(Article article) {
-            title.setText(article.getTitle());
+            title.setText(article.getTitle().substring(0, 20) + "...");
             date.setText(article.getDate());
             //photo.setImageResource(article.getImgResource());
         }
