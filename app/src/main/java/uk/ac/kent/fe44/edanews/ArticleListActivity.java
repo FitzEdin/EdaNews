@@ -1,14 +1,8 @@
 package uk.ac.kent.fe44.edanews;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,17 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class ArticleListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ArticleListFragment.OnListItemClickedListener {
 
-    static private FloatingActionButton fab;
+    static private FloatingActionButton searchFab;
     static private LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
     //private boolean hasTwoPanes;
@@ -54,23 +44,23 @@ public class ArticleListActivity extends AppCompatActivity
         Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
-        fab = (FloatingActionButton) findViewById(R.id.fab);
+        searchFab = (FloatingActionButton) findViewById(R.id.search_fab);
 
         //add functionality to the FAB
-        fab.setOnClickListener(new View.OnClickListener() {
+        searchFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             /*    Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             */
-                fab.setVisibility(View.INVISIBLE);
+                searchFab.setVisibility(View.INVISIBLE);
                 searchBar.setVisibility(View.VISIBLE);
                 searchBar.hasFocus();
             }
         });
 
         searchBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.VISIBLE);
+        searchFab.setVisibility(View.VISIBLE);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,7 +74,7 @@ public class ArticleListActivity extends AppCompatActivity
 
     public void closeSearchBar(View v) {
         searchBar.setVisibility(View.INVISIBLE);
-        fab.setVisibility(View.VISIBLE);
+        searchFab.setVisibility(View.VISIBLE);
     }
 
     @Override

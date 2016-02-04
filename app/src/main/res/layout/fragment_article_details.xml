@@ -1,18 +1,81 @@
-<FrameLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:paddingTop="54dp"
+
+    android:background="@drawable/bg"
+
     tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
 
-    <TextView
-        android:id="@+id/detailTxVw"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
+        android:layout_height="fill_parent"
 
-        android:gravity="center_horizontal|center_vertical"/>
+        android:orientation="vertical"
 
-</FrameLayout>
+        android:layout_marginRight="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+
+        android:padding="16dp"
+
+        android:background="@drawable/round">
+
+        <ImageView
+            android:id="@+id/detailImg"
+
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+
+            android:src="@drawable/ic_uok_logo_new"/>
+
+        <TextView
+            android:id="@+id/detailTitle"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/hello_blank_fragment"
+            android:textSize="20sp"
+            android:textColor="@color/colorTextPrimary"
+
+            android:gravity="center_horizontal|center_vertical"/>
+
+        <TextView
+            android:id="@+id/detailDate"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+
+            android:text="14/12/1988"
+            android:textSize="12sp"
+
+            android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/detailContents"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+
+            android:text="A few paragraphs of text describing the news story being covered."
+            android:textSize="18sp"
+            android:textColor="@color/colorTextSecondary"
+
+            android:gravity="left"/>
+
+    </LinearLayout>
+
+</ScrollView>

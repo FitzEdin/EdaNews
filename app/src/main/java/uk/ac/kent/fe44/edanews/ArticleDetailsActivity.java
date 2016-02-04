@@ -11,6 +11,7 @@ import android.view.View;
 public class ArticleDetailsActivity extends AppCompatActivity {
 
     private String ITEM_ID = "ITEM_ID";
+    private static FloatingActionButton faveFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,12 +20,14 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
+        faveFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //add article to fave list
+
+                //change icon on article
+                faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -35,8 +38,5 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
         fragment.updateDetails(itemId);
-
-
     }
-
 }

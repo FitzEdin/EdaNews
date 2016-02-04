@@ -1,5 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.content.res.ColorStateList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,14 +70,6 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                /*  resize cell on-click
-                    Issues: resized view is recycled with changes for other cell
-                    LinearLayout cell = (LinearLayout)itemView;
-
-                    ViewGroup.LayoutParams params = cell.getLayoutParams();
-                    params.height = 300;
-                    cell.setLayoutParams(params);
-                */
                     fragment.onItemClicked(getPosition());
                 }
             });
@@ -90,7 +83,9 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
         //add values from data model to each row
         public void setData(Article article) {
             title.setText(article.getTitle().substring(0, 20) + "...");
+            //title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border_black_24dp, 0, 0, 0);
             date.setText(article.getDate());
+
             //photo.setImageResource(article.getImgResource());
         }
     }

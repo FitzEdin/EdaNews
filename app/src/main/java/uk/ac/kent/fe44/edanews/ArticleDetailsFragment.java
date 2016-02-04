@@ -14,7 +14,9 @@ import android.widget.TextView;
  */
 public class ArticleDetailsFragment extends Fragment {
 
-    private TextView txVw;
+    private TextView articleTitle;
+    private TextView articleDate;
+    private TextView articleContents;
 
     public ArticleDetailsFragment() {
         // Required empty public constructor
@@ -26,7 +28,9 @@ public class ArticleDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_article_details, container, false);
 
-        txVw = (TextView)view.findViewById(R.id.detailTxVw);
+        articleTitle = (TextView)view.findViewById(R.id.detailTitle);
+        articleDate = (TextView)view.findViewById(R.id.detailDate);
+        articleContents = (TextView)view.findViewById(R.id.detailContents);
 
         return view;
     }
@@ -38,7 +42,16 @@ public class ArticleDetailsFragment extends Fragment {
                 .get(id);
 
         //TODO: Update UI with data
-        txVw.setText(article.getTitle());
+        articleTitle.setText(article.getTitle());
+        articleDate.setText(article.getDate());
+        articleContents.setText(article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle() + " "
+                + article.getTitle());
     }
 
 
