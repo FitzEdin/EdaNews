@@ -12,6 +12,8 @@ public class Article {
     private String contents;
     private String web_page;
 
+    private boolean isFave = false;
+
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String date) {
         this.imageURL = imageURL;
@@ -67,5 +69,13 @@ public class Article {
 
     public void setWeb_page(String web_page) {
         this.web_page = web_page;
+    }
+
+    public boolean isFave() {
+        return isFave;
+    }
+
+    public void setIsFave(boolean isFave) {
+        this.isFave = isFave;
     }
 }

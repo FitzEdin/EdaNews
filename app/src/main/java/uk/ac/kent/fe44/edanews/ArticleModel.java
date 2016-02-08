@@ -27,6 +27,9 @@ public class ArticleModel {
     private OnListUpdateListener listUpdateListener;
     private static ArticleModel ourInstance = new ArticleModel();
 
+    /*faves list*/
+    private ArrayList<Article> favesList = new ArrayList<>();
+
     /*members for performing article list request*/
     private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date", IMAGE_URL = "image_url";
@@ -164,5 +167,14 @@ public class ArticleModel {
 
     public ArrayList<Article> getArticleList() {
         return articleList;
+    }
+
+    public ArrayList<Article> getFavesList() {
+        return favesList;
+    }
+
+    //TODO: populate faves list with items from memory
+    public void setFavesList(ArrayList<Article> favesList) {
+        this.favesList = favesList;
     }
 }
