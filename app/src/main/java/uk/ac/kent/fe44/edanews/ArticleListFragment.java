@@ -27,13 +27,14 @@ import java.util.ArrayList;
 public class ArticleListFragment extends Fragment implements ArticleModel.OnListUpdateListener {
 
     private TextView noNetworkRetry;
-    protected ProgressBar mProgressBar;
+
+    private ProgressBar mProgressBar;
 
     private RecyclerView articleListView;
     private LinearLayoutManager layoutManager;
     private ArticleListAdapter listAdapter;
 
-    private OnListItemClickedListener mListener;
+    private OnListItemClickedListener mListenerActivity;
 
     public ArticleListFragment() {
         // Required empty public constructor
@@ -76,30 +77,14 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         articleListView.setLayoutManager(layoutManager);
         articleListView.setAdapter(listAdapter);
 
-        //grab data from network
-        getData();
-
-        //kill progressBar
-        mProgressBar.setVisibility(View.INVISIBLE);
-        // Inflate the layout for this fragment
         return view;
-    }
-
-    private void getData() {
-        //get data
-        ArticleModel model = ArticleModel.getInstance();
-        model.setOnListUpdateListener(this);
-        model.loadData();
-
-        //kill the progress bar
-        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnListItemClickedListener) activity;
+            mListenerActivity = (OnListItemClickedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnListItemClickedListener");
@@ -109,7 +94,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mListenerActivity = null;
     }
 
     /*refresh data set with new information*/
@@ -131,12 +116,12 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnListItemClickedListener {
-        // TODO: Update argument type and name
         void onItemClicked(int position);
     }
 
     public void onItemClicked(int position) {
-        mListener.onItemClicked(position);
+        //perform secondary network request
+        mListenerActivity.onItemClicked(position);
     }
 
     //Source: previous project kn.muscovado.thadailygeek
@@ -157,8 +142,6 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
     }//end networkIsAvailable() method
 
     public void tryForNetwork(){
-        //check that there is a connection before starting async thread
-
         //hide everything
         mProgressBar.setVisibility(View.INVISIBLE);
         noNetworkRetry.setVisibility(View.INVISIBLE);
@@ -167,12 +150,15 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
             //hide no network message if present, show fab+progress bar
             mProgressBar.setVisibility(View.VISIBLE);
             getData();
-            /*create object to get blog posts
-            GetBlogPostsTask getBlogPosts = new GetBlogPostsTask();
-            //run that object
-            getBlogPosts.execute(); */
         }else {        //no network? hide progress bar and tell the user
             noNetworkRetry.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void getData() {
+        //get data
+        ArticleModel model = ArticleModel.getInstance();
+        model.setOnListUpdateListener(this);
+        model.loadData(mProgressBar);
     }
 }

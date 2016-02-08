@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ArticleListActivity extends AppCompatActivity
@@ -21,6 +22,7 @@ public class ArticleListActivity extends AppCompatActivity
     static private FloatingActionButton searchFab;
     static private LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
+    private TextView searchTextView;
     //private boolean hasTwoPanes;
 
     @Override

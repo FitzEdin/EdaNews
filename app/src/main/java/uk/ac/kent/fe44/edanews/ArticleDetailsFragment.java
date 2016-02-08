@@ -12,11 +12,15 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ArticleDetailsFragment extends Fragment {
+public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnDetailsUpdateListener {
 
     private TextView articleTitle;
     private TextView articleDate;
     private TextView articleContents;
+    private int articleId;
+    private int articleIndex;
+
+    //give this fragment an ArticleModel member, and perform network request for article's details
 
     public ArticleDetailsFragment() {
         // Required empty public constructor
@@ -35,24 +39,38 @@ public class ArticleDetailsFragment extends Fragment {
         return view;
     }
 
-    public void updateDetails(int id) {
+    public void updateDetails(int index) {
+        this.articleIndex = index;
+        //get the article from the list
         Article article = ArticleModel
                 .getInstance()
                 .getArticleList()
-                .get(id);
+                .get(articleIndex);
 
-        //TODO: Update UI with data
+        //get a handle on that article's record id for network request
+        articleId = article.getRecordID();
+        getArticleDetails();
+
+        //update UI with data
         articleTitle.setText(article.getTitle());
         articleDate.setText(article.getDate());
-        articleContents.setText(article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle() + " "
-                + article.getTitle());
+        articleContents.setText("Loading details...");
+    }
+
+    public void getArticleDetails() {
+        //get details
+        ArticleModel model = ArticleModel.getInstance();
+        model.setOnDetailsUpdateListener(this);
+        model.loadArticleDetails(articleId, articleIndex);
     }
 
 
+    @Override
+    public void onDetailsUpdate() {
+        Article article = ArticleModel
+                .getInstance()
+                .getArticleList()
+                .get(articleIndex);
+        articleContents.setText(article.getContents());
+    }
 }
