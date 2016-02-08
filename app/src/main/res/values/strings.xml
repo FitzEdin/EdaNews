@@ -7,6 +7,17 @@
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
 
+    <string name="home_category">Home</string>
+    <string name="about_category">About</string>
+    <string name="faves_category">Faves</string>
+    <string name="school_name">Engineering and Digital Arts</string>
+    <string name="developer_name">Fitzroy Edinborough</string>
+
+    <string name="app_title">EDA News Reader</string>
+
+    <string name="dummy_date">14/12/1988</string>
+    <string name="dummy_title">Degree and prize giving day for postgraduate students</string>
+
     <string name="search_titles">Search Titles...</string>
     <string name="no_network">No network is available.</string>
     <string name="no_network_retry">No network is available. \n Tap to retry.</string>

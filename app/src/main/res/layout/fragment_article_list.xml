@@ -22,7 +22,7 @@
     </android.support.v7.widget.RecyclerView>
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyleLarge"
 
         android:layout_width="wrap_content"

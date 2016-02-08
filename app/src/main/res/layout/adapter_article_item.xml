@@ -44,7 +44,7 @@
 
             android:paddingBottom="2dp"
 
-            android:text="Degree and prize giving day for postgraduate students"
+            android:text="@string/dummy_title"
             android:textColor="@color/colorTextPrimary"
             android:textSize="18sp"
 
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:text="14/12/1988"
+            android:text="@string/dummy_date"
             android:textColor="@color/colorTextSecondary"
             android:textSize="12sp"
 

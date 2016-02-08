@@ -7,28 +7,28 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
 
-            android:title="Home"/>
+            android:title="@string/home_category"/>
 
         <item
             android:id="@+id/nav_faves"
             android:icon="@drawable/ic_favorite_black_24dp"
 
-            android:title="Favourites" />
+            android:title="@string/faves_category" />
     </group>
 
-    <item android:title="About">
+    <item android:title="@string/about_category">
         <menu>
             <item
                 android:id="@+id/nav_EDA"
                 android:icon="@drawable/ic_info_outline_black_24dp"
 
-                android:title="Engineering and Digital Arts" />
+                android:title="@string/school_name" />
 
             <item
                 android:id="@+id/nav_developer"
                 android:icon="@drawable/ic_school_black_24dp"
 
-                android:title="Fitzroy Edinborough" />
+                android:title="@string/developer_name" />
         </menu>
     </item>
 

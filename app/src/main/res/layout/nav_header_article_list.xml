@@ -10,18 +10,21 @@
     android:gravity="bottom">
 
     <ImageView
+        android:id="@+id/logo_image_view"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_uok_logo_new"
-        android:id="@+id/imageView" />
+        android:src="@drawable/ic_uok_logo_new" />
 
     <TextView
+        android:id="@+id/school_text_view"
+
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:paddingTop="0dp"
-        android:text="EDA News Reader"
+        android:text="@string/app_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

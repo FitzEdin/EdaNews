@@ -28,9 +28,9 @@ public class ArticleDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_article_details, container, false);
 
-        articleTitle = (TextView)view.findViewById(R.id.detailTitle);
-        articleDate = (TextView)view.findViewById(R.id.detailDate);
-        articleContents = (TextView)view.findViewById(R.id.detailContents);
+        articleTitle = (TextView)view.findViewById(R.id.detail_title);
+        articleDate = (TextView)view.findViewById(R.id.detail_date);
+        articleContents = (TextView)view.findViewById(R.id.detail_contents);
 
         return view;
     }

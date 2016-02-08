@@ -47,7 +47,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
 
         View view = inflater.inflate(R.layout.fragment_article_list, container, false);
 
-        mProgressBar = (ProgressBar)view.findViewById(R.id.progressBar);
+        mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         noNetworkRetry = (TextView)view.findViewById(R.id.no_network_retry);
 
         //TODO: remove

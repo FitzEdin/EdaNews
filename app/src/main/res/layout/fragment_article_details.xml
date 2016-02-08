@@ -27,7 +27,7 @@
         android:background="@drawable/round">
 
         <ImageView
-            android:id="@+id/detailImg"
+            android:id="@+id/detail_img"
 
             android:layout_width="148dp"
             android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
             android:src="@drawable/ic_uok_logo_new"/>
 
         <TextView
-            android:id="@+id/detailTitle"
+            android:id="@+id/detail_title"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             android:gravity="center_horizontal|center_vertical"/>
 
         <TextView
-            android:id="@+id/detailDate"
+            android:id="@+id/detail_date"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:gravity="right"/>
 
         <TextView
-            android:id="@+id/detailContents"
+            android:id="@+id/detail_contents"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
