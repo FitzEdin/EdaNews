@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.NetworkImageView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,10 +20,10 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
     private TextView articleTitle;
     private TextView articleDate;
     private TextView articleContents;
+    private NetworkImageView articlePhoto;
+
     private int articleId;
     private int articleIndex;
-
-    //give this fragment an ArticleModel member, and perform network request for article's details
 
     public ArticleDetailsFragment() {
         // Required empty public constructor
@@ -36,6 +38,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         articleTitle = (TextView)view.findViewById(R.id.detail_title);
         articleDate = (TextView)view.findViewById(R.id.detail_date);
         articleContents = (TextView)view.findViewById(R.id.detail_contents);
+        articlePhoto = (NetworkImageView)view.findViewById(R.id.detail_img);
 
         return view;
     }
@@ -52,6 +55,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         //update UI with data
         articleTitle.setText(article.getTitle());
         articleDate.setText(article.getDate());
+        articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
 
         if(article.isDetailed()) { //details have been downloaded before..
                                     //so no need to do it twice

@@ -26,10 +26,10 @@
 
         android:background="@drawable/round">
 
-        <ImageView
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/detail_img"
 
-            android:layout_width="148dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
 
             android:layout_gravity="center"
