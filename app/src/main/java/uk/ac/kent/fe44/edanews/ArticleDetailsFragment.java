@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -39,6 +40,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         return view;
     }
 
+    /*populate the views with article's details*/
     public void updateDetails(int index) {
         this.articleIndex = index;
         //get the article from the list
@@ -47,16 +49,24 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
                 .getArticleList()
                 .get(articleIndex);
 
-        //get a handle on that article's record id for network request
-        articleId = article.getRecordID();
-        getArticleDetails();
-
         //update UI with data
         articleTitle.setText(article.getTitle());
         articleDate.setText(article.getDate());
-        articleContents.setText("Loading details...");
+
+        if(article.isDetailed()) { //details have been downloaded before..
+                                    //so no need to do it twice
+            articleContents.setText(article.getContents());
+        }else {
+            // show network message
+            articleContents.setText("Loading details...");
+
+            //get a handle on that article's record id for network request
+            articleId = article.getRecordID();
+            getArticleDetails();
+        }
     }
 
+    /*prompts the ArticleModel class to get article's details from the network*/
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();

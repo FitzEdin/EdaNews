@@ -13,6 +13,7 @@ public class Article {
     private String web_page;
 
     private boolean isFave = false;
+    private boolean isDetailed = false;
 
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String date) {
@@ -77,5 +78,13 @@ public class Article {
 
     public void setIsFave(boolean isFave) {
         this.isFave = isFave;
+    }
+
+    public boolean isDetailed() {
+        return isDetailed;
+    }
+
+    public void setIsDetailed(boolean isDetailed) {
+        this.isDetailed = isDetailed;
     }
 }

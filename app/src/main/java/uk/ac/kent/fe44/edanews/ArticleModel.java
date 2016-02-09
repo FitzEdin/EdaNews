@@ -117,6 +117,10 @@ public class ArticleModel {
                         .setWeb_page(response.getString(WEB_PAGE));
                 getArticleList().get(articleIndex)
                         .setContents(response.getString(CONTENTS));
+
+                //mark article as detailed
+                getArticleList().get(articleIndex)
+                        .setIsDetailed(true);
             }catch(JSONException e) {
                 //handle exception
             }
