@@ -10,6 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.toolbox.NetworkImageView;
+
 import java.util.List;
 
 /**
@@ -62,7 +64,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private TextView date;
-        private ImageView photo;
+        private NetworkImageView photo;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -77,7 +79,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             //get a handle on UI views
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
-            photo = (ImageView)itemView.findViewById(R.id.article_photo);
+            photo = (NetworkImageView)itemView.findViewById(R.id.article_photo);
         }
 
         //add values from data model to each row
@@ -85,7 +87,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             title.setText(article.getTitle().substring(0, 20) + "...");
             //title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border_black_24dp, 0, 0, 0);
             date.setText(article.getDate());
-
+            photo.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
             //photo.setImageResource(article.getImgResource());
         }
     }

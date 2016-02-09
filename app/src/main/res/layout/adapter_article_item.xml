@@ -19,16 +19,12 @@
     android:background="@drawable/round"
     android:elevation="@dimen/elevation" >
 
-    <ImageView
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/article_photo"
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="60dp"
-        android:layout_height="48dp"
-
-        android:paddingTop="2dp"
-
-        android:tint="@color/lightOrange"/>
+        android:layout_height="48dp"/>
 
     <LinearLayout
         android:orientation="vertical"

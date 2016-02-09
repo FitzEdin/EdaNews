@@ -3,6 +3,7 @@ package uk.ac.kent.fe44.edanews;
 import android.app.Application;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
@@ -14,6 +15,7 @@ public class ArticlesApp extends Application {
 
     private static ArticlesApp instance;
     private RequestQueue requestQueue;
+    private ImageLoader imageLoader;
 
     @Override
     public void onCreate() {
@@ -22,6 +24,9 @@ public class ArticlesApp extends Application {
         instance = this;
 
         requestQueue = Volley.newRequestQueue(this);
+
+        int size = 4 * 1024 * 1024;
+        imageLoader = new ImageLoader(requestQueue, new LruBitmapCache(size));
     }
 
     public static ArticlesApp getInstance() {
@@ -30,5 +35,9 @@ public class ArticlesApp extends Application {
 
     public RequestQueue getRequestQueue() {
         return requestQueue;
+    }
+
+    public ImageLoader getImageLoader() {
+        return imageLoader;
     }
 }
