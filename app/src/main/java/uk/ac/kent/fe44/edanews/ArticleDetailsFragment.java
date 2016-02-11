@@ -62,7 +62,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
             articleContents.setText(article.getContents());
         }else {
             // show network message
-            articleContents.setText("Loading details...");
+            articleContents.setText("Loading details");
 
             //get a handle on that article's record id for network request
             articleId = article.getRecordID();
