@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:paddingTop="0dp"
-        android:text="(C) 2016 Muscovado"
+        android:text="@string/copy"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

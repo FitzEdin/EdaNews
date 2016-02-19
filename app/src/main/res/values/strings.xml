@@ -14,6 +14,7 @@
     <string name="developer_name">Fitzroy Edinborough</string>
 
     <string name="app_title">EDA News Reader</string>
+    <string name="copy">(C) 2016 Muscovado</string>
 
     <string name="dummy_date">14/12/1988</string>
     <string name="dummy_title">Degree and prize giving day for postgraduate students</string>
