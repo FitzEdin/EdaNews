@@ -33,6 +33,9 @@ public class ArticleListActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         /*uncomment for two-pane
         if(findViewById(R.id.details_fragment) == null) {
             hasTwoPanes = false;
