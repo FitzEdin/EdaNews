@@ -84,6 +84,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
         //add values from data model to each row
         public void setData(Article article) {
+            //display the first 35 characters only
             title.setText(article.getTitle().substring(0, 20) + "...");
             //title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border_black_24dp, 0, 0, 0);
             date.setText(article.getDate());
