@@ -1,5 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,7 +55,6 @@ public class ArticleListActivity extends AppCompatActivity
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
-
         //listen for searches
         searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -61,6 +62,8 @@ public class ArticleListActivity extends AppCompatActivity
                 boolean handled  = false;
                 if(actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String searchText = v.getText().toString();
+                    v.setText("");
+                    closeSearchBar(searchTextView);
                     searchFor(searchText);
                     handled = true;
                 }
@@ -69,7 +72,6 @@ public class ArticleListActivity extends AppCompatActivity
         });
 
         searchFab = (FloatingActionButton)findViewById(R.id.search_fab);
-
         //add functionality to the FAB
         searchFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,15 +96,26 @@ public class ArticleListActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+}
 
     public void closeSearchBar(View v) {
+        hideKeyboard(this);
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
     }
     public void searchFor(String key) {
-        Toast.makeText(this, key, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Searching for: " + key, Toast.LENGTH_SHORT).show();
         //make network request
+    }
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
