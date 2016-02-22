@@ -3,6 +3,7 @@ package uk.ac.kent.fe44.edanews;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +22,10 @@ import android.widget.Toast;
 public class ArticleListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ArticleListFragment.OnListItemClickedListener {
 
-    static private FloatingActionButton searchFab;
-    static private LinearLayout searchBar;
+    private static FloatingActionButton searchFab;
+    private static LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
-    private TextView searchTextView;
+    private static EditText searchTextView;
     //private boolean hasTwoPanes;
 
     @Override
@@ -49,7 +52,23 @@ public class ArticleListActivity extends AppCompatActivity
         Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
-        searchFab = (FloatingActionButton) findViewById(R.id.search_fab);
+        searchTextView = (EditText) findViewById(R.id.search_text);
+
+        //listen for searches
+        searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled  = false;
+                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    String searchText = v.getText().toString();
+                    searchFor(searchText);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
+
+        searchFab = (FloatingActionButton)findViewById(R.id.search_fab);
 
         //add functionality to the FAB
         searchFab.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +100,14 @@ public class ArticleListActivity extends AppCompatActivity
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
     }
+    public void searchFor(String key) {
+        Toast.makeText(this, key, Toast.LENGTH_SHORT).show();
+        //make network request
+    }
 
     @Override
     public void onPause() {
         super.onPause();
-
         //release resources, files and sensors
     }
 
@@ -97,7 +119,6 @@ public class ArticleListActivity extends AppCompatActivity
     @Override
     public void onStop() {
         super.onStop();
-
         //save data
     }
 

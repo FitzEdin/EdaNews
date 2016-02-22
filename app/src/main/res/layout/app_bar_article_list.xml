@@ -21,6 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- Search Bar -->
     <LinearLayout
         android:id="@+id/search_bar"
 
