@@ -23,7 +23,7 @@
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="fill_parent"
-        android:layout_height="192dp"/>
+        android:layout_height="fill_parent"/>
 
     <TextView
         android:id="@+id/article_title"
