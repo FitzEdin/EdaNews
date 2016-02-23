@@ -44,4 +44,20 @@
         </menu>
     </item>
 
+    <item android:title="@string/contact_category">
+        <menu>
+            <item
+                android:id="@+id/nav_contact_EDA"
+                android:icon="@drawable/ic_info_outline_black_24dp"
+
+                android:title="@string/school_name" />
+
+            <item
+                android:id="@+id/nav_contact_developer"
+                android:icon="@drawable/ic_school_black_24dp"
+
+                android:title="@string/developer_name" />
+        </menu>
+    </item>
+
 </menu>

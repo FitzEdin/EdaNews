@@ -66,7 +66,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         tryForNetwork();
 
         //set up layout manager
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
 

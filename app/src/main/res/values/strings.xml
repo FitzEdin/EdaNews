@@ -9,11 +9,14 @@
 
     <string name="home_category">Home</string>
     <string name="about_category">About</string>
+    <string name="contact_category">Contact</string>
     <string name="faves_category">Faves</string>
     <string name="saved_category">Read Later</string>
     <string name="school_name">Engineering and Digital Arts</string>
     <string name="developer_name">Fitzroy Edinborough</string>
     <string name="about_app">EDA News</string>
+    <string name="contact_school">Contact EDA</string>
+    <string name="contact_developer">Contact the Developer</string>
 
     <string name="app_title">EDA News Reader</string>
     <string name="copy">(C) 2016 Muscovado</string>
