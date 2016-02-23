@@ -1,10 +1,7 @@
 package uk.ac.kent.fe44.edanews;
 
-
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;

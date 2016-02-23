@@ -31,7 +31,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
     private ProgressBar mProgressBar;
 
     private RecyclerView articleListView;
-    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager linearLayoutManager;
     private ArticleListAdapter listAdapter;
 
     private OnListItemClickedListener mListenerActivity;
@@ -65,16 +65,16 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         tryForNetwork();
 
         //set up layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        linearLayoutManager.scrollToPosition(0);
 
         //set up list adapter
         listAdapter = new ArticleListAdapter(this);
 
         //set up visual elements
         articleListView = (RecyclerView)view.findViewById(R.id.article_list_view);
-        articleListView.setLayoutManager(layoutManager);
+        articleListView.setLayoutManager(linearLayoutManager);
         articleListView.setAdapter(listAdapter);
 
         return view;
