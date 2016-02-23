@@ -15,10 +15,13 @@ public class Article {
     private boolean isFave = false;
     private boolean isDetailed = false;
 
+    private static final String timThumb = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w=200&h=200&src=";
+
 
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String date) {
-        this.imageURL = imageURL;
+        String url = timThumb.concat(imageURL);
+        this.imageURL = url;
         this.recordID = recordID;
         this.title = title;
         this.date = date;

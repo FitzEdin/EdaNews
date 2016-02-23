@@ -14,6 +14,12 @@
             android:icon="@drawable/ic_favorite_black_24dp"
 
             android:title="@string/faves_category" />
+
+        <item
+            android:id="@+id/nav_saved"
+            android:icon="@drawable/ic_favorite_black_24dp"
+
+            android:title="@string/saved_category" />
     </group>
 
     <item android:title="@string/about_category">
@@ -29,6 +35,12 @@
                 android:icon="@drawable/ic_school_black_24dp"
 
                 android:title="@string/developer_name" />
+
+            <item
+                android:id="@+id/nav_app"
+                android:icon="@drawable/ic_school_black_24dp"
+
+                android:title="@string/about_app" />
         </menu>
     </item>
 
