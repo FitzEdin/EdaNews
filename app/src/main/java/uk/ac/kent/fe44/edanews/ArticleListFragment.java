@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
     private ProgressBar mProgressBar;
 
     private RecyclerView articleListView;
-    private LinearLayoutManager linearLayoutManager;
+    private GridLayoutManager gridLayoutManager;
     private ArticleListAdapter listAdapter;
 
     private OnListItemClickedListener mListenerActivity;
@@ -65,16 +66,16 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         tryForNetwork();
 
         //set up layout manager
-        linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        linearLayoutManager.scrollToPosition(0);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        gridLayoutManager.scrollToPosition(0);
 
         //set up list adapter
         listAdapter = new ArticleListAdapter(this);
 
         //set up visual elements
         articleListView = (RecyclerView)view.findViewById(R.id.article_list_view);
-        articleListView.setLayoutManager(linearLayoutManager);
+        articleListView.setLayoutManager(gridLayoutManager);
         articleListView.setAdapter(listAdapter);
 
         return view;

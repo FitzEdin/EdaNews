@@ -15,8 +15,6 @@ public class Article {
     private boolean isFave = false;
     private boolean isDetailed = false;
 
-    private String timThumb = "";
-
 
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String date) {

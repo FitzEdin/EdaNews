@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-    android:orientation="vertical"
+    android:layout_height="68dp"
 
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
@@ -22,37 +21,45 @@
         android:id="@+id/article_photo"
         android:src="@drawable/ic_uok_logo_new"
 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"/>
+        android:layout_width="0dp"
+        android:layout_height="48dp"
 
-    <TextView
-        android:id="@+id/article_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-        android:layout_marginTop="8dp"
-        android:gravity="center"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
 
-        android:text="@string/dummy_title"
-        android:textColor="@color/colorTextPrimary"
-        android:textSize="18sp"
+        android:layout_weight="2"
 
-        android:lines="1"
-        android:maxLength="40" />
+        android:layout_margin="8dp" >
 
-    <TextView
-        android:id="@+id/article_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-        android:layout_marginBottom="4dp"
-        android:gravity="center"
+            android:paddingBottom="2dp"
 
-        android:text="@string/dummy_date"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="12sp"
+            android:text="@string/dummy_title"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="18sp"
 
-        android:lines="1"
-        android:maxLength="10" />
+            android:lines="1"
+            android:maxLength="25" />
+
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="@string/dummy_date"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="12sp"
+
+            android:lines="1"
+            android:maxLength="10" />
+    </LinearLayout>
 
 </LinearLayout>
