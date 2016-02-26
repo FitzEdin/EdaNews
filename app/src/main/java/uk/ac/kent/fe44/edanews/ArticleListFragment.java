@@ -37,6 +37,8 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
 
     private OnListItemClickedListener mListenerActivity;
 
+    private int start = 0;
+
     public ArticleListFragment() {
         // Required empty public constructor
     }
@@ -78,6 +80,10 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         articleListView.setLayoutManager(gridLayoutManager);
         articleListView.setAdapter(listAdapter);
 
+        /*source: https://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView*/
+        //add onScrollListener
+        //articleListView.addOnScrollListener(new EndlessRecyclerViewScrollListener);
+
         return view;
     }
 
@@ -106,16 +112,7 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    //interface for activities using this fragment
     public interface OnListItemClickedListener {
         void onItemClicked(int position);
     }
@@ -157,9 +154,12 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
     }
 
     private void getData() {
-        //get data
         ArticleModel model = ArticleModel.getInstance();
+
+        //listen for eventual response
         model.setOnListUpdateListener(this);
+
+        //load data from network
         model.loadData(mProgressBar);
     }
 }

@@ -28,16 +28,18 @@ public class ArticleModel {
     private ArrayList<Article> favesList = new ArrayList<>();
 
     /*members for performing article list request*/
-    private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php";
+    private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date", IMAGE_URL = "image_url";
     private ArrayList<Article> articleList = new ArrayList<>();
+    private int mStart = 0;
 
     private Response.Listener<JSONArray> netListener = new Response.Listener<JSONArray>() {
         @Override
         public void onResponse(JSONArray response) {
             //handle response from server
-            //TODO: remove clear from article list
-            getArticleList().clear();
+            if(mStart == 0){
+                getArticleList().clear();
+            }
 
             try{
                 for(int i = 0; i < response.length(); i++) {
@@ -67,15 +69,22 @@ public class ArticleModel {
             //handle error in response
         }
     };
-    /*grab initial data from the network*/
+    /*loads a set of twenty articles*/
     public void loadData(ProgressBar progressBar) {
+        //need to handle certain UI elements on this thread
         myProgressBar = progressBar;
-        //TODO: modify URL for grabbing sets of data
-        JsonArrayRequest request = new JsonArrayRequest(CLIENT_URL, netListener, errorListener);
+
+        //build request
+        String url = CLIENT_URL + mStart;
+        JsonArrayRequest request = new JsonArrayRequest(url, netListener, errorListener);
+
         //make request
         ArticlesApp.getInstance()
                 .getRequestQueue()
                 .add(request);
+
+        //set up for pulling next set of articles
+        mStart += 20;
     }
     /*let the listener know about updates*/
     private void notifyListener() {
@@ -130,6 +139,7 @@ public class ArticleModel {
             //handle error in response
         }
     };
+    /*loads the details of a particular article, by appending its id to DETAILS_URL*/
     public void loadArticleDetails(int articleId, int articleIndex) {
         //localise index for further use
         this.articleIndex = articleIndex;
