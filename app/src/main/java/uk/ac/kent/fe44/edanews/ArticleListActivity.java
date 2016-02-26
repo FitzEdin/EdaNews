@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -225,5 +226,20 @@ public class ArticleListActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /* handle clicks on article icons */
+    public void fave(View v) {
+        Toast.makeText(this, "FAVE", Toast.LENGTH_SHORT).show();
+        ImageView imgVw = (ImageView)v;
+        imgVw.setImageResource(R.drawable.ic_favorite_black_24dp);
+    }
+    public void save(View v) {
+        Toast.makeText(this, "SAVE", Toast.LENGTH_SHORT).show();
+        ImageView imgVw = (ImageView)v;
+        imgVw.setImageResource(R.drawable.ic_watch_later_black_24dp);
+    }
+    public void share(View v) {
+        Toast.makeText(this, "SHOUT", Toast.LENGTH_SHORT).show();
     }
 }

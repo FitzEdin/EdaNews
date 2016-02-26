@@ -70,16 +70,18 @@
             android:lines="1"
             android:maxLength="10" />
 
+        <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->
         <ImageView
             android:layout_width="0dp"
             android:layout_height="fill_parent"
 
             android:layout_weight="1"
-            android:layout_gravity="center_horizontal"
 
             android:src="@drawable/ic_favorite_border_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="fave"/>
 
         <!-- save later icon -->
         <ImageView
@@ -89,7 +91,9 @@
             android:layout_weight="1"
 
             android:src="@drawable/ic_watch_later_outline_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="save"/>
 
         <!-- share icon -->
         <ImageView
@@ -99,7 +103,9 @@
             android:layout_weight="1"
 
             android:src="@drawable/ic_share_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="share"/>
     </LinearLayout>
 
 </LinearLayout>
