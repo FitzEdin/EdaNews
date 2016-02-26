@@ -29,7 +29,8 @@ public class ArticleModel {
 
     /*members for performing article list request*/
     private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
-    private String RECORD_ID = "record_id", TITLE = "title", DATE = "date", IMAGE_URL = "image_url";
+    private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
+            SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     private ArrayList<Article> articleList = new ArrayList<>();
     private int mStart = 0;
 
@@ -51,6 +52,7 @@ public class ArticleModel {
                             object.getString(IMAGE_URL),
                             object.getInt(RECORD_ID),
                             object.getString(TITLE),
+                            object.getString(SHORT_INFO),
                             object.getString(DATE)
                     );
 

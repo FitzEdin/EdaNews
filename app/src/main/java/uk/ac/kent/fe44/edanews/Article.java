@@ -9,6 +9,7 @@ public class Article {
     private int recordID;
     private String title;
     private String date;
+    private String short_info;
     private String contents;
     private String web_page;
 
@@ -19,11 +20,12 @@ public class Article {
 
 
     /*Constructor*/
-    public Article(String imageURL, int recordID, String title, String date) {
+    public Article(String imageURL, int recordID, String title, String short_info, String date) {
         String url = timThumb.concat(imageURL);
         this.imageURL = url;
         this.recordID = recordID;
         this.title = title;
+        this.short_info = short_info;
         this.date = date;
     }
 
@@ -58,6 +60,14 @@ public class Article {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getShortInfo() {
+        return short_info;
+    }
+
+    public void setShortInfo(String short_info) {
+        this.short_info = short_info;
     }
 
     public String getContents() {
