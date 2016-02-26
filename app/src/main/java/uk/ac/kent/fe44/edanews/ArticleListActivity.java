@@ -194,15 +194,31 @@ public class ArticleListActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_faves) {
-            Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_EDA) {
-            Toast.makeText(this, "School at Kent Uni", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_developer) {
-            Toast toast = Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT);
-            toast.show();
+        switch (id){
+            case R.id.nav_home:
+                Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_faves:
+                Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_saved:
+                Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_EDA:
+                Toast.makeText(this, "School at Kent Uni", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_developer:
+                Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_app:
+                Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_contact_EDA:
+                Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_contact_developer:
+                Toast.makeText(this, "Contact the developer", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
