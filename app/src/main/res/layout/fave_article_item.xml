@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
+
+    android:focusable="true"
+    android:clickable="true"
+
+    android:background="@drawable/round"
+    android:elevation="@dimen/elevation" >
+
+    <!-- large image -->
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/article_photo"
+        android:src="@drawable/ic_uok_logo_new"
+
+        android:layout_width="fill_parent"
+        android:layout_height="324dp"/>
+
+    <!-- article title -->
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
+
+        android:text="@string/dummy_title"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="24sp"
+
+        android:lines="1"
+        android:maxLength="25" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="28dp"
+
+        android:orientation="horizontal"
+
+        android:layout_marginTop="2dp"
+
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+
+        android:gravity="center">
+
+        <!-- article date -->
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+
+            android:layout_weight="2"
+
+            android:text="@string/dummy_date"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="16sp"
+
+            android:lines="1"
+            android:maxLength="10" />
+
+        <!-- Icons: onClick functions are in .ArticleListActivity-->
+        <!-- favourites icon -->
+        <ImageView
+            android:id="@+id/ic_faves"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+
+            android:layout_weight="1"
+
+            android:src="@drawable/ic_favorite_black_24dp"
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="fave"/>
+
+        <!-- save later icon -->
+        <ImageView
+            android:id="@+id/ic_save"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+
+            android:layout_weight="1"
+
+            android:src="@drawable/ic_watch_later_outline_black_24dp"
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="save"/>
+
+        <!-- share icon -->
+        <ImageView
+            android:id="@+id/ic_share"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+
+            android:layout_weight="1"
+
+            android:src="@drawable/ic_share_black_24dp"
+            android:tint="@color/colorPrimaryDark"
+
+            android:onClick="share"/>
+    </LinearLayout>
+
+</LinearLayout>

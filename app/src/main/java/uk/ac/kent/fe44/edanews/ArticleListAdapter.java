@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
@@ -23,7 +24,6 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
     //constructor
     public ArticleListAdapter(ArticleListFragment fragment) {
         super();
-
         this.fragment = fragment;
     }
 
@@ -69,7 +69,7 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    fragment.onItemClicked(getPosition());
+                    fragment.onItemClicked(getAdapterPosition());
                 }
             });
 
@@ -80,6 +80,17 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
             faveIc = (ImageView)itemView.findViewById(R.id.ic_faves);
             savedIc = (ImageView) itemView.findViewById(R.id.ic_save);
+/*
+            photo.setOnLongClickListener(new NetworkImageView.OnLongClickListener(){
+                @Override
+                public boolean onLongClick(View v) {
+                    int position = getPosition();
+                    Toast.makeText()
+                    return false;
+                }
+            });
+
+*/
         }
 
         //add values from data model to each row

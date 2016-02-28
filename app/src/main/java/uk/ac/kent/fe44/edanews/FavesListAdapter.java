@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -29,7 +30,7 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(
-                        R.layout.adapter_article_item,
+                        R.layout.fave_article_item,
                         parent,
                         false
                 );
@@ -41,14 +42,14 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
     //populates new rows with data
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Article article = model.getArticleList().get(position);
+        Article article = model.getFavesList().get(position);
         holder.setData(article);
     }
 
     //returns size of data list
     @Override
     public int getItemCount() {
-        return model.getArticleList().size();
+        return model.getFavesList().size();
     }
 
     /*handles layout for each item in the list*/
@@ -56,6 +57,8 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
         private TextView title;
         private TextView date;
         private NetworkImageView photo;
+        private ImageView faveIc;
+        private ImageView savedIc;
 
         public ViewHolder(final View itemView) {
             super(itemView);
@@ -71,16 +74,22 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
             photo = (NetworkImageView)itemView.findViewById(R.id.article_photo);
+
+            faveIc = (ImageView)itemView.findViewById(R.id.ic_faves);
+            savedIc = (ImageView) itemView.findViewById(R.id.ic_save);
         }
 
         //add values from data model to each row
         public void setData(Article article) {
-            //display the first 35 characters only
+            //display the first 20 characters only
             title.setText(article.getTitle().substring(0, 20) + "...");
-            //title.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_favorite_border_black_24dp, 0, 0, 0);
             date.setText(article.getDate());
             photo.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
-            //photo.setImageResource(article.getImgResource());
+            faveIc.setImageResource(R.drawable.ic_favorite_black_24dp);
+            savedIc.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
+
+            // force the recyclerView to redraw icons correctly for each article
+            if(article.isSaved()) { faveIc.setImageResource(R.drawable.ic_watch_later_black_24dp); }
         }
     }
 }
