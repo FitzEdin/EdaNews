@@ -8,7 +8,7 @@ import com.android.volley.toolbox.ImageLoader;
 /**
  * Created by fitzroy on 09/02/2016.
  *
- * Loads images from the network.
+ * Stores images loaded from the network.
  */
 public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageLoader.ImageCache {
 

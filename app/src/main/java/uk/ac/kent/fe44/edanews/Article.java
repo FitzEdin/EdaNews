@@ -14,6 +14,7 @@ public class Article {
     private String web_page;
 
     private boolean isFave = false;
+    private boolean isSaved = false;
     private boolean isDetailed = false;
 
     private static final String timThumb = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w=200&h=200&src=";
@@ -88,6 +89,14 @@ public class Article {
 
     public boolean isFave() {
         return isFave;
+    }
+
+    public void setIsSaved(boolean isSaved) {
+        this.isSaved = isSaved;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
     }
 
     public void setIsFave(boolean isFave) {

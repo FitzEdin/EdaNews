@@ -73,6 +73,7 @@
         <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->
         <ImageView
+            android:id="@+id/ic_faves"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
 
@@ -85,6 +86,7 @@
 
         <!-- save later icon -->
         <ImageView
+            android:id="@+id/ic_save"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
 
@@ -97,6 +99,7 @@
 
         <!-- share icon -->
         <ImageView
+            android:id="@+id/ic_share"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
 
