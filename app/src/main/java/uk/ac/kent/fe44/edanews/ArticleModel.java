@@ -190,4 +190,18 @@ public class ArticleModel {
     public void setFavesList(ArrayList<Article> favesList) {
         this.favesList = favesList;
     }
+
+    public void addToFaves(int position){
+        //mark article as favourite in ArticleList
+        getArticleList().get(position).setIsFave(true);
+        //add it to list of Faves
+        favesList.add(getArticleList().get(position));
+    }
+
+    public void removeFromFaves(int position) {
+        //unmark article as favourite in ArticleList
+        getArticleList().get(position).setIsFave(false);
+        //add it to list of Faves
+        favesList.remove(getArticleList().get(position));
+    }
 }

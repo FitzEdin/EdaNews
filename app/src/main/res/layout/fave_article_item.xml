@@ -80,9 +80,7 @@
             android:layout_weight="1"
 
             android:src="@drawable/ic_favorite_black_24dp"
-            android:tint="@color/colorPrimaryDark"
-
-            android:onClick="fave"/>
+            android:tint="@color/colorPrimaryDark"/>
 
         <!-- save later icon -->
         <ImageView
@@ -93,9 +91,7 @@
             android:layout_weight="1"
 
             android:src="@drawable/ic_watch_later_outline_black_24dp"
-            android:tint="@color/colorPrimaryDark"
-
-            android:onClick="save"/>
+            android:tint="@color/colorPrimaryDark"/>
 
         <!-- share icon -->
         <ImageView
@@ -106,9 +102,7 @@
             android:layout_weight="1"
 
             android:src="@drawable/ic_share_black_24dp"
-            android:tint="@color/colorPrimaryDark"
-
-            android:onClick="share"/>
+            android:tint="@color/colorPrimaryDark"/>
     </LinearLayout>
 
 </LinearLayout>

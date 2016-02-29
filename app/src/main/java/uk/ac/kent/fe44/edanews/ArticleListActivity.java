@@ -227,19 +227,4 @@ public class ArticleListActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    /* handle clicks on article icons */
-    public void fave(View v) {
-        Toast.makeText(this, "FAVE", Toast.LENGTH_SHORT).show();
-        ImageView imgVw = (ImageView)v;
-        imgVw.setImageResource(R.drawable.ic_favorite_black_24dp);
-    }
-    public void save(View v) {
-        Toast.makeText(this, "SAVE", Toast.LENGTH_SHORT).show();
-        ImageView imgVw = (ImageView)v;
-        imgVw.setImageResource(R.drawable.ic_watch_later_black_24dp);
-    }
-    public void share(View v) {
-        Toast.makeText(this, "SHOUT", Toast.LENGTH_SHORT).show();
-    }
 }
