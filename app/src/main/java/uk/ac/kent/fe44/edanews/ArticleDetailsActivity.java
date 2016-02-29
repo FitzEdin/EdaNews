@@ -10,8 +10,40 @@ import android.widget.Toast;
 
 public class ArticleDetailsActivity extends AppCompatActivity {
 
+    private ArticleModel model = ArticleModel.getInstance();
+    private Article article;
+    private Toast toast;
+    private int itemId;
+
     private String ITEM_ID = "ITEM_ID";
     private static FloatingActionButton faveFab;
+
+    /* handle taps on fab */
+    private View.OnClickListener fabLstnr =
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    //toggle article's fave status
+                    if(article.isFave()) {
+                        //remove from faves list
+                        model.removeFromFaves(itemId);
+
+                        //change icon
+                        faveFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                        toast.setText(R.string.faves_removed);
+                        toast.show();
+                    }else {
+                        //add to faves list
+                        model.addToFaves(itemId);
+
+                        //change icon
+                        faveFab.setImageResource(R.drawable.ic_favorite_black_24dp);
+                        toast.setText(R.string.faves_added);
+                        toast.show();
+                    }
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,40 +54,18 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent i = getIntent();
-        final int itemId = i.getIntExtra(ITEM_ID, 0);
+        itemId = i.getIntExtra(ITEM_ID, 0);
 
-        final Toast toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+        //get handle on article
+        article = model.getArticleList().get(itemId);
+        toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
         faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
-        faveFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //get handle on article
-                ArticleModel model = ArticleModel.getInstance();
-                Article article = model.getArticleList().get(itemId);
-
-                //toggle article's fave status
-                if(article.isFave()) {
-                    //remove from faves list
-                    article.setIsFave(false);
-                    model.getFavesList().remove(article);   //won't know article's index on faves list
-
-                    //change icon
-                    faveFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    toast.setText("Removed from faves list.");
-                    toast.show();
-                }else {
-                    //add to faves list
-                    article.setIsFave(true);
-                    model.getFavesList().add(article);
-
-                    //change icon
-                    faveFab.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    toast.setText("Added to faves list.");
-                    toast.show();
-                }
-            }
-        });
+        //set correct icon
+        if(article.isFave()){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
+        else{   faveFab.setImageResource(R.drawable.ic_favorite_border_white_24dp); }
+        //set click listener on fab
+        faveFab.setOnClickListener(fabLstnr);
 
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);

@@ -99,11 +99,11 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
                 if(article.isFave()) {
                     model.removeFromFaves(position);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    Toast.makeText(itemView.getContext(), "Removed from Faves", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), R.string.faves_removed, Toast.LENGTH_SHORT).show();
                 }else{
                     model.addToFaves(position);
                     ic.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    Toast.makeText(itemView.getContext(), "Added to Faves", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), R.string.faves_added, Toast.LENGTH_SHORT).show();
                 }
             }
         };

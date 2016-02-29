@@ -7,6 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
 
+    <!-- nav drawer items -->
     <string name="home_category">Home</string>
     <string name="about_category">About</string>
     <string name="contact_category">Contact</string>
@@ -18,8 +19,13 @@
     <string name="contact_school">Contact EDA</string>
     <string name="contact_developer">Contact the Developer</string>
 
+    <!--  -->
     <string name="app_title">EDA News Reader</string>
     <string name="copy">(C) 2016 Muscovado</string>
+
+    <!-- faves -->
+    <string name="faves_added">Added to Faves</string>
+    <string name="faves_removed">Removed from Faves</string>
 
     <string name="dummy_date">14/12/1988</string>
     <string name="dummy_title">Degree and prize giving day for postgraduate students</string>
