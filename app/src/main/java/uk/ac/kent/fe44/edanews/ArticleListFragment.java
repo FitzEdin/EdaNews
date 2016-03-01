@@ -37,8 +37,6 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
 
     private OnListItemClickedListener mListenerActivity;
 
-    private int start = 0;
-
     public ArticleListFragment() {
         // Required empty public constructor
     }

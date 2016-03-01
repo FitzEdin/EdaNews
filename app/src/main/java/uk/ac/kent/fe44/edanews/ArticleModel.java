@@ -24,9 +24,6 @@ public class ArticleModel {
     private OnListUpdateListener listUpdateListener;
     private static ArticleModel ourInstance = new ArticleModel();
 
-    /*faves list*/
-    private ArrayList<Article> favesList = new ArrayList<>();
-
     /*members for performing article list request*/
     private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
@@ -182,26 +179,40 @@ public class ArticleModel {
         return articleList;
     }
 
+
+    /*managing my faves list*/
+    private ArrayList<Article> favesList = new ArrayList<>();
+    private OnFavesUpdateListener favesUpdateListener;
+
     public ArrayList<Article> getFavesList() {
         return favesList;
     }
-
     //TODO: populate faves list with items from memory
     public void setFavesList(ArrayList<Article> favesList) {
         this.favesList = favesList;
     }
-
     public void addToFaves(int position){
         //mark article as favourite in ArticleList
         getArticleList().get(position).setIsFave(true);
         //add it to list of Faves
         favesList.add(getArticleList().get(position));
     }
-
     public void removeFromFaves(int position) {
         //unmark article as favourite in ArticleList
         getArticleList().get(position).setIsFave(false);
         //add it to list of Faves
         favesList.remove(getArticleList().get(position));
+    }
+    private void notifyFavesListener() {
+        if(favesUpdateListener != null) {
+            favesUpdateListener.onFavesUpdate();
+        }
+    }
+    /*receive subscriptions for notifications from classes*/
+    public void setOnFavesUpdateListener(OnFavesUpdateListener favesUpdateListener) {
+        this.favesUpdateListener = favesUpdateListener;
+    }
+    public interface OnFavesUpdateListener {
+        void onFavesUpdate();
     }
 }

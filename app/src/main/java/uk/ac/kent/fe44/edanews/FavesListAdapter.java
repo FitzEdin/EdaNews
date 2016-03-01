@@ -15,13 +15,13 @@ import com.android.volley.toolbox.NetworkImageView;
 public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.ViewHolder> {
 
     private ArticleModel model = ArticleModel.getInstance();
-    //private FavesListFragment fragment;
+    private FavesListFragment fragment;
 
     //constructor
-    public FavesListAdapter(/*FavesListFragment fragment*/) {
+    public FavesListAdapter(FavesListFragment fragment) {
         super();
 
-        //this.fragment = fragment;
+        this.fragment = fragment;
     }
 
     //called when a new item should be created
@@ -30,7 +30,7 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
         View view = LayoutInflater
                 .from(parent.getContext())
                 .inflate(
-                        R.layout.fave_article_item,
+                        R.layout.adapter_faves_item,
                         parent,
                         false
                 );
@@ -66,7 +66,7 @@ public class FavesListAdapter extends RecyclerView.Adapter<FavesListAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //fragment.onItemClicked(getPosition());
+                    fragment.onItemClicked(getAdapterPosition());
                 }
             });
 
