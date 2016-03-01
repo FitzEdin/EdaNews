@@ -26,6 +26,7 @@
     <!-- faves -->
     <string name="faves_added">Added to Faves</string>
     <string name="faves_removed">Removed from Faves</string>
+    <string name="title_activity_faves">EDA Faves</string>
 
     <string name="dummy_date">14/12/1988</string>
     <string name="dummy_title">Degree and prize giving day for postgraduate students</string>
