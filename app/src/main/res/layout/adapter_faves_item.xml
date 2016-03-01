@@ -4,12 +4,12 @@
     android:orientation="vertical"
 
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="218dp"
 
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
-    android:layout_marginLeft="18dp"
-    android:layout_marginRight="18dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
 
     android:focusable="true"
     android:clickable="true"
@@ -23,52 +23,53 @@
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="fill_parent"
-        android:layout_height="324dp"/>
+        android:layout_height="156dp"/>
 
     <!-- article title -->
     <TextView
         android:id="@+id/article_title"
         android:layout_width="match_parent"
-        android:layout_height="42dp"
+        android:layout_height="24dp"
 
-        android:paddingLeft="8dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
         android:paddingTop="4dp"
 
         android:text="@string/dummy_title"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="24sp"
+        android:textSize="12sp"
+
+        android:lines="2"
+        android:maxLength="25" />
+
+    <!-- article date -->
+    <TextView
+        android:id="@+id/article_date"
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+
+        android:text="@string/dummy_date"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="8sp"
+
+        android:paddingBottom="2dp"
+
+        android:gravity="center"
 
         android:lines="1"
-        android:maxLength="25" />
+        android:maxLength="10" />
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="28dp"
+        android:layout_height="24dp"
 
         android:orientation="horizontal"
-
-        android:layout_marginTop="2dp"
 
         android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
 
         android:gravity="center">
-
-        <!-- article date -->
-        <TextView
-            android:id="@+id/article_date"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-
-            android:layout_weight="2"
-
-            android:text="@string/dummy_date"
-            android:textColor="@color/colorTextSecondary"
-            android:textSize="16sp"
-
-            android:lines="1"
-            android:maxLength="10" />
 
         <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->
