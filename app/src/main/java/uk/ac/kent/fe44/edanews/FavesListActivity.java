@@ -24,10 +24,11 @@ import android.widget.Toast;
 public class FavesListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, FavesListFragment.OnListItemClickedListener {
 
-    private static FloatingActionButton searchFab;
-    private static LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
-    private static EditText searchTextView;
+    private String CALLER_ID = "CALLER_ID";
+    private NavigationView navView;
+
+    private int callerId;
     //private boolean hasTwoPanes;
 
     @Override
@@ -40,6 +41,8 @@ public class FavesListActivity extends AppCompatActivity
 
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        callerId = 2;
 
         /*uncomment for two-pane
         if(findViewById(R.id.details_fragment) == null) {
@@ -59,9 +62,9 @@ public class FavesListActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
+        navView = (NavigationView) findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setCheckedItem(R.id.nav_faves);
     }
 
     @Override
@@ -89,6 +92,7 @@ public class FavesListActivity extends AppCompatActivity
 
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
+        i.putExtra(CALLER_ID, callerId);
         startActivity(i);
 
         /*TODO: uncomment for two-pane
@@ -143,6 +147,12 @@ public class FavesListActivity extends AppCompatActivity
         switch (id){
             case R.id.nav_home:
                 Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
+
+                navView = (NavigationView) findViewById(R.id.nav_view);
+                navView.setNavigationItemSelectedListener(this);
+                navView.setCheckedItem(R.id.nav_home);
+
+                finish();
                 break;
             case R.id.nav_faves:
                 Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();

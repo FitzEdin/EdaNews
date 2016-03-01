@@ -43,13 +43,24 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
     }
 
     /*populate the views with article's details*/
-    public void updateDetails(int index) {
+    public void updateDetails(int index, int caller) {
         this.articleIndex = index;
-        //get the article from the list
-        Article article = ArticleModel
-                .getInstance()
-                .getArticleList()
-                .get(articleIndex);
+        //get the article from the correct list
+        Article article = new Article();
+        switch(caller){
+            case 1:
+                article = ArticleModel
+                        .getInstance()
+                        .getArticleList()
+                        .get(articleIndex);
+                break;
+            case 2:
+                article = ArticleModel
+                        .getInstance()
+                        .getFavesList()
+                        .get(articleIndex);
+                break;
+        }
 
         //update UI with data
         articleTitle.setText(article.getTitle());

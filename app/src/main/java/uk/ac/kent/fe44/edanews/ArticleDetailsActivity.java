@@ -14,8 +14,10 @@ public class ArticleDetailsActivity extends AppCompatActivity {
     private Article article;
     private Toast toast;
     private int itemId;
+    private int callerId;
 
     private String ITEM_ID = "ITEM_ID";
+    private String CALLER_ID = "CALLER_ID";
     private static FloatingActionButton faveFab;
 
     /* handle taps on fab */
@@ -55,9 +57,18 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         itemId = i.getIntExtra(ITEM_ID, 0);
+        callerId = i.getIntExtra(CALLER_ID, 1);
 
-        //get handle on article
-        article = model.getArticleList().get(itemId);
+        //take from the correct list based on the parent activity
+        switch (callerId){
+            case 1:
+                article = model.getArticleList().get(itemId);
+                break;
+            case 2:
+                article = model.getFavesList().get(itemId);
+                break;
+        }
+
         toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
         faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
@@ -69,6 +80,6 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
-        fragment.updateDetails(itemId);
+        fragment.updateDetails(itemId, callerId);
     }
 }

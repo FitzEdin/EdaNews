@@ -29,6 +29,8 @@ public class Article {
         this.short_info = short_info;
         this.date = date;
     }
+    //empty constructor used in ArticleDetailsFragment
+    public Article(){}
 
     /*Getters and Setters*/
     public String getImageURL() {
