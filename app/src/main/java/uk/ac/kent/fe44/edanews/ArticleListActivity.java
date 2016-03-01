@@ -1,10 +1,13 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -195,6 +198,7 @@ public class ArticleListActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Dialog d;
 
         switch (id){
             case R.id.nav_home:
@@ -209,7 +213,8 @@ public class ArticleListActivity extends AppCompatActivity
                 Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
-                Toast.makeText(this, "School at Kent Uni", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.school_name), getString(R.string.app_name));
+                d.show();
                 break;
             case R.id.nav_developer:
                 Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
@@ -221,12 +226,27 @@ public class ArticleListActivity extends AppCompatActivity
                 Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_contact_developer:
-                Toast.makeText(this, "Contact the developer", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));
+                d.show();
                 break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    /*create the About dialog*/
+    public Dialog createDialog(String title, String message) {
+    /*    LayoutInflater inflater = this.getLayoutInflater();
+        View aboutView = inflater.inflate(R.layout.about_dialog, null); */
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", null);
+        // Create the AlertDialog object and return it
+        return builder.create();
     }
 }

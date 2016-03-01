@@ -38,6 +38,13 @@
 
     <string name="get_articles">http://www.efstratiou.info/projects/newsfeed/getList.php</string>
 
+    <string name="developer_contact">
+        Muscovado Labs
+        \nEast Street
+        \nNewtown, Basseterre
+        \nSaint Kitts, West Indies
+    </string>
+
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_article_details">EDA News</string>
