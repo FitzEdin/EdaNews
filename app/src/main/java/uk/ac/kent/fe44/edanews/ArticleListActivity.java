@@ -202,6 +202,8 @@ public class ArticleListActivity extends AppCompatActivity
                 break;
             case R.id.nav_faves:
                 Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, FavesListActivity.class);
+                startActivity(i);
                 break;
             case R.id.nav_saved:
                 Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
