@@ -13,7 +13,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class FavesListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, FavesListFragment.OnListItemClickedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        FavesListFragment.OnListItemClickedListener {
 
     private String ITEM_ID = "ITEM_ID";
     private String CALLER_ID = "CALLER_ID";

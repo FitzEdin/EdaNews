@@ -24,22 +24,11 @@ import java.util.ArrayList;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class ArticleListFragment extends Fragment implements ArticleModel.OnListUpdateListener {
+public class ArticleListFragment extends ListFragment {
 
     private TextView noNetworkRetry;
 
     private ProgressBar mProgressBar;
-
-    private RecyclerView articleListView;
-    private GridLayoutManager gridLayoutManager;
-    private ArticleListAdapter listAdapter;
-
-    private OnListItemClickedListener mListenerActivity;
-
-    public ArticleListFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -73,50 +62,15 @@ public class ArticleListFragment extends Fragment implements ArticleModel.OnList
         listAdapter = new ArticleListAdapter(this);
 
         //set up visual elements
-        articleListView = (RecyclerView)view.findViewById(R.id.article_list_view);
-        articleListView.setLayoutManager(gridLayoutManager);
-        articleListView.setAdapter(listAdapter);
+        listView = (RecyclerView)view.findViewById(R.id.article_list_view);
+        listView.setLayoutManager(gridLayoutManager);
+        listView.setAdapter(listAdapter);
 
         /*source: https://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView*/
         //add onScrollListener
         //articleListView.addOnScrollListener(new EndlessRecyclerViewScrollListener);
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListenerActivity = (OnListItemClickedListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnListItemClickedListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListenerActivity = null;
-    }
-
-    /*refresh data set with new information*/
-    @Override
-    public void onListUpdate(ArrayList<Article> articleList) {
-        if(listAdapter != null) {
-            listAdapter.notifyDataSetChanged();
-        }
-    }
-
-    //interface for activities using this fragment
-    public interface OnListItemClickedListener {
-        void onItemClicked(int position);
-    }
-
-    public void onItemClicked(int position) {
-        //perform secondary network request
-        mListenerActivity.onItemClicked(position);
     }
 
     //Source: previous project kn.muscovado.thadailygeek

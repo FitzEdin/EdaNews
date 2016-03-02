@@ -24,7 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ArticleListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ArticleListFragment.OnListItemClickedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        ArticleListFragment.OnListItemClickedListener {
 
     private static FloatingActionButton searchFab;
     private static LinearLayout searchBar;
