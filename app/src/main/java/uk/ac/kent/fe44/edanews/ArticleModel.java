@@ -140,7 +140,7 @@ public class ArticleModel {
     };
     /*loads the details of a particular article, by appending its id to DETAILS_URL*/
     public void loadArticleDetails(int articleId, int articleIndex) {
-        //localise index for further use
+        //localise index for use by the response listener
         this.articleIndex = articleIndex;
 
         //create url for particular article

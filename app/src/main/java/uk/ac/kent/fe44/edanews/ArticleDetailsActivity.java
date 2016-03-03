@@ -55,6 +55,7 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // get extra values to pass on to fragment
         Intent i = getIntent();
         itemId = i.getIntExtra(ITEM_ID, 0);
         callerId = i.getIntExtra(CALLER_ID, 0);
