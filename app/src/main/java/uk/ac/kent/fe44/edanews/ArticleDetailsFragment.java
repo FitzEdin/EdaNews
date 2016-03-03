@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -96,5 +97,12 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
                 .getArticleList()
                 .get(articleIndex);
         articleContents.setText(article.getContents());
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        Toast.makeText(getActivity(), "Detail fragment killed", Toast.LENGTH_SHORT).show();
+
     }
 }

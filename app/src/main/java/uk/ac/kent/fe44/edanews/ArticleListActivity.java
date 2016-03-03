@@ -30,6 +30,8 @@ public class ArticleListActivity extends AppCompatActivity
     private static FloatingActionButton searchFab;
     private static LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
+    private String CALLER_ID = "CALLER_ID";
+    private int callerId = 1;
     private static EditText searchTextView;
     //private boolean hasTwoPanes;
 
@@ -54,7 +56,7 @@ public class ArticleListActivity extends AppCompatActivity
 
 
         //TODO: remove this
-        Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
+        //Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
@@ -108,7 +110,7 @@ public class ArticleListActivity extends AppCompatActivity
         searchFab.setVisibility(View.VISIBLE);
     }
     public void searchFor(String key) {
-        Toast.makeText(this, "Searching for: " + key, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Searching for: " + key, Toast.LENGTH_SHORT).show();
         //make network request
     }
     public static void hideKeyboard(Activity activity) {
@@ -141,12 +143,26 @@ public class ArticleListActivity extends AppCompatActivity
 
     /*define what happens on choosing a list item*/
     @Override
+    public void onItemShared(int position) {
+        Article article = ArticleModel.getInstance().getArticleList().get(position);
+        String str = article.getWeb_page();
+
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, str);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share on..."));
+    }
+
+    /*define what happens on choosing a list item*/
+    @Override
     public void onItemClicked(int position) {
         //TODO: remove
-        Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
+        i.putExtra(CALLER_ID, callerId);
         startActivity(i);
 
         /*TODO: uncomment for two-pane
@@ -201,28 +217,28 @@ public class ArticleListActivity extends AppCompatActivity
 
         switch (id){
             case R.id.nav_home:
-                Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_faves:
-                Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, FavesListActivity.class);
                 startActivity(i);
                 break;
             case R.id.nav_saved:
-                Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
                 d = createDialog(getString(R.string.school_name), getString(R.string.app_name));
                 d.show();
                 break;
             case R.id.nav_developer:
-                Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_app:
-                Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_contact_EDA:
-                Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_contact_developer:
                 d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));

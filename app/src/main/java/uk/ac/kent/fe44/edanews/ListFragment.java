@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by fitzroy on 01/03/2016.
  */
-public abstract class ListFragment extends Fragment implements ArticleModel.OnListUpdateListener {
+public abstract class ListFragment extends Fragment {
 
     protected RecyclerView listView;
     protected GridLayoutManager gridLayoutManager;
@@ -41,21 +41,19 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnLi
         mListenerActivity = null;
     }
 
-    /*refresh data set with new information*/
-    @Override
-    public void onListUpdate(ArrayList<Article> articleList) {
-        if(listAdapter != null) {
-            listAdapter.notifyDataSetChanged();
-        }
-    }
-
     //interface for activities using this fragment
     public interface OnListItemClickedListener {
         void onItemClicked(int position);
+        void onItemShared(int position);
     }
 
     public void onItemClicked(int position) {
         //perform secondary network request
         mListenerActivity.onItemClicked(position);
+    }
+
+    public void onItemShared(int position) {
+        //perform secondary network request
+        mListenerActivity.onItemShared(position);
     }
 }

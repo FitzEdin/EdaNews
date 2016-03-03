@@ -89,7 +89,7 @@ public class ArticleModel {
     private void notifyListener() {
         if(listUpdateListener != null) {
             myProgressBar.setVisibility(View.INVISIBLE);
-            listUpdateListener.onListUpdate(getArticleList());
+            listUpdateListener.onListUpdate();
         }
     }
     /*receive subscriptions for notifications from classes*/
@@ -98,7 +98,7 @@ public class ArticleModel {
     }
     /*informs appropriate classes when the data is updated*/
     public interface OnListUpdateListener {
-        void  onListUpdate(ArrayList<Article> articleList);
+        void  onListUpdate();
     }
     /*end definition for members an methods for performing article list request(s)*/
 
@@ -187,21 +187,27 @@ public class ArticleModel {
     public ArrayList<Article> getFavesList() {
         return favesList;
     }
-    //TODO: populate faves list with items from memory
     public void setFavesList(ArrayList<Article> favesList) {
+        //TODO: populate faves list with items from memory
         this.favesList = favesList;
     }
     public void addToFaves(int position){
         //mark article as favourite in ArticleList
         getArticleList().get(position).setIsFave(true);
         //add it to list of Faves
-        favesList.add(getArticleList().get(position));
+        getFavesList().add(getArticleList().get(position));
+        //notify whoever is listening
+        notifyFavesListener();
     }
-    public void removeFromFaves(int position) {
+    public void removeFromFaves(Article article) {
+        //get position of this article in the ArticleList
+        int articleListPosition = getArticleList().indexOf(article);
         //unmark article as favourite in ArticleList
-        getArticleList().get(position).setIsFave(false);
-        //add it to list of Faves
-        favesList.remove(getArticleList().get(position));
+        (getArticleList().get(articleListPosition)).setIsFave(false);
+        //remove it from list of Faves
+        getFavesList().remove(article);
+        //notify whoever is listening
+        notifyFavesListener();
     }
     private void notifyFavesListener() {
         if(favesUpdateListener != null) {

@@ -24,10 +24,9 @@ import java.util.ArrayList;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class ArticleListFragment extends ListFragment {
+public class ArticleListFragment extends ListFragment implements ArticleModel.OnListUpdateListener {
 
     private TextView noNetworkRetry;
-
     private ProgressBar mProgressBar;
 
     @Override
@@ -41,12 +40,12 @@ public class ArticleListFragment extends ListFragment {
         noNetworkRetry = (TextView)view.findViewById(R.id.no_network_retry);
 
         //TODO: remove
-        Toast.makeText(getActivity(), "ArticleListFragment.onCreateView", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(getActivity(), "ArticleListFragment.onCreateView", Toast.LENGTH_SHORT).show();
 
         noNetworkRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), R.string.checking_network, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), R.string.checking_network, Toast.LENGTH_SHORT).show();
                 tryForNetwork();
             }
         });
@@ -68,9 +67,19 @@ public class ArticleListFragment extends ListFragment {
 
         /*source: https://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView*/
         //add onScrollListener
-        //articleListView.addOnScrollListener(new EndlessRecyclerViewScrollListener);
+        //articleListView.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager){
+        // }
+        // );
 
         return view;
+    }
+
+    /*refresh data set with new information*/
+    @Override
+    public void onListUpdate() {
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     //Source: previous project kn.muscovado.thadailygeek

@@ -1,14 +1,12 @@
 
 package uk.ac.kent.fe44.edanews;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -39,6 +37,9 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected ImageView savedIc;
         protected ImageView shareIc;
 
+        /*sub classes determine which list they are using*/
+        protected abstract ArrayList<Article> getList();
+
         //common
         protected View.OnClickListener itemTap = new View.OnClickListener(){
             @Override
@@ -46,7 +47,6 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 fragment.onItemClicked(getAdapterPosition());
             }
         };
-
         /* handle long click on article image */
         protected NetworkImageView.OnLongClickListener imgLongTap
                 = new NetworkImageView.OnLongClickListener(){
@@ -55,11 +55,10 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 int position = getAdapterPosition();
                 //TODO: place dialog here
                 String str = getList().get(position).getTitle();
-                Toast.makeText(itemView.getContext(), str, Toast.LENGTH_LONG).show();
+                //Toast.makeText(itemView.getContext(), str, Toast.LENGTH_LONG).show();
                 return true;
             }
         };
-
         /* handle tap on faves icon */
         protected ImageView.OnClickListener faveICTap
                 = new ImageView.OnClickListener(){
@@ -71,9 +70,9 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
                 //if a fave
                 if(article.isFave()) {
-                    model.removeFromFaves(position);
+                    model.removeFromFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    Toast.makeText(itemView.getContext(), R.string.faves_removed, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(itemView.getContext(), "Removed from faves " + position, Toast.LENGTH_SHORT).show();
                 }else {
                     model.addToFaves(position);
                     ic.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -81,12 +80,11 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 }
             }
         };
-
         /* handle tap on saved icon */
         protected ImageView.OnClickListener savedICTap = new ImageView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Toast.makeText(itemView.getContext(), "SAVE ARTICLE", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(itemView.getContext(), "SAVE ARTICLE", Toast.LENGTH_SHORT).show();
                 ImageView imgVw = (ImageView)v;
                 imgVw.setImageResource(R.drawable.ic_watch_later_black_24dp);
     /*            ImageView ic = (ImageView)v;
@@ -104,13 +102,13 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
     */
             }
         };
-
         /* handle tap on share icon */
         protected ImageView.OnClickListener shareICTap = new ImageView.OnClickListener(){
             @Override
             public void onClick(View v) {
                 /*TODO: implement share*/
                 Toast.makeText(itemView.getContext(), "SHOUT LOUD", Toast.LENGTH_SHORT).show();
+                fragment.onItemShared(getAdapterPosition());
             }
         };
 
@@ -150,7 +148,5 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             if(article.isFave()) {  faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
             if(article.isSaved()) { savedIc.setImageResource(R.drawable.ic_watch_later_black_24dp); }
         }
-
-        abstract public ArrayList<Article> getList();
     }
 }

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +18,7 @@ import android.widget.Toast;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class FavesListFragment extends ListFragment{
+public class FavesListFragment extends ListFragment implements ArticleModel.OnFavesUpdateListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -26,7 +28,7 @@ public class FavesListFragment extends ListFragment{
         View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
 
         //TODO: remove
-        Toast.makeText(getActivity(), "FavesListFragment.onCreateView", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "FavesListFragment.onCreateView", Toast.LENGTH_SHORT).show();
 
         //set up layout manager
         gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -41,6 +43,18 @@ public class FavesListFragment extends ListFragment{
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
 
+        //listen for changes to the Faves List
+        ArticleModel.getInstance().setOnFavesUpdateListener(this);
+
         return view;
+    }
+
+    /*refresh data set with new information*/
+    @Override
+    public void onFavesUpdate() {
+        //change data set
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
     }
 }
