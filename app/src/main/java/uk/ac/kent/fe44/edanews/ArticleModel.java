@@ -181,21 +181,26 @@ public class ArticleModel {
 
 
     /*managing my faves list*/
-    private ArrayList<Article> favesList = new ArrayList<>();
+    // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
     private OnFavesUpdateListener favesUpdateListener;
 
     public ArrayList<Article> getFavesList() {
+        ArrayList<Article> favesList = new ArrayList<>();
+        for (Article a : getArticleList()) {
+            if(a.isFave()){
+                favesList.add(a);
+            }
+        }
         return favesList;
     }
     public void setFavesList(ArrayList<Article> favesList) {
         //TODO: populate faves list with items from memory
-        this.favesList = favesList;
     }
     public void addToFaves(int position){
         //mark article as favourite in ArticleList
         getArticleList().get(position).setIsFave(true);
         //add it to list of Faves
-        getFavesList().add(getArticleList().get(position));
+        //favesList is no longer persistent getFavesList().add(getArticleList().get(position));
         //notify whoever is listening
         notifyFavesListener();
     }
@@ -205,7 +210,7 @@ public class ArticleModel {
         //unmark article as favourite in ArticleList
         (getArticleList().get(articleListPosition)).setIsFave(false);
         //remove it from list of Faves
-        getFavesList().remove(article);
+        // favesList is no longer persistent getFavesList().remove(article);
         //notify whoever is listening
         notifyFavesListener();
     }
