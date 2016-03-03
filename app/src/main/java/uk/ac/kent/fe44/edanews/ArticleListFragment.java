@@ -64,6 +64,22 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
         listView = (RecyclerView)view.findViewById(R.id.article_list_view);
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int visibleItemCount = gridLayoutManager.getChildCount();
+                int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
+                int totalItemCount = gridLayoutManager.getItemCount();
+
+
+                if((dy > 0) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3){
+                    Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
+                    tryForNetwork();
+                }
+            }
+        });
 
         /*source: https://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView*/
         //add onScrollListener
