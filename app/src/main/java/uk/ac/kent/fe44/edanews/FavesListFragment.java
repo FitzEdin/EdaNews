@@ -32,6 +32,19 @@ public class FavesListFragment extends ListFragment implements ArticleModel.OnFa
 
         //set up layout manager
         gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        /*have multiple spans for different rows*/
+    /*    gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+            @Override
+            public int getSpanSize(int position){
+                switch(position){
+                    case 0:
+                        return 2;
+                    default:
+                        return 1;
+                }
+            }
+        });
+    */
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
 

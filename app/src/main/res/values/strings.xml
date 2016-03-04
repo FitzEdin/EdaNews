@@ -13,6 +13,7 @@
     <string name="contact_category">Contact</string>
     <string name="faves_category">Faves</string>
     <string name="saved_category">Read Later</string>
+    <string name="settings_category">Settings</string>
     <string name="school_name">Engineering and Digital Arts</string>
     <string name="developer_name">Fitzroy Edinborough</string>
     <string name="about_app">EDA News</string>

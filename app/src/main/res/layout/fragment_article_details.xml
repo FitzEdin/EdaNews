@@ -28,8 +28,8 @@
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/detail_img"
 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="324dp"
+            android:layout_height="324dp"
 
             android:layout_gravity="center"
 
