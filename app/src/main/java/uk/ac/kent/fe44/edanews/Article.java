@@ -18,16 +18,10 @@ public class Article {
     private boolean isSaved = false;    //saved for later reading
     private boolean isRead = false;     //read
 
-    private static final int height = 200;
-    private static final int width = 200;
-
-    private static final String timThumb
-            = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w="+width+"&h="+height+"&src=";
-
-
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String short_info, String date) {
-        String url = timThumb.concat(imageURL);
+        String resizer = ArticleModel.getInstance().getResizer();
+        String url = resizer.concat(imageURL);
         this.imageURL = url;
         this.recordID = recordID;
         this.title = title;

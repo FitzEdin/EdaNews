@@ -24,6 +24,16 @@ public class ArticleModel {
     private OnListUpdateListener listUpdateListener;
     private static ArticleModel ourInstance = new ArticleModel();
 
+    private static final int height = 200;
+    private static final int width = 200;
+
+    private static final String timThumb
+            = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w="+width+"&h="+height+"&src=";
+
+    public String getResizer() {
+        return timThumb;
+    }
+
     /*members for performing article list request*/
     private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
