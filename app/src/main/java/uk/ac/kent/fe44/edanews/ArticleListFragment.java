@@ -77,6 +77,7 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
                 if((dy > 0) && (loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3){
                     //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
+                    loading = false;
                 }
             }
         });
