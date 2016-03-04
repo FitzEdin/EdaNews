@@ -13,9 +13,10 @@ public class Article {
     private String contents;
     private String web_page;
 
-    private boolean isFave = false;
-    private boolean isSaved = false;
-    private boolean isDetailed = false;
+    // whether or not the article has been...
+    private boolean isFave = false;     //favourited
+    private boolean isSaved = false;    //saved for later reading
+    private boolean isRead = false;     //read
 
     private static final int height = 200;
     private static final int width = 200;
@@ -109,11 +110,11 @@ public class Article {
         this.isFave = isFave;
     }
 
-    public boolean isDetailed() {
-        return isDetailed;
+    public boolean isRead() {
+        return isRead;
     }
 
-    public void setIsDetailed(boolean isDetailed) {
-        this.isDetailed = isDetailed;
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
     }
 }
