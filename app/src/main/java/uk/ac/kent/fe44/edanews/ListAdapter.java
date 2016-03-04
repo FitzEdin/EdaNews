@@ -136,8 +136,12 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
         //add values from data model to each row
         public void setData(Article article) {
-            //display the first 20 characters only
-            title.setText(article.getTitle().substring(0, 20) + "...");
+            //protection for super long and super short titles
+            int length = article.getTitle().length() - 3;
+            if(length > 20){
+                length = 20;
+            }
+            title.setText(article.getTitle().substring(0, length) + "...");
             date.setText(article.getDate());
             photo.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
             faveIc.setImageResource(R.drawable.ic_favorite_border_black_24dp);

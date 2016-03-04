@@ -28,6 +28,7 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
 
     private TextView noNetworkRetry;
     private ProgressBar mProgressBar;
+    private boolean loading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -73,19 +74,12 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
                 int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = gridLayoutManager.getItemCount();
 
-
-                if((dy > 0) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3){
-                    Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
+                if((dy > 0) && (loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3){
+                    //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
                 }
             }
         });
-
-        /*source: https://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView*/
-        //add onScrollListener
-        //articleListView.addOnScrollListener(new EndlessRecyclerViewScrollListener(gridLayoutManager){
-        // }
-        // );
 
         return view;
     }
@@ -96,6 +90,8 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();
         }
+
+        loading = true;
     }
 
     //Source: previous project kn.muscovado.thadailygeek
