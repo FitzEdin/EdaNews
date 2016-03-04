@@ -44,6 +44,7 @@ public class ArticleListAdapter extends ListAdapter {
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
         Article article = model.getArticleList().get(position);
+        //grab article's details as it comes into view
         model.loadArticleDetails(article.getRecordID(), position);
         holder.setData(article);
     }

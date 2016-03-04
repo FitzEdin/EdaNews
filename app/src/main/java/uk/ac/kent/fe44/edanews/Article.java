@@ -17,7 +17,11 @@ public class Article {
     private boolean isSaved = false;
     private boolean isDetailed = false;
 
-    private static final String timThumb = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w=200&h=200&src=";
+    private static final int height = 200;
+    private static final int width = 200;
+
+    private static final String timThumb
+            = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w="+width+"&h="+height+"&src=";
 
 
     /*Constructor*/
@@ -29,7 +33,7 @@ public class Article {
         this.short_info = short_info;
         this.date = date;
     }
-    //empty constructor used in ArticleDetailsFragment
+    //empty constructor used to create an empty Article object
     public Article(){}
 
     /*Getters and Setters*/

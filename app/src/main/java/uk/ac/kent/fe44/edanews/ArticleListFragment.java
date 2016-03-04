@@ -24,7 +24,8 @@ import java.util.ArrayList;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class ArticleListFragment extends ListFragment implements ArticleModel.OnListUpdateListener {
+public class ArticleListFragment extends ListFragment
+        implements ArticleModel.OnListUpdateListener, ArticleModel.OnFavesUpdateListener  {
 
     private TextView noNetworkRetry;
     private ProgressBar mProgressBar;
@@ -74,7 +75,7 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
                 int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = gridLayoutManager.getItemCount();
 
-                if((dy > 0) && (loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3){
+                if ((dy > 0) && (loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3) {
                     //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
                     loading = false;
@@ -82,7 +83,19 @@ public class ArticleListFragment extends ListFragment implements ArticleModel.On
             }
         });
 
+        //listen for changes to the Faves List
+        ArticleModel.getInstance().setOnFavesUpdateListener(this);
+
         return view;
+    }
+
+    /*refresh data set with new information*/
+    @Override
+    public void onFavesUpdate() {
+        //change data set
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     /*refresh data set with new information*/

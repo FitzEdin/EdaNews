@@ -15,7 +15,7 @@ import com.android.volley.toolbox.NetworkImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnDetailsUpdateListener {
+public class ArticleDetailsFragment extends Fragment {
 
     private TextView articleTitle;
     private TextView articleDate;
@@ -67,21 +67,11 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         articleTitle.setText(article.getTitle());
         articleDate.setText(article.getDate());
         articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
-
-        if(article.isDetailed()) { //details have been downloaded before..
-                                    //so no need to do it twice
-            articleContents.setText(article.getContents());
-        }else {
-            // show network message
-            articleContents.setText("Loading details...");
-
-            //get a handle on that article's record id for network request
-            articleId = article.getRecordID();
-            getArticleDetails();
-        }
+        articleContents.setText(article.getContents());
     }
 
-    /*prompts the ArticleModel class to get article's details from the network*/
+    /*TODO: no longer needed*/
+    /*prompts the ArticleModel class to get article's details from the network
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
@@ -98,6 +88,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
                 .get(articleIndex);
         articleContents.setText(article.getContents());
     }
+    */
 
     @Override
     public void onDetach(){

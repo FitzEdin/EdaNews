@@ -9,7 +9,9 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by fitzroy on 31/01/2016.
  *
- * Handles globally needed objects
+ * A singleton class, which manages the
+ * requestQueue and imageLoader objects
+ * used throughout the application.
  */
 public class ArticlesApp extends Application {
 
