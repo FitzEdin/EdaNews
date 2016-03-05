@@ -5,6 +5,7 @@ package uk.ac.kent.fe44.edanews;
  * Represents an individual article.
  */
 public class Article {
+    //attributes that define an article
     private String imageURL;
     private int recordID;
     private String title;

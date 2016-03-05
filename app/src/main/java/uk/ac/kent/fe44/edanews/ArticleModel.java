@@ -26,7 +26,6 @@ public class ArticleModel {
 
     private static final int height = 200;
     private static final int width = 200;
-
     private static final String timThumb
             = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w="+width+"&h="+height+"&src=";
 
@@ -34,21 +33,26 @@ public class ArticleModel {
         return timThumb;
     }
 
+
+    /** Performing Article List requests
+     *  The lists are downloaded in batches of size
+     *  and any listener is informed via the interface
+     *  */
     /*members for performing article list request*/
     private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
             SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     private ArrayList<Article> articleList = new ArrayList<>();
     private int mStart = 0;
+    private int size = 20;
 
     private Response.Listener<JSONArray> netListener = new Response.Listener<JSONArray>() {
         @Override
         public void onResponse(JSONArray response) {
             //handle response from server
             if(mStart == 0){
-                getArticleList().clear();
+                articleList.clear();
             }
-
             try{
                 for(int i = 0; i < response.length(); i++) {
                     //extract JSON object from response
@@ -93,7 +97,7 @@ public class ArticleModel {
                 .add(request);
 
         //set up for pulling next set of articles
-        mStart += 20;
+        mStart += size;
     }
     /*let the listener know about updates*/
     private void notifyListener() {
@@ -106,7 +110,7 @@ public class ArticleModel {
     public void setOnListUpdateListener(OnListUpdateListener listUpdateListener) {
         this.listUpdateListener = listUpdateListener;
     }
-    /*informs appropriate classes when the data is updated*/
+    /*classes that need this data implement this interface*/
     public interface OnListUpdateListener {
         void  onListUpdate();
     }
@@ -114,7 +118,11 @@ public class ArticleModel {
 
 
 
-
+    /** Performing Article Detail requests
+     *  The detail for each article, ie, its contents
+     *  and web page url is downloaded with a second
+     *  network request.
+     *  */
     /*members and methods for performing request for article's details*/
     private String DETAILS_URL = "http://www.efstratiou.info/projects/newsfeed/getItem.php?id=";
     private String CONTENTS = "contents", WEB_PAGE = "web_page";
@@ -191,6 +199,14 @@ public class ArticleModel {
     }
 
 
+
+    /** Manages the faves list; no network requests are
+     * involved, and the list itself is transient. It is
+     * built dynamically using getFavesList(). Any additions
+     * and deletions are done using addToFaves() and
+     * removeFromFaves(), respectively. Any listeners are
+     * notified after each addition and deletion.
+     *  */
     /*managing my faves list*/
     // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
     private OnFavesUpdateListener favesUpdateListener;
