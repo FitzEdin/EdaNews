@@ -133,11 +133,10 @@ public class ArticleModel {
                 getArticleList().get(articleIndex)
                         .setContents(response.getString(CONTENTS));
 
-                /*TODO: no longer need to mark article as detailed*/
-                //mark article as detailed
-                /*getArticleList().get(articleIndex)
+                //mark article as detailed /---/ prevents a second attempt at downloading same data
+                getArticleList().get(articleIndex)
                         .setIsDetailed(true);
-                */
+
             }catch(JSONException e) {
                 //handle exception
             }

@@ -15,7 +15,7 @@ import com.android.volley.toolbox.NetworkImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ArticleDetailsFragment extends Fragment {
+public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnDetailsUpdateListener {
 
     private TextView articleTitle;
     private TextView articleDate;
@@ -67,11 +67,20 @@ public class ArticleDetailsFragment extends Fragment {
         articleTitle.setText(article.getTitle());
         articleDate.setText(article.getDate());
         articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
-        articleContents.setText(article.getContents());
+
+        if(article.isDetailed()) {
+            articleContents.setText(article.getContents());
+        }else{
+            //show network message
+            articleContents.setText(R.string.loading_contents);
+
+            //get a handle on article's record id for network request
+            articleId = article.getRecordID();
+            getArticleDetails();
+        }
     }
 
-    /*TODO: no longer needed*/
-    /*prompts the ArticleModel class to get article's details from the network
+    /*prompts the ArticleModel class to get article's details from the network*/
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
@@ -88,12 +97,11 @@ public class ArticleDetailsFragment extends Fragment {
                 .get(articleIndex);
         articleContents.setText(article.getContents());
     }
-    */
+
 
     @Override
     public void onDetach(){
         super.onDetach();
         Toast.makeText(getActivity(), "Detail fragment killed", Toast.LENGTH_SHORT).show();
-
     }
 }

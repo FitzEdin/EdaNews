@@ -75,10 +75,10 @@ public class ArticleListFragment extends ListFragment
                 int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = gridLayoutManager.getItemCount();
 
-                if ((dy > 0) && (loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3) {
+                if ((dy > 0) && (!loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3) {
                     //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
-                    loading = false;
+                    loading = true;
                 }
             }
         });
@@ -105,7 +105,7 @@ public class ArticleListFragment extends ListFragment
             listAdapter.notifyDataSetChanged();
         }
 
-        loading = true;
+        loading = false;
     }
 
     //Source: previous project kn.muscovado.thadailygeek

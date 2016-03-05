@@ -17,6 +17,7 @@ public class Article {
     private boolean isFave = false;     //favourited
     private boolean isSaved = false;    //saved for later reading
     private boolean isRead = false;     //read
+    private boolean isDetailed = false; //downloaded in its entirety
 
     /*Constructor*/
     public Article(String imageURL, int recordID, String title, String short_info, String date) {
@@ -110,5 +111,13 @@ public class Article {
 
     public void setIsRead(boolean isRead) {
         this.isRead = isRead;
+    }
+
+    public boolean isDetailed() {
+        return isDetailed;
+    }
+
+    public void setIsDetailed(boolean isDetailed) {
+        this.isDetailed = isDetailed;
     }
 }
