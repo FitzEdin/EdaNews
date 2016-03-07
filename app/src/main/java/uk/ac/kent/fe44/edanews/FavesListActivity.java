@@ -14,16 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class FavesListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        ListFragment.OnListItemClickedListener {
-
-    private String ITEM_ID = "ITEM_ID";
-    private String CALLER_ID = "CALLER_ID";
-    private int callerId = 2;
-
-    private NavigationView navView;
-    //private boolean hasTwoPanes;
+public class FavesListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +39,9 @@ public class FavesListActivity extends AppCompatActivity
         //TODO: remove this
         //Toast.makeText(this, "FavesListActivity.onCreate", Toast.LENGTH_SHORT);
 
+        //set up caller id for ArticleDetailsActivity
+        callerId = 2;
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,
@@ -64,7 +58,7 @@ public class FavesListActivity extends AppCompatActivity
         navView.setCheckedItem(R.id.nav_faves);
     }
 
-    private ArrayList<Article> getList(){
+    public ArrayList<Article> getList(){
         return ArticleModel.getInstance().getFavesList();
     }
 
@@ -83,116 +77,5 @@ public class FavesListActivity extends AppCompatActivity
     public void onStop() {
         super.onStop();
         //save data
-    }
-
-    /*define what happens on choosing a list item*/
-    @Override
-    public void onItemShared(int position) {
-        Article article = getList().get(position);
-        String str = article.getWeb_page();
-
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, str);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
-    }
-
-    /*define what happens on choosing a list item*/
-    @Override
-    public void onItemClicked(int position) {
-        //TODO: remove
-        //Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
-
-        Intent i = new Intent(this, ArticleDetailsActivity.class);
-        i.putExtra(ITEM_ID, position);
-        i.putExtra(CALLER_ID, callerId);
-        startActivity(i);
-
-        /*TODO: uncomment for two-pane
-        if(hasTwoPanes) {
-            ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
-            fragment.updateDetails(position);
-        }else {
-            Intent i = new Intent(this, ArticleDetailsActivity.class);
-            i.putExtra(ITEM_ID, position);
-            startActivity(i);
-        }
-        /*end of section for two-panes*/
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.article_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        switch (id){
-            case R.id.nav_home:
-                //Toast.makeText(this, "Welcome HOME ! ! !", Toast.LENGTH_SHORT).show();
-
-                navView = (NavigationView) findViewById(R.id.nav_view);
-                navView.setNavigationItemSelectedListener(this);
-                navView.setCheckedItem(R.id.nav_home);
-
-                finish();
-                break;
-            case R.id.nav_faves:
-                //Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_saved:
-                //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_EDA:
-                //Toast.makeText(this, "School at Kent Uni", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_developer:
-                //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_app:
-                //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_contact_EDA:
-                //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_contact_developer:
-                //Toast.makeText(this, "Contact the developer", Toast.LENGTH_SHORT).show();
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }
