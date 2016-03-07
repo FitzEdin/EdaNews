@@ -31,7 +31,9 @@ public class ArticleListActivity extends AppCompatActivity
 
     private String ITEM_ID = "ITEM_ID";
     private String CALLER_ID = "CALLER_ID";
-    private int callerId = 1;
+    private int callerId;
+
+    private NavigationView navView;
     //private boolean hasTwoPanes;
 
     private static FloatingActionButton searchFab;
@@ -60,6 +62,9 @@ public class ArticleListActivity extends AppCompatActivity
 
         //TODO: remove this
         //Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
+
+        //set up caller id for ArticleDetailsActivity
+        callerId = 1;
 
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
@@ -102,9 +107,9 @@ public class ArticleListActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_home);
+        navView = (NavigationView) findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setCheckedItem(R.id.nav_home);
     }
 
     private ArrayList<Article> getList(){
