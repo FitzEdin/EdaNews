@@ -21,9 +21,13 @@ public abstract class ListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ListFragment.OnListItemClickedListener {
 
-    protected String ITEM_ID = "ITEM_ID";
-    protected String CALLER_ID = "CALLER_ID";
+    protected final static String ITEM_ID = "ITEM_ID";
+    protected final static String CALLER_ID = "CALLER_ID";
+    protected final static String PLAIN_TEXT = "text/plain";
     protected int callerId;
+
+    private final static String classArticleActivity = "ArticleListActivity";
+    private final static String classFavesActivity = "FavesListActivity";
 
     protected NavigationView navView;
     //protected boolean hasTwoPanes;
@@ -36,9 +40,7 @@ public abstract class ListActivity extends AppCompatActivity
     //each subclass has to provide access to its list
     public abstract ArrayList<Article> getList();
 
-
-
-    /*define what happens on choosing a list item*/
+    /*define what happens on sharing a list item*/
     @Override
     public void onItemShared(int position) {
         Article article = getList().get(position);
@@ -47,7 +49,7 @@ public abstract class ListActivity extends AppCompatActivity
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, str);
-        sendIntent.setType("text/plain");
+        sendIntent.setType(PLAIN_TEXT);
         startActivity(Intent.createChooser(sendIntent, "Share on..."));
     }
 
@@ -117,11 +119,11 @@ public abstract class ListActivity extends AppCompatActivity
                 //Toast.makeText(this, this.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
                 switch(this.getClass().getSimpleName()) {
                     //add cases for other classes
-                    case "ArticleListActivity":
+                    case classArticleActivity:
                         //do nothing
                         Toast.makeText(this, "We're here already", Toast.LENGTH_SHORT).show();
                         break;
-                    case "FavesListActivity":
+                    case classFavesActivity:
                         finish();
                         break;
                 }
@@ -130,11 +132,11 @@ public abstract class ListActivity extends AppCompatActivity
                 //Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
                 switch(this.getClass().getSimpleName()) {
                     //add cases for other classes
-                    case "ArticleListActivity":
+                    case classArticleActivity:
                         Intent i = new Intent(this, FavesListActivity.class);
                         startActivity(i);
                         break;
-                    case "FavesListActivity":
+                    case classFavesActivity:
                         //do nothing
                         Toast.makeText(this, "We're here already", Toast.LENGTH_SHORT).show();
                         break;
