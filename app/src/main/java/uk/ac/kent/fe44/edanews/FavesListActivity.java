@@ -12,9 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class FavesListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        FavesListFragment.OnListItemClickedListener {
+        ListFragment.OnListItemClickedListener {
 
     private String ITEM_ID = "ITEM_ID";
     private String CALLER_ID = "CALLER_ID";
@@ -48,13 +50,22 @@ public class FavesListActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         navView = (NavigationView) findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
         navView.setCheckedItem(R.id.nav_faves);
+    }
+
+    private ArrayList<Article> getList(){
+        return ArticleModel.getInstance().getFavesList();
     }
 
     @Override
@@ -77,7 +88,7 @@ public class FavesListActivity extends AppCompatActivity
     /*define what happens on choosing a list item*/
     @Override
     public void onItemShared(int position) {
-        Article article = ArticleModel.getInstance().getFavesList().get(position);
+        Article article = getList().get(position);
         String str = article.getWeb_page();
 
         Intent sendIntent = new Intent();

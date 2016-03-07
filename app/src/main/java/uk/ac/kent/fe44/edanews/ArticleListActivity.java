@@ -23,17 +23,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class ArticleListActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-        ArticleListFragment.OnListItemClickedListener {
+        ListFragment.OnListItemClickedListener {
 
-    private static FloatingActionButton searchFab;
-    private static LinearLayout searchBar;
     private String ITEM_ID = "ITEM_ID";
     private String CALLER_ID = "CALLER_ID";
     private int callerId = 1;
-    private static EditText searchTextView;
     //private boolean hasTwoPanes;
+
+    private static FloatingActionButton searchFab;
+    private static LinearLayout searchBar;
+    private static EditText searchTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +107,10 @@ public class ArticleListActivity extends AppCompatActivity
         navigationView.setCheckedItem(R.id.nav_home);
     }
 
+    private ArrayList<Article> getList(){
+        return ArticleModel.getInstance().getArticleList();
+    }
+
     public void closeSearchBar(View v) {
         hideKeyboard(this);
         searchBar.setVisibility(View.INVISIBLE);
@@ -144,7 +151,7 @@ public class ArticleListActivity extends AppCompatActivity
     /*define what happens on choosing a list item*/
     @Override
     public void onItemShared(int position) {
-        Article article = ArticleModel.getInstance().getArticleList().get(position);
+        Article article = getList().get(position);
         String str = article.getWeb_page();
 
         Intent sendIntent = new Intent();
