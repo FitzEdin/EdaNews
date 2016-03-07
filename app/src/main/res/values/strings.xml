@@ -16,9 +16,46 @@
     <string name="settings_category">Settings</string>
     <string name="school_name">Engineering and Digital Arts</string>
     <string name="developer_name">Fitzroy Edinborough</string>
+    <string name="about_developer">About Fitzroy Edinborough</string>
     <string name="about_app">EDA News</string>
     <string name="contact_school">Contact EDA</string>
     <string name="contact_developer">Contact the Developer</string>
+
+    <string name="developer_contact">
+        Muscovado Labs
+        \nEast Street
+        \nNewtown, Basseterre
+        \nSaint Kitts, West Indies
+        \nfitzroy.edinborough@gmail.com
+    </string>
+    <string name="school_contact">
+        Jennison Building
+        \nUniversity of Kent
+        \nCanterbury, CT2 7NT
+        \nKent, United Kingdom
+        \neda@kent.ac.uk
+    </string>
+    <string name="app_about">
+        EDA News Reader is the result of an assignment
+        in EL881 Android Application Design at University
+        of Kent. It was developed by Fitzroy Edinborough
+        to demonstrate his proficiency at designing and
+        developing apps for the Android platform.
+    </string>
+    <string name="developer_about">
+        Fitzroy Edinborough is a West Indian student
+        from the sunny twin-island paradise of
+        St Kitts-Nevis. He is the founder of Muscovado,
+        a 2015 Commonwealth Scholar, and an avid footballer.
+    </string>
+    <string name="school_about">
+        The School of Engineering and Digital Arts has an
+        excellent reputation for both its teaching and
+        research. Based in the Jennison Building on the
+        Canterbury Campus, the School has 30 academic staff
+        members, with both academic and industrial experience,
+        as well as a number of specialist visiting lecturers.
+    </string>
 
     <!--  -->
     <string name="app_title">EDA News Reader</string>
@@ -39,13 +76,6 @@
     <string name="loading_contents">Grabbing details. Gimme a second...</string>
 
     <string name="get_articles">http://www.efstratiou.info/projects/newsfeed/getList.php</string>
-
-    <string name="developer_contact">
-        Muscovado Labs
-        \nEast Street
-        \nNewtown, Basseterre
-        \nSaint Kitts, West Indies
-    </string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -146,20 +146,30 @@ public abstract class ListActivity extends AppCompatActivity
                 //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
-                d = createDialog(getString(R.string.school_name), getString(R.string.app_name));
+                d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
                 d.show();
                 break;
             case R.id.nav_developer:
                 //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.about_developer), getString(R.string.developer_about));
+                d.show();
                 break;
             case R.id.nav_app:
                 //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
+                d.show();
                 break;
             case R.id.nav_contact_EDA:
                 //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.school_name), getString(R.string.school_contact));
+                d.show();
                 break;
             case R.id.nav_contact_developer:
                 d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));
+                d.show();
+                break;
+            case R.id.nav_settings:
+                d = createDialog("Sorry", "That doesn't do anything yet.");
                 d.show();
                 break;
         }
