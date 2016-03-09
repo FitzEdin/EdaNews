@@ -55,7 +55,7 @@ public class ArticleListActivity extends ListActivity {
         searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled  = false;
+                boolean handled = false;
                 if(actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String searchText = v.getText().toString();
                     v.setText("");
