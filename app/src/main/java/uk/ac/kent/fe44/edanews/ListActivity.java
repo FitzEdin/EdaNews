@@ -10,7 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
@@ -80,8 +84,10 @@ public abstract class ListActivity extends AppCompatActivity
     @Override
     public void onLongTap(int position) {
         Article article = getList().get(position);
+
         String title = article.getTitle();
         String message = article.getShortInfo();
+        String imgUrl = article.getImageURL();
 
         Dialog d = createDialog(title, message);
         d.show();
@@ -199,6 +205,29 @@ public abstract class ListActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
                 .setMessage(message)
+                .setPositiveButton("Close", null);
+        // Create the AlertDialog object and return it
+        return builder.create();
+    }
+
+
+    /*create the About dialog*/
+    public Dialog createPeekDialog(String title, String shortInfo, String imgUrl) {
+        //get the overall view for the dialog
+        View peekView = findViewById(R.id.peek_view);
+
+        //get handles on the child views
+        TextView titleView = (TextView)findViewById(R.id.peek_title);
+        TextView shortInfoView = (TextView)findViewById(R.id.peek_short_info);
+        //NetworkImageView imgView = (NetworkImageView)findViewById(R.id.peek_photo);
+
+        //add the
+        titleView.setText(title);
+        shortInfoView.setText(shortInfo);
+        //imgView.setImageUrl(imgUrl, ArticlesApp.getInstance().getImageLoader());
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder .setView(peekView)
                 .setPositiveButton("Close", null);
         // Create the AlertDialog object and return it
         return builder.create();

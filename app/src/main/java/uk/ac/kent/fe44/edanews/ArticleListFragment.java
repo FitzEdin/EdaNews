@@ -79,10 +79,14 @@ public class ArticleListFragment extends ListFragment
             }
         });
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
-
-        return view;
     }
 
     /*refresh data set with new information*/
