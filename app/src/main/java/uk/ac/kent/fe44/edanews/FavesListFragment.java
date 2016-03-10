@@ -53,10 +53,14 @@ public class FavesListFragment extends ListFragment implements ArticleModel.OnFa
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
-
-        return view;
     }
 
     /*refresh data set with new information*/
