@@ -46,6 +46,7 @@ public abstract class ListFragment extends Fragment {
         void onItemClicked(int position);
         void onItemShared(int position);
         void onLongTap(int position);
+        void onLongTapReleased(int position);
     }
 
     public void onItemClicked(int position) {
@@ -61,5 +62,10 @@ public abstract class ListFragment extends Fragment {
     public void onLongTap(int position) {
         //perform peek action
         mListenerActivity.onLongTap(position);
+    }
+
+    public void onLongTapReleased(int position) {
+        //perform peek action
+        mListenerActivity.onLongTapReleased(position);
     }
 }

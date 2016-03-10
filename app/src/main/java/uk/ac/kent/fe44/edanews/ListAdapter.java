@@ -2,6 +2,7 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected ImageView savedIc;
         protected ImageView shareIc;
 
+        boolean longPressing = false;
+
         /*sub classes determine which list they are using*/
         protected abstract ArrayList<Article> getList();
 
@@ -52,6 +55,20 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             @Override
             public boolean onLongClick(View v) {
                 fragment.onLongTap(getAdapterPosition());
+                longPressing = true;
+                return true;
+            }
+        };
+        /* handle end of long click on article image */
+        protected NetworkImageView.OnTouchListener imgLongTapReleased
+                = new NetworkImageView.OnTouchListener(){
+            @Override
+            public boolean onTouch(View vw, MotionEvent motionEvent){
+                vw.onTouchEvent(motionEvent);
+                if((longPressing) && (motionEvent.getAction() == MotionEvent.ACTION_UP)) {
+                    fragment.onLongTapReleased(getAdapterPosition());
+                    longPressing = false;
+                }
                 return true;
             }
         };
@@ -123,6 +140,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             shareIc = (ImageView) itemView.findViewById(R.id.ic_share);
 
             photo.setOnLongClickListener(imgLongTap);
+            photo.setOnTouchListener(imgLongTapReleased);
             photo.setOnClickListener(itemTap);
 
             faveIc.setOnClickListener(faveICTap);

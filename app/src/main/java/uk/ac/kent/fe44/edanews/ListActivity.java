@@ -34,6 +34,7 @@ public abstract class ListActivity extends AppCompatActivity
     private final static String classFavesActivity = "FavesListActivity";
 
     protected NavigationView navView;
+    protected Dialog d;
     //protected boolean hasTwoPanes;
 
     @Override
@@ -80,7 +81,7 @@ public abstract class ListActivity extends AppCompatActivity
         /*end of section for two-panes*/
     }
 
-    /*define what happens on sharing a list item*/
+    /*define what happens when a long press is done on an item image */
     @Override
     public void onLongTap(int position) {
         Article article = getList().get(position);
@@ -89,8 +90,16 @@ public abstract class ListActivity extends AppCompatActivity
         String message = article.getShortInfo();
         String imgUrl = article.getImageURL();
 
-        Dialog d = createDialog(title, message);
+        d = createDialog(title, message);
         d.show();
+    }
+
+    /* define what happens when the long tap on the image is released */
+    @Override
+    public void onLongTapReleased(int position){
+        if(d.isShowing()){
+            d.cancel();
+        }
     }
 
     @Override
