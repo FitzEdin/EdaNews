@@ -69,6 +69,10 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                     fragment.onLongTapReleased(getAdapterPosition());
                     longPressing = false;
                 }
+                if((longPressing) && (motionEvent.getAction() == MotionEvent.ACTION_MOVE)){
+                    //do nothing
+                    longPressing = true;
+                }
                 return true;
             }
         };
