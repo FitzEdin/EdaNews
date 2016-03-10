@@ -51,10 +51,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 = new NetworkImageView.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                int position = getAdapterPosition();
-                //TODO: place dialog here
-                String str = getList().get(position).getTitle();
-                //Toast.makeText(itemView.getContext(), str, Toast.LENGTH_LONG).show();
+                fragment.onLongTap(getAdapterPosition());
                 return true;
             }
         };

@@ -76,6 +76,17 @@ public abstract class ListActivity extends AppCompatActivity
         /*end of section for two-panes*/
     }
 
+    /*define what happens on sharing a list item*/
+    @Override
+    public void onLongTap(int position) {
+        Article article = getList().get(position);
+        String title = article.getTitle();
+        String message = article.getShortInfo();
+
+        Dialog d = createDialog(title, message);
+        d.show();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
