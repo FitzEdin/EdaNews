@@ -188,7 +188,7 @@ public abstract class ListActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("OK", null);
+                .setPositiveButton("Close", null);
         // Create the AlertDialog object and return it
         return builder.create();
     }
