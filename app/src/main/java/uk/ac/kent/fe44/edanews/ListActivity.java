@@ -5,16 +5,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
@@ -28,9 +23,6 @@ public abstract class ListActivity extends AppCompatActivity
     protected final static String CALLER_ID = "CALLER_ID";
     protected final static String PLAIN_TEXT = "text/plain";
     protected int callerId;
-
-    private final static String classArticleActivity = "ArticleListActivity";
-    private final static String classFavesActivity = "FavesListActivity";
 
     protected NavigationView navView;
     protected Dialog d;
@@ -60,8 +52,6 @@ public abstract class ListActivity extends AppCompatActivity
     /*define what happens on choosing a list item*/
     @Override
     public void onItemClicked(int position) {
-        //TODO: remove
-        //Toast.makeText(this, "Hehe. That tickles!", Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
@@ -126,8 +116,6 @@ public abstract class ListActivity extends AppCompatActivity
 
     /*create the About dialog*/
     public Dialog createDialog(String title, String message) {
-    /*    LayoutInflater inflater = this.getLayoutInflater();
-        View aboutView = inflater.inflate(R.layout.about_dialog, null); */
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)

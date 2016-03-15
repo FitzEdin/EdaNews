@@ -1,4 +1,3 @@
-
 package uk.ac.kent.fe44.edanews;
 
 import android.support.v7.widget.RecyclerView;
@@ -6,7 +5,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -21,6 +19,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
     protected ArticleModel model = ArticleModel.getInstance();
     protected ListFragment fragment;
+    private String ELLIPSIS = "...";
 
     //constructor
     public ListAdapter(ListFragment fragment) {
@@ -85,11 +84,9 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 if(article.isFave()) {
                     model.removeFromFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                    Toast.makeText(itemView.getContext(), "Removed from faves " + position, Toast.LENGTH_SHORT).show();
                 }else {
                     model.addToFaves(position);
                     ic.setImageResource(R.drawable.ic_favorite_black_24dp);
-                    Toast.makeText(itemView.getContext(), R.string.faves_added, Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -97,30 +94,14 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected ImageView.OnClickListener savedICTap = new ImageView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //Toast.makeText(itemView.getContext(), "SAVE ARTICLE", Toast.LENGTH_SHORT).show();
                 ImageView imgVw = (ImageView)v;
                 imgVw.setImageResource(R.drawable.ic_watch_later_black_24dp);
-    /*            ImageView ic = (ImageView)v;
-                int position = getAdapterPosition();
-                Article article = model.getArticleList().get(position);
-
-                //if a fave
-                if(article.isFave()) {
-                    model.removeFromFaves(position);
-                    ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                }else{
-                    model.addToFaves(position);
-                    ic.setImageResource(R.drawable.ic_favorite_black_24dp);
-                }
-    */
             }
         };
         /* handle tap on share icon */
         protected ImageView.OnClickListener shareICTap = new ImageView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                /*TODO: implement share*/
-                Toast.makeText(itemView.getContext(), "SHOUT LOUD", Toast.LENGTH_SHORT).show();
                 fragment.onItemShared(getAdapterPosition());
             }
         };
@@ -155,7 +136,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             if(length > 20){
                 length = 20;
             }
-            title.setText(article.getTitle().substring(0, length) + "...");
+            title.setText(article.getTitle().substring(0, length) + ELLIPSIS);
             date.setText(article.getDate());
             photo.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
             faveIc.setImageResource(R.drawable.ic_favorite_border_black_24dp);

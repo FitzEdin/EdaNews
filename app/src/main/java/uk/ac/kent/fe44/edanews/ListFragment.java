@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.ArrayList;
-
 /**
  * Created by fitzroy on 01/03/2016.
  */
