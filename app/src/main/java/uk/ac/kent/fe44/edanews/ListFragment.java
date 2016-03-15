@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by fitzroy on 01/03/2016.
  */
-public abstract class ListFragment extends Fragment {
+public abstract class ListFragment extends Fragment implements ArticleModel.OnFavesUpdateListener {
 
     protected RecyclerView listView;
     protected GridLayoutManager gridLayoutManager;
@@ -39,6 +39,15 @@ public abstract class ListFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListenerActivity = null;
+    }
+
+    /*refresh data set with new information*/
+    @Override
+    public void onFavesUpdate() {
+        //change data set
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
     }
 
     //interface for activities using this fragment

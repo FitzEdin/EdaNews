@@ -15,7 +15,7 @@ import android.view.ViewGroup;
  * {@link OnListItemClickedListener} interface
  * to handle interaction events.
  */
-public class FavesListFragment extends ListFragment implements ArticleModel.OnFavesUpdateListener {
+public class FavesListFragment extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -61,14 +61,5 @@ public class FavesListFragment extends ListFragment implements ArticleModel.OnFa
         super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
-    }
-
-    /*refresh data set with new information*/
-    @Override
-    public void onFavesUpdate() {
-        //change data set
-        if(listAdapter != null) {
-            listAdapter.notifyDataSetChanged();
-        }
     }
 }

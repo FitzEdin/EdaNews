@@ -21,7 +21,7 @@ import android.widget.TextView;
  * to handle interaction events.
  */
 public class ArticleListFragment extends ListFragment
-        implements ArticleModel.OnListUpdateListener, ArticleModel.OnFavesUpdateListener  {
+        implements ArticleModel.OnListUpdateListener  {
 
     private TextView noNetworkRetry;
     private ProgressBar mProgressBar;
@@ -87,15 +87,6 @@ public class ArticleListFragment extends ListFragment
         super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
-    }
-
-    /*refresh data set with new information*/
-    @Override
-    public void onFavesUpdate() {
-        //change data set
-        if(listAdapter != null) {
-            listAdapter.notifyDataSetChanged();
-        }
     }
 
     /*refresh data set with new information*/
