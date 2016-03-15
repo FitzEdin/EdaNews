@@ -1,13 +1,11 @@
 package uk.ac.kent.fe44.edanews;
 
-
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -88,7 +86,6 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         model.loadArticleDetails(articleId, articleIndex);
     }
 
-
     @Override
     public void onDetailsUpdate() {
         Article article = ArticleModel
@@ -98,10 +95,8 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         articleContents.setText(article.getContents());
     }
 
-
     @Override
     public void onDetach(){
         super.onDetach();
-        Toast.makeText(getActivity(), "Detail fragment killed", Toast.LENGTH_SHORT).show();
     }
 }

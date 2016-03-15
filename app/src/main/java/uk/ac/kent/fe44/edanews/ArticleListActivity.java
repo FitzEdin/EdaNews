@@ -47,10 +47,6 @@ public class ArticleListActivity extends ListActivity
         }
         /*end of pc to remove*/
 
-
-        //TODO: remove this
-        //Toast.makeText(this, "ArticleListActivity.onCreate", Toast.LENGTH_SHORT);
-
         //set up caller id for ArticleDetailsActivity
         callerId = 1;
 
@@ -77,9 +73,6 @@ public class ArticleListActivity extends ListActivity
         searchFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            /*    Snackbar.make(view, "Wattu looking for?", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            */
                 searchFab.setVisibility(View.INVISIBLE);
                 searchBar.setVisibility(View.VISIBLE);
                 searchBar.hasFocus();
@@ -163,24 +156,20 @@ public class ArticleListActivity extends ListActivity
                 startActivity(i);
                 break;
             case R.id.nav_saved:
-                //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
                 d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
                 d.show();
                 break;
             case R.id.nav_developer:
-                //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
                 d = createDialog(getString(R.string.about_developer), getString(R.string.developer_about));
                 d.show();
                 break;
             case R.id.nav_app:
-                //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
                 d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
                 d.show();
                 break;
             case R.id.nav_contact_EDA:
-                //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
                 d = createDialog(getString(R.string.school_name), getString(R.string.school_contact));
                 d.show();
                 break;

@@ -6,13 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
 public class ArticleDetailsActivity extends AppCompatActivity {
 
     private ArticleModel model = ArticleModel.getInstance();
     private Article article;
-    private Toast toast;
     private int itemId;
     private int callerId;
 
@@ -33,16 +31,12 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
                         //change icon
                         faveFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                        //toast.setText(R.string.faves_removed+itemId);
-                        //toast.show();
                     }else {
                         //add to faves list
                         model.addToFaves(itemId);
 
                         //change icon
                         faveFab.setImageResource(R.drawable.ic_favorite_black_24dp);
-                        //toast.setText(R.string.faves_added);
-                        //toast.show();
                     }
                 }
             };
@@ -79,8 +73,6 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                 article = model.getFavesList().get(itemId);
                 break;
         }
-
-        //toast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
 
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
