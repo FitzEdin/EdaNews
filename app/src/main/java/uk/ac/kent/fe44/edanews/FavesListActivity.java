@@ -26,10 +26,6 @@ public class FavesListActivity extends ListActivity {
         }
         /*end of pc to remove*/
 
-
-        //TODO: remove this
-        //Toast.makeText(this, "FavesListActivity.onCreate", Toast.LENGTH_SHORT);
-
         //set up caller id for ArticleDetailsActivity
         callerId = 2;
     }
