@@ -53,7 +53,8 @@ public class ArticleModel {
      *  and any listener is informed via the interface
      *  */
     /*members for performing article list request*/
-    private String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
+    private static String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
+    private static String WEB_PAGE_URL = "http://www.eda.kent.ac.uk/school/news_article.aspx?aid=";
     private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
             SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     private OnListUpdateListener listUpdateListener;
@@ -80,6 +81,10 @@ public class ArticleModel {
                             object.getString(SHORT_INFO),
                             object.getString(DATE)
                     );
+
+                    //add web url to article
+                    String url = WEB_PAGE_URL + article.getRecordID();
+                    article.setWeb_page(url);
 
                     //and add to list of Articles
                     getArticleList().add(article);
@@ -139,9 +144,9 @@ public class ArticleModel {
      *  */
     /*members and methods for performing request for article's details*/
     private String DETAILS_URL = "http://www.efstratiou.info/projects/newsfeed/getItem.php?id=";
-    private String CONTENTS = "contents", WEB_PAGE = "web_page";
+    private String CONTENTS = "contents";
     private OnDetailsUpdateListener detailsUpdateListener;
-    private static int articleId, articleIndex;
+    private static int articleIndex;
     private ArticleDetailsFragment me;
 
     private Response.Listener<JSONObject> detailsListener = new Response.Listener<JSONObject>() {
@@ -149,9 +154,7 @@ public class ArticleModel {
         public void onResponse(JSONObject response) {
             //handle response from server
             try{
-                //extract web_page and contents from JSON object response
-                getArticleList().get(articleIndex)
-                        .setWeb_page(response.getString(WEB_PAGE));
+                //extract contents from JSON object response
                 getArticleList().get(articleIndex)
                         .setContents(response.getString(CONTENTS));
 
