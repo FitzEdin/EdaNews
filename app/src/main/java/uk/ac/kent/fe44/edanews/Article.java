@@ -18,6 +18,7 @@ public class Article {
 
     // whether or not the article has been...
     private boolean isFave = false;     //favourited
+    private boolean isSaved = false;     //favourited
     private boolean isDetailed = false; //downloaded in its entirety
 
     /*Constructors*/
@@ -119,6 +120,13 @@ public class Article {
     }
     public void setIsFave(boolean isFave) {
         this.isFave = isFave;
+    }
+
+    public boolean isSaved() {
+        return isSaved;
+    }
+    public void setIsSaved(boolean isSaved) {
+        this.isSaved = isSaved;
     }
 
     public boolean isDetailed() {

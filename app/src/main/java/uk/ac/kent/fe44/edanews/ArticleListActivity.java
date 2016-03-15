@@ -1,13 +1,17 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -17,7 +21,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ArticleListActivity extends ListActivity {
+public class ArticleListActivity extends ListActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private static FloatingActionButton searchFab;
     private static LinearLayout searchBar;
@@ -134,5 +139,63 @@ public class ArticleListActivity extends ListActivity {
     public void onStop() {
         super.onStop();
         //save data
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        Dialog d;
+
+        switch (id){
+            case R.id.nav_faves:
+                Intent i = new Intent(this, FavesListActivity.class);
+                startActivity(i);
+                break;
+            case R.id.nav_saved:
+                //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_EDA:
+                d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
+                d.show();
+                break;
+            case R.id.nav_developer:
+                //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.about_developer), getString(R.string.developer_about));
+                d.show();
+                break;
+            case R.id.nav_app:
+                //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
+                d.show();
+                break;
+            case R.id.nav_contact_EDA:
+                //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
+                d = createDialog(getString(R.string.school_name), getString(R.string.school_contact));
+                d.show();
+                break;
+            case R.id.nav_contact_developer:
+                d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));
+                d.show();
+                break;
+            case R.id.nav_settings:
+                d = createDialog("Sorry", "That doesn't do anything yet.");
+                d.show();
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

@@ -35,21 +35,6 @@ public class FavesListActivity extends ListActivity {
 
         //set up caller id for ArticleDetailsActivity
         callerId = 2;
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,
-                drawer,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
-        );
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        navView = (NavigationView) findViewById(R.id.nav_view);
-        navView.setNavigationItemSelectedListener(this);
-        navView.setCheckedItem(R.id.nav_faves);
     }
 
     public ArrayList<Article> getList(){

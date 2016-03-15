@@ -22,8 +22,7 @@ import java.util.ArrayList;
  * Created by fitzroy on 07/03/2016.
  */
 public abstract class ListActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,
-        ListFragment.OnListItemClickedListener {
+        implements ListFragment.OnListItemClickedListener {
 
     protected final static String ITEM_ID = "ITEM_ID";
     protected final static String CALLER_ID = "CALLER_ID";
@@ -103,16 +102,6 @@ public abstract class ListActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.article_list, menu);
@@ -132,77 +121,6 @@ public abstract class ListActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-        Dialog d;
-
-        switch (id){
-            case R.id.nav_home:
-                //Toast.makeText(this, this.getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
-                switch(this.getClass().getSimpleName()) {
-                    //add cases for other classes
-                    case classArticleActivity:
-                        //do nothing
-                        Toast.makeText(this, "We're here already", Toast.LENGTH_SHORT).show();
-                        break;
-                    case classFavesActivity:
-                        finish();
-                        break;
-                }
-                break;
-            case R.id.nav_faves:
-                //Toast.makeText(this, "My favourite place", Toast.LENGTH_SHORT).show();
-                switch(this.getClass().getSimpleName()) {
-                    //add cases for other classes
-                    case classArticleActivity:
-                        Intent i = new Intent(this, FavesListActivity.class);
-                        startActivity(i);
-                        break;
-                    case classFavesActivity:
-                        //do nothing
-                        Toast.makeText(this, "We're here already", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-                break;
-            case R.id.nav_saved:
-                //Toast.makeText(this, "My saved articles", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_EDA:
-                d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
-                d.show();
-                break;
-            case R.id.nav_developer:
-                //Toast.makeText(this, "Student from Saint Kitts", Toast.LENGTH_SHORT).show();
-                d = createDialog(getString(R.string.about_developer), getString(R.string.developer_about));
-                d.show();
-                break;
-            case R.id.nav_app:
-                //Toast.makeText(this, "About the app", Toast.LENGTH_SHORT).show();
-                d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
-                d.show();
-                break;
-            case R.id.nav_contact_EDA:
-                //Toast.makeText(this, "Contact EDA at Kent Uni", Toast.LENGTH_SHORT).show();
-                d = createDialog(getString(R.string.school_name), getString(R.string.school_contact));
-                d.show();
-                break;
-            case R.id.nav_contact_developer:
-                d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));
-                d.show();
-                break;
-            case R.id.nav_settings:
-                d = createDialog("Sorry", "That doesn't do anything yet.");
-                d.show();
-                break;
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
 
