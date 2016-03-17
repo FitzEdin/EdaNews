@@ -49,15 +49,16 @@ public class Article {
         /* A version of the original picture, resized
          * to a height and width defined in the
          * ArticleModel class, is displayed in the article
-         * list */
+         * list
         String resizer = ArticleModel.getInstance().getResizer();
-        String url = resizer.concat(imageURL);;
+        String url = resizer.concat(imageURL);
+        */
 
 
         /* The first network call responds with a
          * few of the Article's attributes; a second
           * network call will get the details*/
-        this.imageURL = url;
+        this.imageURL = imageURL;
         this.recordID = recordID;
         this.title = title;
         this.short_info = short_info;
