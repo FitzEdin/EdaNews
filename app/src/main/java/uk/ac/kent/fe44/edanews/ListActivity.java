@@ -62,7 +62,8 @@ public abstract class ListActivity extends AppCompatActivity
 
         /*TODO: uncomment for two-pane*/
         if(hasTwoPanes) {
-            ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
+            ArticleDetailsFragment fragment
+                    = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
             fragment.updateDetails(position, callerId);
         }else {
             Intent i = new Intent(this, ArticleDetailsActivity.class);

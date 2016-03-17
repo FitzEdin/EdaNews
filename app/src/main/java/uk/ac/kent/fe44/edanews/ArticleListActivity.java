@@ -76,6 +76,7 @@ public class ArticleListActivity extends ListActivity
                 searchFab.setVisibility(View.INVISIBLE);
                 searchBar.setVisibility(View.VISIBLE);
                 searchBar.hasFocus();
+                searchTextView.setText("");
             }
         });
 
