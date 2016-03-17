@@ -2,6 +2,7 @@ package uk.ac.kent.fe44.edanews;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -75,8 +76,13 @@ public class ArticleListActivity extends ListActivity
             public void onClick(View view) {
                 searchFab.setVisibility(View.INVISIBLE);
                 searchBar.setVisibility(View.VISIBLE);
-                searchBar.hasFocus();
+
+                //prep the text view for capturing input
                 searchTextView.setText("");
+                searchTextView.setFocusableInTouchMode(true);
+                searchTextView.requestFocus();
+
+                showKeyboard();
             }
         });
 
@@ -109,13 +115,11 @@ public class ArticleListActivity extends ListActivity
     }
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
-        View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
-        if (view == null) {
-            view = new View(activity);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(searchTextView.getWindowToken(), 0);
+    }
+    public void showKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(searchTextView, InputMethodManager.SHOW_IMPLICIT);
     }
 
     @Override
