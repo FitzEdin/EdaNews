@@ -26,7 +26,7 @@ public abstract class ListActivity extends AppCompatActivity
 
     protected NavigationView navView;
     protected Dialog d;
-    //protected boolean hasTwoPanes;
+    protected boolean hasTwoPanes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +53,21 @@ public abstract class ListActivity extends AppCompatActivity
     @Override
     public void onItemClicked(int position) {
 
+        /*
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
         i.putExtra(CALLER_ID, callerId);
         startActivity(i);
+        */
 
-        /*TODO: uncomment for two-pane
+        /*TODO: uncomment for two-pane*/
         if(hasTwoPanes) {
             ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
-            fragment.updateDetails(position);
+            fragment.updateDetails(position, callerId);
         }else {
             Intent i = new Intent(this, ArticleDetailsActivity.class);
             i.putExtra(ITEM_ID, position);
+            i.putExtra(CALLER_ID, callerId);
             startActivity(i);
         }
         /*end of section for two-panes*/
