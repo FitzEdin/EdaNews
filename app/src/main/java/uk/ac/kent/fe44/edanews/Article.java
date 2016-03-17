@@ -51,7 +51,10 @@ public class Article {
          * ArticleModel class, is displayed in the article
          * list */
         String resizer = ArticleModel.getInstance().getResizer();
-        String url = resizer.concat(imageURL);
+        String url = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w=200&h=200&src="
+                + imageURL;
+
+        //resizer.concat(imageURL);
 
         /* The first network call responds with a
          * few of the Article's attributes; a second

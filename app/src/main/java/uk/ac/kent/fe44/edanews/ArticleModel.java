@@ -102,10 +102,7 @@ public class ArticleModel {
         }
     };
     /*loads a set of twenty articles*/
-    public void loadData(ProgressBar progressBar) {
-        //need to handle certain UI elements on this thread
-        myProgressBar = progressBar;
-
+    public void loadData() {
         //build request
         String url = CLIENT_URL + mStart;
         JsonArrayRequest request = new JsonArrayRequest(url, netListener, errorListener);
@@ -121,7 +118,6 @@ public class ArticleModel {
     /*let the listener know about updates*/
     private void notifyListener() {
         if(listUpdateListener != null) {
-            myProgressBar.setVisibility(View.INVISIBLE);
             listUpdateListener.onListUpdate();
         }
     }

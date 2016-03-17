@@ -94,6 +94,7 @@ public class ArticleListFragment extends ListFragment
     public void onListUpdate() {
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();
+            mProgressBar.setVisibility(View.INVISIBLE);
         }
 
         loading = false;
@@ -137,6 +138,6 @@ public class ArticleListFragment extends ListFragment
         model.setOnListUpdateListener(this);
 
         //load data from network
-        model.loadData(mProgressBar);
+        model.loadData();
     }
 }
