@@ -4,8 +4,8 @@
         android:radius="0dp" />
     <stroke
         android:width="0dp"
-        android:color="@color/colorPrimary" />
+        android:color="@color/white" />
 
     <solid
-        android:color="@color/colorPrimary" />
+        android:color="@color/white" />
 </shape>
