@@ -28,6 +28,34 @@ public class ArticleListActivity extends ListActivity
     private static FloatingActionButton searchFab;
     private static LinearLayout searchBar;
     private static EditText searchTextView;
+    private View.OnClickListener onFabClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            searchFab.setVisibility(View.INVISIBLE);
+            searchBar.setVisibility(View.VISIBLE);
+
+            //prep the text view for capturing input
+            searchTextView.setText("");
+            searchTextView.setFocusableInTouchMode(true);
+            searchTextView.requestFocus();
+
+            showKeyboard();
+        }
+    };
+    private TextView.OnEditorActionListener searchButtonListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            boolean handled = false;
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                String searchText = v.getText().toString();
+                v.setText("");
+                closeSearchBar(searchTextView);
+                searchFor(searchText);
+                handled = true;
+            }
+            return handled;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,37 +82,11 @@ public class ArticleListActivity extends ListActivity
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
         //listen for searches
-        searchTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                boolean handled = false;
-                if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    String searchText = v.getText().toString();
-                    v.setText("");
-                    closeSearchBar(searchTextView);
-                    searchFor(searchText);
-                    handled = true;
-                }
-                return handled;
-            }
-        });
+        searchTextView.setOnEditorActionListener(searchButtonListener);
 
         searchFab = (FloatingActionButton)findViewById(R.id.search_fab);
         //add functionality to the FAB
-        searchFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchFab.setVisibility(View.INVISIBLE);
-                searchBar.setVisibility(View.VISIBLE);
-
-                //prep the text view for capturing input
-                searchTextView.setText("");
-                searchTextView.setFocusableInTouchMode(true);
-                searchTextView.requestFocus();
-
-                showKeyboard();
-            }
-        });
+        searchFab.setOnClickListener(onFabClickListener);
 
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
