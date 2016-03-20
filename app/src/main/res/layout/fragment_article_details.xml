@@ -27,13 +27,13 @@
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/detail_img"
+            android:src="@drawable/ic_uok_logo_new"
 
             android:layout_width="324dp"
             android:layout_height="324dp"
 
             android:layout_gravity="center"
-
-            android:src="@drawable/ic_uok_logo_new"/>
+            android:scaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/detail_title"

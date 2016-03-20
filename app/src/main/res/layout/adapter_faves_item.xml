@@ -23,7 +23,9 @@
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="fill_parent"
-        android:layout_height="156dp"/>
+        android:layout_height="156dp"
+
+        android:scaleType="centerCrop"/>
 
     <!-- article title -->
     <TextView
