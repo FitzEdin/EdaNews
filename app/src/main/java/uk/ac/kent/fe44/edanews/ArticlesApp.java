@@ -19,6 +19,9 @@ public class ArticlesApp extends Application {
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
 
+    public final static String TITLE = "title", SHORT_INFO = "short_info", IMAGE_URL = "image_url";
+    public final static String TAG_PEEK_ARTICLE = "peekArticleTag";
+
     @Override
     public void onCreate() {
         super.onCreate();

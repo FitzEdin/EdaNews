@@ -68,14 +68,6 @@ public class ArticleListActivity extends ListActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /*TODO: uncomment for two-pane*/
-        if(findViewById(R.id.details_fragment) == null) {
-            hasTwoPanes = false;
-        }else {
-            hasTwoPanes = true;
-        }
-        /*end of pc to remove*/
-
         //set up caller id for ArticleDetailsActivity
         callerId = 1;
 

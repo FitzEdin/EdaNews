@@ -64,7 +64,10 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             @Override
             public boolean onTouch(View vw, MotionEvent motionEvent){
                 vw.onTouchEvent(motionEvent);
-                if((longPressing) && (motionEvent.getAction() == MotionEvent.ACTION_UP)) {
+                if((longPressing)
+                        && ( (motionEvent.getAction() == MotionEvent.ACTION_UP)
+                /*         || (motionEvent.getAction() == MotionEvent.ACTION_MOVE)*/ )
+                        ) {
                     fragment.onLongTapReleased(getAdapterPosition());
                     longPressing = false;
                 }
@@ -132,10 +135,9 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         //add values from data model to each row
         public void setData(Article article) {
             //protection for super long and super short titles
-            int length = article.getTitle().length() - 3;
-            if(length > 20){
-                length = 20;
-            }
+            int titleLength = article.getTitle().length() - 3;
+            int length = (titleLength <= 20) ? titleLength : 20;
+
             title.setText(article.getTitle().substring(0, length) + ELLIPSIS);
             date.setText(article.getDate());
             photo.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());

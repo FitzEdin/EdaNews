@@ -24,12 +24,10 @@ public class FavesListFragment extends ListFragment {
 
         View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
 
-        //TODO: remove
-        //Toast.makeText(getActivity(), "FavesListFragment.onCreateView", Toast.LENGTH_SHORT).show();
 
         //set up layout manager
         gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        /*have multiple spans for different rows*/
+        /*TODO: have multiple spans for different rows*/
     /*    gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
             @Override
             public int getSpanSize(int position){

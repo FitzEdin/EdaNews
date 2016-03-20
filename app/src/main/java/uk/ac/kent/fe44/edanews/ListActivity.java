@@ -2,14 +2,11 @@ package uk.ac.kent.fe44.edanews;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,8 +22,9 @@ public abstract class ListActivity extends AppCompatActivity
     protected int callerId;
 
     protected NavigationView navView;
-    protected Dialog d;
-    protected boolean hasTwoPanes;
+    //protected boolean hasTwoPanes;
+
+    private DialogFragment pkDialog = new PeekDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,25 +51,11 @@ public abstract class ListActivity extends AppCompatActivity
     @Override
     public void onItemClicked(int position) {
 
-        /*
+
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
         i.putExtra(CALLER_ID, callerId);
         startActivity(i);
-        */
-
-        /*TODO: uncomment for two-pane*/
-        if(hasTwoPanes) {
-            ArticleDetailsFragment fragment
-                    = (ArticleDetailsFragment)getFragmentManager().findFragmentById(R.id.details_fragment);
-            fragment.updateDetails(position, callerId);
-        }else {
-            Intent i = new Intent(this, ArticleDetailsActivity.class);
-            i.putExtra(ITEM_ID, position);
-            i.putExtra(CALLER_ID, callerId);
-            startActivity(i);
-        }
-        /*end of section for two-panes*/
     }
 
     /*define what happens when a long press is done on an item image */
@@ -79,20 +63,20 @@ public abstract class ListActivity extends AppCompatActivity
     public void onLongTap(int position) {
         Article article = getList().get(position);
 
-        String title = article.getTitle();
-        String message = article.getShortInfo();
-        String imgUrl = article.getImageURL();
+        //prep bundle for fragment
+        Bundle args = new Bundle();
+        args.putString(ArticlesApp.TITLE, article.getTitle());
+        args.putString(ArticlesApp.SHORT_INFO, article.getShortInfo());
+        args.putString(ArticlesApp.IMAGE_URL, article.getImageURL());
 
-        d = createDialog(title, message);
-        d.show();
+        pkDialog.setArguments(args);    //pass bundle to fragment
+        pkDialog.show(getFragmentManager(), ArticlesApp.TAG_PEEK_ARTICLE);
     }
 
     /* define what happens when the long tap on the image is released */
     @Override
     public void onLongTapReleased(int position){
-        if(d.isShowing()){
-            d.cancel();
-        }
+            pkDialog.dismiss();
     }
 
 
@@ -102,29 +86,6 @@ public abstract class ListActivity extends AppCompatActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
                 .setMessage(message)
-                .setPositiveButton("Close", null);
-        // Create the AlertDialog object and return it
-        return builder.create();
-    }
-
-
-    /*create the About dialog*/
-    public Dialog createPeekDialog(String title, String shortInfo, String imgUrl) {
-        //get the overall view for the dialog
-        View peekView = findViewById(R.id.peek_view);
-
-        //get handles on the child views
-        TextView titleView = (TextView)findViewById(R.id.peek_title);
-        TextView shortInfoView = (TextView)findViewById(R.id.peek_short_info);
-        //NetworkImageView imgView = (NetworkImageView)findViewById(R.id.peek_photo);
-
-        //add the
-        titleView.setText(title);
-        shortInfoView.setText(shortInfo);
-        //imgView.setImageUrl(imgUrl, ArticlesApp.getInstance().getImageLoader());
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder .setView(peekView)
                 .setPositiveButton("Close", null);
         // Create the AlertDialog object and return it
         return builder.create();

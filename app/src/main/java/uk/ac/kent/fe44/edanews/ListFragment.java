@@ -1,9 +1,13 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Toast;
 
 /**
  * Created by fitzroy on 01/03/2016.
@@ -71,6 +75,7 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
         mListenerActivity.onLongTap(position);
     }
 
+    /* define what happens when the long tap on the image is released */
     public void onLongTapReleased(int position) {
         //perform peek action
         mListenerActivity.onLongTapReleased(position);

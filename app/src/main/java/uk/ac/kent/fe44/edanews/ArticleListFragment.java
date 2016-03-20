@@ -37,13 +37,9 @@ public class ArticleListFragment extends ListFragment
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         noNetworkRetry = (TextView)view.findViewById(R.id.no_network_retry);
 
-        //TODO: remove
-       // Toast.makeText(getActivity(), "ArticleListFragment.onCreateView", Toast.LENGTH_SHORT).show();
-
         noNetworkRetry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getActivity(), R.string.checking_network, Toast.LENGTH_SHORT).show();
                 tryForNetwork();
             }
         });
@@ -71,7 +67,10 @@ public class ArticleListFragment extends ListFragment
                 int pastVisibleItems = gridLayoutManager.findFirstVisibleItemPosition();
                 int totalItemCount = gridLayoutManager.getItemCount();
 
-                if ((dy > 0) && (!loading) && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3) {
+                if ((dy > 0)
+                        && (!loading)
+                        && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3
+                        ) {
                     //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
                     loading = true;
