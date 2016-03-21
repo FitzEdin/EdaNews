@@ -44,7 +44,9 @@
         android:textSize="12sp"
 
         android:lines="2"
-        android:maxLength="25" />
+        android:maxLength="25"
+
+        android:transitionName="article_title" />
 
     <!-- article date -->
     <TextView
@@ -61,7 +63,9 @@
         android:gravity="center"
 
         android:lines="1"
-        android:maxLength="10" />
+        android:maxLength="10"
+
+        android:transitionName="article_date" />
 
     <LinearLayout
         android:layout_width="fill_parent"

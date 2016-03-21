@@ -42,7 +42,9 @@
         android:textSize="24sp"
 
         android:lines="1"
-        android:maxLength="25" />
+        android:maxLength="25"
+
+        android:transitionName="article_title" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -71,7 +73,9 @@
             android:textSize="18sp"
 
             android:lines="1"
-            android:maxLength="10" />
+            android:maxLength="10"
+
+            android:transitionName="article_date" />
 
         <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->

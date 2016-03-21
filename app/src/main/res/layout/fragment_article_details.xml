@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:paddingTop="54dp"
+    android:paddingTop="?attr/actionBarSize"
 
     android:background="@drawable/bg"
 
@@ -29,7 +29,7 @@
             android:id="@+id/detail_img"
             android:src="@drawable/ic_uok_logo_new"
 
-            android:layout_width="324dp"
+            android:layout_width="fill_parent"
             android:layout_height="324dp"
 
             android:layout_gravity="center"

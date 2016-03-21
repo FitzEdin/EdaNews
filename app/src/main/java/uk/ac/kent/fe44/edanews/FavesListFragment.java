@@ -1,6 +1,8 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Fragment;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,10 +27,25 @@ public class FavesListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
 
 
+        int spanCount = 2;
+/*
+        Configuration config = getResources().getConfiguration();
+        //Todo: ensure this checks for screen size as well
+        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            spanCount = 4;
+        }else {
+            spanCount = 3;
+        }
+
+
+        //if wide screen and portrait, spancount =
+*/
         //set up layout manager
-        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        gridLayoutManager.scrollToPosition(0);
         /*TODO: have multiple spans for different rows*/
-    /*    gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+/*        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
             @Override
             public int getSpanSize(int position){
                 switch(position){
@@ -39,9 +56,7 @@ public class FavesListFragment extends ListFragment {
                 }
             }
         });
-    */
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        gridLayoutManager.scrollToPosition(0);
+*/
 
         //set up list adapter
         listAdapter = new FavesListAdapter(this);
