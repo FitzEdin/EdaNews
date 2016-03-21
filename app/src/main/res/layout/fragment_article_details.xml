@@ -33,7 +33,9 @@
             android:layout_height="324dp"
 
             android:layout_gravity="center"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+
+            android:transitionName="article_img"/>
 
         <TextView
             android:id="@+id/detail_title"
@@ -44,7 +46,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
 
-            android:text="@string/hello_blank_fragment"
+            android:text="@string/dummy_title"
             android:textSize="20sp"
             android:textColor="@color/colorTextPrimary"
 
@@ -58,7 +60,7 @@
 
             android:layout_marginTop="8dp"
 
-            android:text="14/12/1988"
+            android:text="@string/dummy_date"
             android:textSize="12sp"
             android:textColor="@color/colorTextSecondary"
 

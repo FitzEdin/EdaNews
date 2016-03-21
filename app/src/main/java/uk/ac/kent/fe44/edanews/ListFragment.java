@@ -3,6 +3,7 @@ package uk.ac.kent.fe44.edanews;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
@@ -54,15 +55,15 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
 
     //interface for activities using this fragment
     public interface OnListItemClickedListener {
-        void onItemClicked(int position);
+        void onItemClicked(int position, Bundle bundle);
         void onItemShared(int position);
         void onLongTap(int position);
         void onLongTapReleased(int position);
     }
 
-    public void onItemClicked(int position) {
+    public void onItemClicked(int position, Bundle bundle) {
         //perform secondary network request
-        mListenerActivity.onItemClicked(position);
+        mListenerActivity.onItemClicked(position, bundle);
     }
 
     public void onItemShared(int position) {

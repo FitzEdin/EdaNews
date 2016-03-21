@@ -24,7 +24,9 @@
 
         android:layout_width="fill_parent"
         android:layout_height="324dp"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+
+        android:transitionName="article_img" />
 
     <!-- article title -->
     <TextView

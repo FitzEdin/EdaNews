@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.TransitionInflater;
 
 import java.util.ArrayList;
 
@@ -29,6 +31,14 @@ public abstract class ListActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //describe what happens when the activity exits
+        if(Build.VERSION.SDK_INT >= 21) {
+            getWindow().setSharedElementExitTransition(
+                    TransitionInflater.from(this)
+                            .inflateTransition(R.transition.shared_image)
+            );
+        }
     }
 
     //each subclass has to provide access to its list
@@ -49,13 +59,11 @@ public abstract class ListActivity extends AppCompatActivity
 
     /*define what happens on choosing a list item*/
     @Override
-    public void onItemClicked(int position) {
-
-
+    public void onItemClicked(int position, Bundle bundle) {
         Intent i = new Intent(this, ArticleDetailsActivity.class);
         i.putExtra(ITEM_ID, position);
         i.putExtra(CALLER_ID, callerId);
-        startActivity(i);
+        startActivity(i, bundle);
     }
 
     /*define what happens when a long press is done on an item image */

@@ -1,10 +1,12 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionInflater;
 import android.view.View;
 
 public class ArticleDetailsActivity extends AppCompatActivity {
@@ -44,6 +46,14 @@ public class ArticleDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //describe what happens when the activity enters
+        if(Build.VERSION.SDK_INT >= 21) {
+            getWindow().setSharedElementEnterTransition(
+                    TransitionInflater.from(this)
+                            .inflateTransition(R.transition.shared_image)
+            );
+        }
         setContentView(R.layout.activity_article_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.details_toolbar);
         setSupportActionBar(toolbar);

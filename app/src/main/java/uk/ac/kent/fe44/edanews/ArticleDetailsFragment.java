@@ -1,6 +1,7 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        if(Build.VERSION.SDK_INT >= 21) {
+
+        }
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_article_details, container, false);
 

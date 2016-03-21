@@ -1,5 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,7 +46,12 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected View.OnClickListener itemTap = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                fragment.onItemClicked(getAdapterPosition());
+                ActivityOptionsCompat optionsCompat
+                        = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            fragment.getActivity(),
+                            photo,
+                            photo.getTransitionName());
+                fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }
         };
         /* handle long click on article image */
