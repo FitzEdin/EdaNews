@@ -20,19 +20,7 @@ import java.util.ArrayList;
  */
 public class ArticleModel {
 
-    private ProgressBar myProgressBar;
     private static ArticleModel ourInstance = new ArticleModel();
-
-    private static final int height = 200;
-    private static final int width = 200;
-    private static final String timThumb
-            = "http://www.efstratiou.info/projects/newsfeed/timthumb.php?w="+width+"&h="+height+"&src=";
-
-    public String getResizer() {
-        return timThumb;
-    }
-
-
 
     /*Constructor*/
     private ArticleModel() {
@@ -250,10 +238,7 @@ public class ArticleModel {
         }
     };
     /*searches for a set of articles with a certain title*/
-    public void loadSearchData(ProgressBar progressBar, String key) {
-        //need to handle certain UI elements on this thread
-        myProgressBar = progressBar;
-
+    public void loadSearchData(String key) {
         //build request
         String url = SEARCH_URL + key;
         JsonArrayRequest request = new JsonArrayRequest(url, searchListener, searchErrorListener);
@@ -266,7 +251,6 @@ public class ArticleModel {
     /*let the listener know about updates*/
     private void notifySearchListener() {
         if(searchListUpdateListener != null) {
-            myProgressBar.setVisibility(View.INVISIBLE);
             searchListUpdateListener.onSearchListUpdate();
         }
     }

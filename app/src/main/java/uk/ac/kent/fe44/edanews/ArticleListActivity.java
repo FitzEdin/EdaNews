@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.transition.TransitionInflater;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -33,6 +34,7 @@ public class ArticleListActivity extends ListActivity
     private View.OnClickListener onFabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //toggle searchBar and searchFab visibility
             searchFab.setVisibility(View.INVISIBLE);
             searchBar.setVisibility(View.VISIBLE);
 
@@ -53,6 +55,7 @@ public class ArticleListActivity extends ListActivity
                 v.setText("");
                 closeSearchBar(searchTextView);
                 searchFor(searchText);
+
                 handled = true;
             }
             return handled;
@@ -107,8 +110,10 @@ public class ArticleListActivity extends ListActivity
         searchFab.setVisibility(View.VISIBLE);
     }
     public void searchFor(String key) {
-        //Toast.makeText(this, "Searching for: " + key, Toast.LENGTH_SHORT).show();
-        //make network request
+        //pass key to
+        Intent i = new Intent(this, SearchListActivity.class);
+        i.putExtra("key", key);
+        startActivity(i);
     }
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);

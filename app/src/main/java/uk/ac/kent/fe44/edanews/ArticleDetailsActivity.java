@@ -74,18 +74,27 @@ public class ArticleDetailsActivity extends AppCompatActivity {
             case 1:
                 article = model.getArticleList().get(itemId);
                 //set correct icon
-                if(article.isFave()){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
-                else{   faveFab.setImageResource(R.drawable.ic_favorite_border_white_24dp); }
+                setCorrectIcon();
                 break;
             case 2:
                 //hide fab button if we got here via FavesList
                 faveFab.setVisibility(View.INVISIBLE);
                 article = model.getFavesList().get(itemId);
                 break;
+            case 3:
+                article = model.getSearchList().get(itemId);
+                //set correct icon
+                setCorrectIcon();
+                break;
         }
 
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
         fragment.updateDetails(itemId, callerId);
+    }
+
+    private void setCorrectIcon() {
+        if(article.isFave()){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
+        else{   faveFab.setImageResource(R.drawable.ic_favorite_border_white_24dp); }
     }
 }

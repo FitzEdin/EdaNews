@@ -1,16 +1,18 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
-public class FavesListActivity extends ListActivity {
+public class SearchListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faves_list);
+        setContentView(R.layout.activity_search_list);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
@@ -18,12 +20,12 @@ public class FavesListActivity extends ListActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //set up caller id for FavesDetailsActivity
-        callerId = 2;
+        callerId = 3;
     }
 
-    public ArrayList<Article> getList(){
-        return ArticleModel.getInstance().getFavesList();
+    @Override
+    public ArrayList<Article> getList() {
+        return ArticleModel.getInstance().getSearchList();
     }
 
     @Override

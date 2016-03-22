@@ -69,7 +69,7 @@
     <string name="dummy_date">14/12/1988</string>
     <string name="dummy_title">Degree and prize giving day for postgraduate students</string>
 
-    <string name="search_titles">Search Titles...</string>
+    <string name="hint_search">Search Titles...</string>
     <string name="no_network">No network is available.</string>
     <string name="no_network_retry">No network is available. \n Tap to retry.</string>
     <string name="checking_network">Checking for network.</string>
@@ -78,4 +78,7 @@
     <string name="get_articles">http://www.efstratiou.info/projects/newsfeed/getList.php</string>
 
     <string name="title_activity_article_details">EDA News</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
