@@ -7,26 +7,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/bg_art_port"
+    android:background="@drawable/bg_faves_land"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_search_list" tools:context=".SearchListActivity">
+    tools:showIn="@layout/app_bar_faves_list" tools:context=".FavesListActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_list_view"
+        android:id="@+id/faves_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         android:layout_marginTop="?attr/actionBarSize">
 
     </android.support.v7.widget.RecyclerView>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleLarge"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:progressTint="@color/colorPrimaryDark"
-        android:layout_centerInParent="true"/>
 </RelativeLayout>

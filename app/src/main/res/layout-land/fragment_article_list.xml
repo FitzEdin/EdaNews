@@ -7,13 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/bg_art_port"
+    android:background="@drawable/bg_art_land"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_search_list" tools:context=".SearchListActivity">
+    tools:showIn="@layout/app_bar_article_list" tools:context=".ArticleListActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/search_list_view"
+        android:id="@+id/article_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -29,4 +29,22 @@
         android:layout_height="wrap_content"
         android:progressTint="@color/colorPrimaryDark"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/no_network_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+        android:padding="8dp"
+
+        android:clickable="true"
+
+        android:text="@string/no_network_retry"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextPrimary"
+
+        android:background="@drawable/round"
+        android:elevation="@dimen/elevation"/>
 </RelativeLayout>

@@ -8,7 +8,7 @@
 
     android:paddingTop="?attr/actionBarSize"
 
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_art_port"
 
     tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
 
