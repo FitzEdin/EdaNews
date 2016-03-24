@@ -63,6 +63,12 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
                         .getFavesList()
                         .get(articleIndex);
                 break;
+            case 3:
+                article = ArticleModel
+                        .getInstance()
+                        .getSearchList()
+                        .get(articleIndex);
+                break;
         }
 
         //update UI with data

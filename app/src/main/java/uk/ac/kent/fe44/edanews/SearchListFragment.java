@@ -1,14 +1,11 @@
 package uk.ac.kent.fe44.edanews;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 /**
@@ -64,5 +61,12 @@ public class SearchListFragment extends ListFragment
         //perform search and listen for response
         model.loadSearchData(key);
         model.setOnSearchListUpdateListener(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //listen for changes to the Faves List
+        ArticleModel.getInstance().setOnFavesUpdateListener(this);
     }
 }
