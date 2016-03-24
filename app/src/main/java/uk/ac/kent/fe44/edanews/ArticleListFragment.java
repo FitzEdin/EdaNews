@@ -2,6 +2,7 @@ package uk.ac.kent.fe44.edanews;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -46,10 +47,54 @@ public class ArticleListFragment extends ListFragment
 
         tryForNetwork();
 
+
+        int spanCount = 1;
+
+        Configuration config = getResources().getConfiguration();
+
+        //set span count based on screen size and orientation
+        final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
+        if(isLarge) {
+            //handle large screens, @least 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 3;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 2;      //
+                    break;
+            }
+        }else{
+            //handle everything smaller than 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 2;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 1;      //
+                    break;
+            }
+        }
+
         //set up layout manager
-        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (isLarge) {
+                    //for large screens in all orientations
+                    if (((position % 4) == 0) || ((position % 4) == 3)) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return 1;
+                }
+            }
+        });
 
         //set up list adapter
         listAdapter = new ArticleListAdapter(this);

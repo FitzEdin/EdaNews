@@ -59,19 +59,18 @@ public class FavesListFragment extends ListFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
-        /*TODO: have multiple spans for different rows*/
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
             @Override
             public int getSpanSize(int position){
                 if(isLarge) {
-                    //for large screens
+                    //for large screens in all orientations
                     if (((position % 10) == 5) || ((position % 10) == 1)) {
                         return 2;
                     } else {
                         return 1;
                     }
                 }else{
-                    //for small screens
+                    //for small screens in all orientations
                     if ((position % 5) == 0) {
                         return 2;
                     } else {
