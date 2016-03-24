@@ -28,35 +28,59 @@ public class FavesListFragment extends ListFragment {
 
 
         int spanCount = 2;
-/*
+
         Configuration config = getResources().getConfiguration();
-        //Todo: ensure this checks for screen size as well
-        if(config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            spanCount = 4;
-        }else {
-            spanCount = 3;
+
+        //set span count based on screen size and orientation
+        final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
+        if(isLarge) {
+            //handle large screens, @least 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 4;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 3;      //
+                    break;
+            }
+        }else{
+            //handle everything smaller than 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 3;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 2;      //
+                    break;
+            }
         }
 
-
-        //if wide screen and portrait, spancount =
-*/
         //set up layout manager
         gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
         /*TODO: have multiple spans for different rows*/
-/*        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
             @Override
             public int getSpanSize(int position){
-                switch(position){
-                    case 0:
+                if(isLarge) {
+                    //for large screens
+                    if (((position % 10) == 5) || ((position % 10) == 1)) {
                         return 2;
-                    default:
+                    } else {
                         return 1;
+                    }
+                }else{
+                    //for small screens
+                    if ((position % 5) == 0) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
                 }
             }
         });
-*/
+
 
         //set up list adapter
         listAdapter = new FavesListAdapter(this);
