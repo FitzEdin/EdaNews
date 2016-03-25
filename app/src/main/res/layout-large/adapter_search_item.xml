@@ -4,7 +4,7 @@
     android:orientation="vertical"
 
     android:layout_width="match_parent"
-    android:layout_height="286dp"
+    android:layout_height="310dp"
 
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
@@ -23,7 +23,7 @@
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="fill_parent"
-        android:layout_height="186dp"
+        android:layout_height="206dp"
 
         android:scaleType="centerCrop"
 
@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/article_title"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="42dp"
 
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
@@ -41,7 +41,7 @@
 
         android:text="@string/dummy_title"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="20sp"
+        android:textSize="24sp"
 
         android:gravity="center"
 

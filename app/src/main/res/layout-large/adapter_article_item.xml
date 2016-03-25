@@ -4,12 +4,12 @@
     android:orientation="vertical"
 
     android:layout_width="match_parent"
-    android:layout_height="286dp"
+    android:layout_height="404dp"
 
     android:layout_marginTop="6dp"
     android:layout_marginBottom="6dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
 
     android:focusable="true"
     android:clickable="true"
@@ -23,8 +23,7 @@
         android:src="@drawable/ic_uok_logo_new"
 
         android:layout_width="fill_parent"
-        android:layout_height="186dp"
-
+        android:layout_height="324dp"
         android:scaleType="centerCrop"
 
         android:transitionName="article_img" />
@@ -33,41 +32,19 @@
     <TextView
         android:id="@+id/article_title"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="42dp"
 
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="6dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="4dp"
 
         android:text="@string/dummy_title"
         android:textColor="@color/colorTextPrimary"
-        android:textSize="20sp"
+        android:textSize="24sp"
 
-        android:gravity="center"
-
-        android:lines="2"
+        android:lines="1"
         android:maxLength="25"
 
         android:transitionName="article_title" />
-
-    <!-- article date -->
-    <TextView
-        android:id="@+id/article_date"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-
-        android:text="@string/dummy_date"
-        android:textColor="@color/colorTextSecondary"
-        android:textSize="16sp"
-
-        android:paddingBottom="4dp"
-
-        android:gravity="center"
-
-        android:lines="1"
-        android:maxLength="10"
-
-        android:transitionName="article_date" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -75,11 +52,30 @@
 
         android:orientation="horizontal"
 
-        android:paddingBottom="6dp"
+        android:layout_marginTop="2dp"
+
+        android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
 
         android:gravity="center">
+
+        <!-- article date -->
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+
+            android:layout_weight="2"
+
+            android:text="@string/dummy_date"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="18sp"
+
+            android:lines="1"
+            android:maxLength="10"
+
+            android:transitionName="article_date" />
 
         <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->
@@ -90,7 +86,7 @@
 
             android:layout_weight="1"
 
-            android:src="@drawable/ic_favorite_black_24dp"
+            android:src="@drawable/ic_favorite_border_black_24dp"
             android:tint="@color/colorPrimaryDark"/>
 
         <!-- save later icon -->
