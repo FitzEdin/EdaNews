@@ -1,5 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -7,8 +8,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
+import android.support.v4.util.Pair;
+import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -61,8 +66,10 @@ public abstract class ListActivity extends AppCompatActivity
     @Override
     public void onItemClicked(int position, Bundle bundle) {
         Intent i = new Intent(this, ArticleDetailsActivity.class);
+
         i.putExtra(ITEM_ID, position);
         i.putExtra(CALLER_ID, callerId);
+
         startActivity(i, bundle);
     }
 

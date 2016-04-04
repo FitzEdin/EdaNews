@@ -4,5 +4,6 @@
     android:duration="500">
 
     <changeBounds/>
+    <changeTransform/>
 
 </transitionSet>

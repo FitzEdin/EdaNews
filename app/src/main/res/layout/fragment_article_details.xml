@@ -13,6 +13,8 @@
     tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
 
     <LinearLayout
+        android:id="@+id/article_card"
+
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
 
@@ -23,7 +25,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
 
-        android:background="@drawable/round">
+        android:background="@drawable/round"
+
+        android:transitionName="article_card">
 
         <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/detail_img"
@@ -35,7 +39,7 @@
             android:layout_gravity="center"
             android:scaleType="centerCrop"
 
-            android:transitionName="article_img"/>
+            android:transitionName="article_photo" />
 
         <TextView
             android:id="@+id/detail_title"
@@ -50,7 +54,9 @@
             android:textSize="20sp"
             android:textColor="@color/colorTextPrimary"
 
-            android:gravity="center_horizontal|center_vertical"/>
+            android:gravity="center_horizontal|center_vertical"
+
+            android:transitionName="article_title" />
 
         <TextView
             android:id="@+id/detail_date"
@@ -64,7 +70,7 @@
             android:textSize="12sp"
             android:textColor="@color/colorTextSecondary"
 
-            android:gravity="center"/>
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/detail_contents"

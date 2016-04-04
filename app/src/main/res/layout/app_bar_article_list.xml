@@ -114,6 +114,8 @@
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginBottom="8dp"
 
-        android:src="@drawable/ic_search_white_24dp" />
+        android:src="@drawable/ic_search_white_24dp"
+
+        android:transitionName="fab_button" />
 
 </android.support.design.widget.CoordinatorLayout>

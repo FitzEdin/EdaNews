@@ -1,10 +1,13 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v4.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -30,6 +33,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
     /*handles layout for each item in the list*/
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
+        protected LinearLayout card;
         protected TextView title;
         protected TextView date;
         protected NetworkImageView photo;
@@ -46,11 +50,13 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected View.OnClickListener itemTap = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //create an options object for transition
                 ActivityOptionsCompat optionsCompat
                         = ActivityOptionsCompat.makeSceneTransitionAnimation(
                             fragment.getActivity(),
-                            photo,
-                            photo.getTransitionName());
+                            card,
+                            ArticlesApp.TRANSITION_CARD
+                );
                 fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }
         };
@@ -121,6 +127,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             itemView.setOnClickListener(itemTap);
 
             //get a handle on UI views
+            card = (LinearLayout)itemView.findViewById(R.id.article_card);
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
             photo = (NetworkImageView)itemView.findViewById(R.id.article_photo);

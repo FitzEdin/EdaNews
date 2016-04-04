@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/article_card"
     android:orientation="vertical"
 
     android:layout_width="match_parent"
@@ -15,7 +17,9 @@
     android:clickable="true"
 
     android:background="@drawable/round"
-    android:elevation="@dimen/elevation" >
+    android:elevation="@dimen/elevation"
+
+    android:transitionName="article_card" >
 
     <!-- large image -->
     <com.android.volley.toolbox.NetworkImageView
@@ -27,7 +31,7 @@
 
         android:scaleType="centerCrop"
 
-        android:transitionName="article_img" />
+        android:transitionName="article_photo" />
 
     <!-- article title -->
     <TextView

@@ -214,8 +214,10 @@ public class ArticleListActivity extends ListActivity
                 d.show();
                 break;
             case R.id.nav_settings:
-                d = createDialog("Sorry", "That doesn't do anything yet.");
-                d.show();
+                Intent s = new Intent(this, ScrollingActivity.class);
+                startActivity(s);
+                //d = createDialog("Sorry", "That doesn't do anything yet.");
+                //d.show();
                 break;
         }
 
