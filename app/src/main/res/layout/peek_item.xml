@@ -2,80 +2,100 @@
 <LinearLayout
     android:id="@+id/peek_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
 
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
-    android:layout_marginLeft="12dp"
-    android:layout_marginRight="12dp"
+    android:gravity="center"
 
-    android:layout_gravity="center"
+    android:orientation="vertical">
 
-    android:padding="3dp"
+    <android.support.v7.widget.CardView
 
-    android:background="@drawable/round"
-    android:elevation="@dimen/elevation" >
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
 
-    <!-- large image -->
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/peek_photo"
-        android:src="@drawable/ic_uok_logo_new"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
 
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardElevation="@dimen/elevation"
 
-        android:scaleType="centerCrop"
+        card_view:cardPreventCornerOverlap="true"
 
-        android:layout_weight="2"/>
+        android:padding="3dp" >
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-
-        android:orientation="vertical"
-
-        android:layout_weight="3">
-
-        <!-- article title -->
-        <TextView
-            android:id="@+id/peek_title"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="4dp"
-
-            android:gravity="center"
-
-            android:text="@string/dummy_title"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="12sp"
-
-            android:lines="2"
-            android:maxLength="25" />
-
-        <!-- article short info -->
-        <TextView
-            android:id="@+id/peek_short_info"
-
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
 
-            android:text="@string/dummy_date"
-            android:textColor="@color/colorTextSecondary"
-            android:textSize="12sp"
+            android:orientation="horizontal">
 
-            android:padding="2dp"
+            <!-- large image -->
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/peek_photo"
+                android:src="@drawable/ic_uok_logo_new"
 
-            android:gravity="top"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
 
-            android:ellipsize="end"
+                android:scaleType="centerCrop"
 
-            android:lines="5" />
-    </LinearLayout>
+                android:layout_weight="2"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+
+                android:orientation="vertical"
+
+                android:layout_weight="3">
+
+                <!-- article title -->
+                <TextView
+                    android:id="@+id/peek_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="4dp"
+
+                    android:gravity="center"
+
+                    android:text="@string/dummy_title"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="20sp"
+
+                    android:lines="2"
+                    android:maxLength="25" />
+
+                <!-- article short info -->
+                <TextView
+                    android:id="@+id/peek_short_info"
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="100dp"
+
+                    android:text="@string/dummy_short_info"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
+
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="2dp"
+                    android:paddingRight="2dp"
+
+                    android:gravity="top"
+
+                    android:ellipsize="end"
+
+                    android:lines="5" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

@@ -84,7 +84,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
 
-            android:text="A few paragraphs of text describing the news story being covered."
+            android:text="@string/dummy_contents"
             android:textSize="18sp"
             android:textColor="@color/colorTextSecondary"
 

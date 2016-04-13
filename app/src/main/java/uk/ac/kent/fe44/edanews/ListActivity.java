@@ -9,11 +9,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
 import android.support.v4.util.Pair;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,7 +34,7 @@ public abstract class ListActivity extends AppCompatActivity
     protected NavigationView navView;
     //protected boolean hasTwoPanes;
 
-    private DialogFragment pkDialog = new PeekDialog();
+    private PeekDialog pkDialog = new PeekDialog();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +89,21 @@ public abstract class ListActivity extends AppCompatActivity
 
         pkDialog.setArguments(args);    //pass bundle to fragment
         pkDialog.show(getFragmentManager(), ArticlesApp.TAG_PEEK_ARTICLE);
+
+        //prep intent for peek activity
+//        Intent p = new Intent(this, PeekActivity.class);
+//
+//        p.putExtra(ArticlesApp.IMAGE_URL, article.getImageURL());
+//        p.putExtra(ArticlesApp.TITLE, article.getTitle());
+//        p.putExtra(ArticlesApp.SHORT_INFO, article.getShortInfo());
+//
+//        startActivity(p);
     }
 
     /* define what happens when the long tap on the image is released */
     @Override
     public void onLongTapReleased(int position){
-            pkDialog.dismiss();
+            //pkDialog.dismiss();
     }
 
 

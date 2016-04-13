@@ -5,10 +5,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.app.DialogFragment;
+import android.support.v4.view.MotionEventCompat;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -21,7 +24,7 @@ public class PeekDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // inflate the dialog's layout
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v = inflater.inflate(R.layout.peek_item, null);
+        View v = inflater.inflate(R.layout.dialog_peek, null);
 
         //get handles on the views in dialog
         TextView title = (TextView)v.findViewById(R.id.peek_title);

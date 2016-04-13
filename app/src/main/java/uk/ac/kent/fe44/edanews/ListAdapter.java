@@ -137,7 +137,6 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             shareIc = (ImageView) itemView.findViewById(R.id.ic_share);
 
             photo.setOnLongClickListener(imgLongTap);
-            photo.setOnTouchListener(imgLongTapReleased);
             photo.setOnClickListener(itemTap);
 
             faveIc.setOnClickListener(faveICTap);
