@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -60,6 +61,8 @@ public class ArticleListActivity extends ListActivity
             return handled;
         }
     };
+
+    private SearchListFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +124,8 @@ public class ArticleListActivity extends ListActivity
     public ArrayList<Article> getList(){
         switch (callerId) {
 
-//            case 3:
-//                return ArticleModel.getInstance().getSearchList();
+            case 3:
+                return ArticleModel.getInstance().getSearchList();
             case 2:
                 return ArticleModel.getInstance().getFavesList();
             default:
@@ -130,22 +133,53 @@ public class ArticleListActivity extends ListActivity
         }
     }
 
+    /**
+     * Hide the search bar
+     * @param v The view button clicked to hide the search bar.
+     */
     public void closeSearchBar(View v) {
         hideKeyboard(this);
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
     }
+
+    /**
+     * Perform a search for the key provided; the fragment is swapped in
+     * if not existing previously. Each time it is handed a new key
+     * @param key
+     */
     public void searchFor(String key) {
-        //pass key to
-        Intent i = new Intent(this, SearchListActivity.class);
-        i.putExtra("key", key);
-        startActivity(i);
+        if(callerId != 3) {
+            //swap in the search fragment
+            callerId = 3;
+
+            // Create fragment and give it an argument specifying the article it should show
+            searchFragment = new SearchListFragment();
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // Replace whatever is in the fragment_container view with this fragment
+            transaction.replace(R.id.list_fragment, searchFragment);
+
+            // Commit the transaction
+            transaction.commit();
+        }
+
+        searchFragment.searchFor(key);
     }
+
+    /**
+     * Hide the keyboard
+     * @param activity The activity requesting the keyboard be hidden
+     */
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm
                 = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchTextView.getWindowToken(), 0);
     }
+    /**
+     * Show the keyboard
+     */
     public void showKeyboard() {
         InputMethodManager imm
                 = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -211,7 +245,14 @@ public class ArticleListActivity extends ListActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            switch (callerId) {
+                case 2:
+                case 3:
+                    goHome();
+                    break;
+                default:
+                    super.onBackPressed();
+            }
         }
     }
 
@@ -223,44 +264,17 @@ public class ArticleListActivity extends ListActivity
 
         switch (id){
             case R.id.nav_home:
-                if(callerId == 1) {
-                    //then we're already home, so ignore
-                    break;
-                }else {
-                    //go home, Roger !
-                    callerId = 1;
-
-                    // Create fragment and give it an argument specifying the article it should show
-                    ArticleListFragment homeFragment = new ArticleListFragment();
-
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                    // Replace whatever is in the fragment_container view with this fragment
-                    transaction.replace(R.id.list_fragment, homeFragment);
-
-                    // Commit the transaction
-                    transaction.commit();
-                    break;
+                if(callerId != 1) {
+                    goHome();
                 }
+                break;
             case R.id.nav_faves:
-                if(callerId == 2) {
-                    break;
-                }else {
-                    callerId = 2;
-
-                    // Create fragment and give it an argument specifying the article it should show
-                    FavesListFragment favesFragment = new FavesListFragment();
-
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                    // Replace whatever is in the fragment_container view with this fragment
-                    transaction.replace(R.id.list_fragment, favesFragment);
-
-                    // Commit the transaction
-                    transaction.commit();
-                    break;
+                if(callerId != 2) {
+                    goFaves();
                 }
+                break;
             case R.id.nav_saved:
+                Toast.makeText(this, "CallerId: "+callerId, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
                 d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
@@ -293,5 +307,35 @@ public class ArticleListActivity extends ListActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void goFaves() {
+        callerId = 2;
+
+        // Create fragment and give it an argument specifying the article it should show
+        FavesListFragment favesFragment = new FavesListFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment
+        transaction.replace(R.id.list_fragment, favesFragment);
+
+        // Commit the transaction
+        transaction.commit();
+    }
+
+    private void goHome() {
+        //go home, Roger !
+        callerId = 1;
+        // Create fragment and give it an argument specifying the article it should show
+        ArticleListFragment homeFragment = new ArticleListFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment
+        transaction.replace(R.id.list_fragment, homeFragment);
+
+        // Commit the transaction
+        transaction.commit();
     }
 }

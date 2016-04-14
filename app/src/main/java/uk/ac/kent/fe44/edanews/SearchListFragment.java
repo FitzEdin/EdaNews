@@ -27,10 +27,10 @@ public class SearchListFragment extends ListFragment
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
 
-        //get search key from intent
-        String key = getActivity().getIntent().getStringExtra("key");
-        //perform search
-        searchFor(key);
+//        //get search key from intent
+//        String key = getActivity().getIntent().getStringExtra("key");
+//        //perform search
+//        searchFor(key);
 
 
         int spanCount = 1;
@@ -96,11 +96,12 @@ public class SearchListFragment extends ListFragment
         //inform the adapter and kill the progress bar
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();
+            listView.scrollToPosition(0);
             mProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 
-    private void searchFor(String key) {
+    public void searchFor(String key) {
         ArticleModel model = ArticleModel.getInstance();
 
         //perform search and listen for response
