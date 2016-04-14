@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -71,9 +73,38 @@ public class ArticleListActivity extends ListActivity
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Check that the activity is using the layout version with
+        // the fragment_container FrameLayout
+        if (findViewById(R.id.list_fragment) != null) {
+
+            // However, if we're being restored from a previous state,
+            // then we don't need to do anything and should return or else
+            // we could end up with overlapping fragments.
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            // Create a new Fragment to be placed in the activity layout
+            ArticleListFragment firstFragment = new ArticleListFragment();
+
+            // Add the fragment to the 'fragment_container' FrameLayout
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.list_fragment, firstFragment).commit();
+        }
+
         //set up caller id for ArticleDetailsActivity
         callerId = 1;
 
+        setUpSearch();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    private void setUpSearch() {
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
         //listen for searches
@@ -85,16 +116,18 @@ public class ArticleListActivity extends ListActivity
 
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
     }
 
     public ArrayList<Article> getList(){
-        return ArticleModel.getInstance().getArticleList();
+        switch (callerId) {
+
+//            case 3:
+//                return ArticleModel.getInstance().getSearchList();
+            case 2:
+                return ArticleModel.getInstance().getFavesList();
+            default:
+                return ArticleModel.getInstance().getArticleList();
+        }
     }
 
     public void closeSearchBar(View v) {
@@ -109,11 +142,13 @@ public class ArticleListActivity extends ListActivity
         startActivity(i);
     }
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager imm
+                = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchTextView.getWindowToken(), 0);
     }
     public void showKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm
+                = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(searchTextView, InputMethodManager.SHOW_IMPLICIT);
     }
 
@@ -187,10 +222,44 @@ public class ArticleListActivity extends ListActivity
         Dialog d;
 
         switch (id){
+            case R.id.nav_home:
+                if(callerId == 1) {
+                    //then we're already home, so ignore
+                    break;
+                }else {
+                    //go home, Roger !
+                    callerId = 1;
+
+                    // Create fragment and give it an argument specifying the article it should show
+                    ArticleListFragment homeFragment = new ArticleListFragment();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                    // Replace whatever is in the fragment_container view with this fragment
+                    transaction.replace(R.id.list_fragment, homeFragment);
+
+                    // Commit the transaction
+                    transaction.commit();
+                    break;
+                }
             case R.id.nav_faves:
-                Intent i = new Intent(this, FavesListActivity.class);
-                startActivity(i);
-                break;
+                if(callerId == 2) {
+                    break;
+                }else {
+                    callerId = 2;
+
+                    // Create fragment and give it an argument specifying the article it should show
+                    FavesListFragment favesFragment = new FavesListFragment();
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                    // Replace whatever is in the fragment_container view with this fragment
+                    transaction.replace(R.id.list_fragment, favesFragment);
+
+                    // Commit the transaction
+                    transaction.commit();
+                    break;
+                }
             case R.id.nav_saved:
                 break;
             case R.id.nav_EDA:

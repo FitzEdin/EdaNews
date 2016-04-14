@@ -31,16 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".FavesListActivity"
-            android:configChanges="orientation"
-            android:label="@string/title_activity_faves"
-            android:parentActivityName=".ArticleListActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.ac.kent.fe44.edanews.ArticleListActivity" />
-        </activity>
-        <activity
             android:name=".SearchListActivity"
             android:label="@string/title_activity_article_search" >
             <intent-filter>
