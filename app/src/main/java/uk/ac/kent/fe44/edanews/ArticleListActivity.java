@@ -152,6 +152,7 @@ public class ArticleListActivity extends ListActivity
         if(callerId != 3) {
             //swap in the search fragment
             callerId = 3;
+            getSupportActionBar().setTitle(R.string.title_activity_article_search);
 
             // Create fragment and give it an argument specifying the article it should show
             searchFragment = new SearchListFragment();
@@ -312,6 +313,8 @@ public class ArticleListActivity extends ListActivity
     private void goFaves() {
         callerId = 2;
 
+        getSupportActionBar().setTitle(R.string.title_activity_faves);
+
         // Create fragment and give it an argument specifying the article it should show
         FavesListFragment favesFragment = new FavesListFragment();
 
@@ -327,6 +330,7 @@ public class ArticleListActivity extends ListActivity
     private void goHome() {
         //go home, Roger !
         callerId = 1;
+        getSupportActionBar().setTitle(R.string.app_name);
         // Create fragment and give it an argument specifying the article it should show
         ArticleListFragment homeFragment = new ArticleListFragment();
 

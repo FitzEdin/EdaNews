@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
@@ -12,84 +13,96 @@
 
     tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
 
-    <LinearLayout
-        android:id="@+id/article_card"
-
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-
-        android:orientation="vertical"
 
         android:layout_marginRight="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
 
-        android:background="@drawable/round"
+        card_view:cardCornerRadius="6dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardElevation="@dimen/elevation"
 
-        android:transitionName="article_card">
+        card_view:cardPreventCornerOverlap="true"
 
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/detail_img"
-            android:src="@drawable/ic_uok_logo_new"
+        android:transitionName="article_card" >
 
-            android:layout_width="fill_parent"
-            android:layout_height="324dp"
-
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-
-            android:transitionName="article_photo" />
-
-        <TextView
-            android:id="@+id/detail_title"
+        <LinearLayout
+            android:id="@+id/article_card"
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
 
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:orientation="vertical"
 
-            android:text="@string/dummy_title"
-            android:textSize="20sp"
-            android:textColor="@color/colorTextPrimary"
+            android:background="@drawable/round">
 
-            android:gravity="center_horizontal|center_vertical"
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/detail_img"
+                android:src="@drawable/ic_uok_logo_new"
 
-            android:transitionName="article_title" />
+                android:layout_width="fill_parent"
+                android:layout_height="324dp"
 
-        <TextView
-            android:id="@+id/detail_date"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:transitionName="article_photo" />
 
-            android:layout_marginTop="8dp"
+            <TextView
+                android:id="@+id/detail_title"
 
-            android:text="@string/dummy_date"
-            android:textSize="12sp"
-            android:textColor="@color/colorTextSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:gravity="center" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
 
-        <TextView
-            android:id="@+id/detail_contents"
+                android:text="@string/dummy_title"
+                android:textSize="20sp"
+                android:textColor="@color/colorTextPrimary"
 
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
 
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+                android:transitionName="article_title" />
 
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
+            <TextView
+                android:id="@+id/detail_date"
 
-            android:text="@string/dummy_contents"
-            android:textSize="18sp"
-            android:textColor="@color/colorTextSecondary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-            android:gravity="left"/>
+                android:layout_marginTop="8dp"
 
-    </LinearLayout>
+                android:text="@string/dummy_date"
+                android:textSize="12sp"
+                android:textColor="@color/colorTextSecondary"
+
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/detail_contents"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+
+                android:text="@string/dummy_contents"
+                android:textSize="18sp"
+                android:textColor="@color/colorTextSecondary"
+
+                android:gravity="left"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </ScrollView>

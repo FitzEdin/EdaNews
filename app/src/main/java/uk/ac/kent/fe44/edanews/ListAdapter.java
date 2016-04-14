@@ -2,8 +2,10 @@ package uk.ac.kent.fe44.edanews;
 
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.util.Pair;
+import android.text.style.TtsSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,7 +35,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
     /*handles layout for each item in the list*/
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
-        protected LinearLayout card;
+        protected CardView card;
         protected TextView title;
         protected TextView date;
         protected NetworkImageView photo;
@@ -127,7 +129,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             itemView.setOnClickListener(itemTap);
 
             //get a handle on UI views
-            card = (LinearLayout)itemView.findViewById(R.id.article_card);
+            card = (CardView)itemView.findViewById(R.id.article_card);
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
             photo = (NetworkImageView)itemView.findViewById(R.id.article_photo);
