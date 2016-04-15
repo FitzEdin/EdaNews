@@ -55,7 +55,7 @@ public class ArticleDetailsActivity extends AppCompatActivity {
             );
         }
         setContentView(R.layout.activity_article_details);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.details_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

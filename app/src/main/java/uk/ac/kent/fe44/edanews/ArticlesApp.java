@@ -22,7 +22,8 @@ public class ArticlesApp extends Application {
     public final static String TITLE = "title", SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     public final static String TAG_PEEK_ARTICLE = "peekArticleTag";
     public final static String TRANSITION_TITLE = "article_title",
-            TRANSITION_PHOTO = "article_photo", TRANSITION_CARD = "article_card";
+            TRANSITION_PHOTO = "article_photo", TRANSITION_CARD = "article_card",
+            TRANSITION_TOOLBAR = "toolbar", TRANSITION_FAB = "fab_button";
 
     @Override
     public void onCreate() {

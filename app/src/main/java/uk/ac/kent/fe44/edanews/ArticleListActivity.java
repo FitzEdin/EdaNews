@@ -98,6 +98,10 @@ public class ArticleListActivity extends ListActivity
         //set up caller id for ArticleDetailsActivity
         callerId = 1;
 
+        navView = (NavigationView) findViewById(R.id.nav_view);
+        navView.setNavigationItemSelectedListener(this);
+        navView.setCheckedItem(R.id.nav_home);
+
         setUpSearch();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -123,7 +127,6 @@ public class ArticleListActivity extends ListActivity
 
     public ArrayList<Article> getList(){
         switch (callerId) {
-
             case 3:
                 return ArticleModel.getInstance().getSearchList();
             case 2:
@@ -196,10 +199,6 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onResume() {
         super.onResume();
-        
-        navView = (NavigationView) findViewById(R.id.nav_view);
-        navView.setNavigationItemSelectedListener(this);
-        navView.setCheckedItem(R.id.nav_home);
     }
 
     @Override

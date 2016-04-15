@@ -21,7 +21,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+
+            android:transitionName="toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -104,14 +106,6 @@
         android:id="@+id/list_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <!--<fragment-->
-        <!--android:id="@+id/list_fragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-
-        <!--class="uk.ac.kent.fe44.edanews.ArticleListFragment"-->
-        <!--tools:layout="@layout/fragment_article_list" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/search_fab"

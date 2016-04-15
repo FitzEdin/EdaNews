@@ -7,10 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/bg"
+    android:background="@drawable/bg_sayagata"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_article_list" tools:context=".ArticleListActivity">
+    tools:showIn="@layout/app_bar_article_list"
+    tools:context=".ArticleListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/article_list_view"

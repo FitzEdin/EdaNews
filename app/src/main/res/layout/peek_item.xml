@@ -25,7 +25,9 @@
 
         card_view:cardPreventCornerOverlap="true"
 
-        android:padding="3dp" >
+        android:padding="3dp"
+
+        android:transitionName="article_card" >
 
         <LinearLayout
             android:layout_width="fill_parent"

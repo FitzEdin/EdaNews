@@ -1,13 +1,16 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.Toolbar;
 import android.text.style.TtsSpan;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,6 +38,8 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
     /*handles layout for each item in the list*/
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
+        protected Toolbar toolbar;
+        protected FloatingActionButton fab;
         protected CardView card;
         protected TextView title;
         protected TextView date;
@@ -55,9 +60,10 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 //create an options object for transition
                 ActivityOptionsCompat optionsCompat
                         = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                            fragment.getActivity(),
-                            card,
-                            ArticlesApp.TRANSITION_CARD
+                        fragment.getActivity(),
+                        Pair.create((View) card, ArticlesApp.TRANSITION_CARD),
+                        Pair.create((View) toolbar, ArticlesApp.TRANSITION_TOOLBAR),
+                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)
                 );
                 fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }
@@ -129,6 +135,8 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             itemView.setOnClickListener(itemTap);
 
             //get a handle on UI views
+            toolbar = (Toolbar)fragment.getActivity().findViewById(R.id.list_toolbar);
+            fab = (FloatingActionButton)fragment.getActivity().findViewById(R.id.search_fab);
             card = (CardView)itemView.findViewById(R.id.article_card);
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
