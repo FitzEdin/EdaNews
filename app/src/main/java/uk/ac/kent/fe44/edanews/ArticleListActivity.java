@@ -102,8 +102,6 @@ public class ArticleListActivity extends ListActivity
         navView.setNavigationItemSelectedListener(this);
         navView.setCheckedItem(R.id.nav_home);
 
-        setUpSearch();
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -125,6 +123,12 @@ public class ArticleListActivity extends ListActivity
         searchFab.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Set the list to be provided to the adapter
+     * based on which fragment is being shown.
+     * @return an ArrayList<Article> to be shown
+     *          in the fragment's RecyclerView
+     */
     public ArrayList<Article> getList(){
         switch (callerId) {
             case 3:
@@ -199,6 +203,7 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onResume() {
         super.onResume();
+        setUpSearch();
     }
 
     @Override

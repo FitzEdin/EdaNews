@@ -5,6 +5,7 @@ package uk.ac.kent.fe44.edanews;
  * Represents an individual article. Articles
  * are created using data from the network or
  * generated from the data stored on the device.
+ *
  */
 public class Article {
     //attributes that define an article

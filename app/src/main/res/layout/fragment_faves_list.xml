@@ -10,7 +10,6 @@
     android:background="@drawable/bg_crossword"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_article_list"
     tools:context=".ArticleListActivity" >
 
     <android.support.v7.widget.RecyclerView

@@ -9,7 +9,8 @@
 
     android:paddingTop="?attr/actionBarSize"
 
-    android:background="@drawable/bg_art_port"
+    android:background="@drawable/bg_crossword"
+    android:scrollbars="none"
 
     tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
 
@@ -17,12 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
 
-        android:layout_marginRight="18dp"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginRight="@dimen/card_right_margin"
+        android:layout_marginLeft="@dimen/card_left_margin"
+        android:layout_marginTop="@dimen/card_top_margin"
+        android:layout_marginBottom="@dimen/card_bottom_margin"
 
-        card_view:cardCornerRadius="6dp"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardElevation="@dimen/elevation"
 
@@ -52,6 +53,7 @@
 
                 android:transitionName="article_photo" />
 
+            <!-- Article Title -->
             <TextView
                 android:id="@+id/detail_title"
 
@@ -62,13 +64,14 @@
                 android:layout_marginRight="16dp"
 
                 android:text="@string/dummy_title"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/colorTextPrimary"
 
                 android:gravity="center_horizontal|center_vertical"
 
                 android:transitionName="article_title" />
 
+            <!-- Article Date -->
             <TextView
                 android:id="@+id/detail_date"
 
@@ -78,11 +81,12 @@
                 android:layout_marginTop="8dp"
 
                 android:text="@string/dummy_date"
-                android:textSize="12sp"
+                android:textSize="18sp"
                 android:textColor="@color/colorTextSecondary"
 
                 android:gravity="center" />
 
+            <!-- Article Details -->
             <TextView
                 android:id="@+id/detail_contents"
 
@@ -96,7 +100,7 @@
                 android:paddingRight="16dp"
 
                 android:text="@string/dummy_contents"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textColor="@color/colorTextSecondary"
 
                 android:gravity="left"/>
