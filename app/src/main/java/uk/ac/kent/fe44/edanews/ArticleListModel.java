@@ -14,10 +14,14 @@ import java.util.ArrayList;
  * Created by fe44 on 17/04/16.
  */
 public class ArticleListModel {
+    /** List of articles that will appear in the newsfeed. */
     private ArrayList<Article> articleList = new ArrayList<>();
+    /** An object that is listening for changes to the newsfeed list. */
     private ArticleModel.OnListUpdateListener listUpdateListener;
 
+    /**  */
     private int mStart = 0;
+    /** The number fo articles to download from the network per request. */
     private int size = 20;
 
     /** The base url to make requests to for data. */

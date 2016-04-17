@@ -61,14 +61,10 @@ public class ArticleModel {
      * load a set of articles into the newsfeed.
      * The object decides where this data should
      * be loaded from.
-     * @param listUpdateListener A class that is
-     *                           listening for changes
-     *                           to the list of articles
-     *                           being managed by the
-     *                           ArticleListModel object.
-     *                           This class should implement
-     *                           the OnListUpdateListener
-     *                           interface.
+     * @param listUpdateListener A class that is listening for changes
+     *                           to the list of articles being managed by the
+     *                           ArticleListModel object. This class should implement
+     *                           the OnListUpdateListener interface.
      */
     public void loadData(OnListUpdateListener listUpdateListener) {
         articleList.load(listUpdateListener);
@@ -81,7 +77,6 @@ public class ArticleModel {
     public interface OnListUpdateListener {
         void onListUpdate();
     }
-    /*end definition for members an methods for performing article list request(s)*/
 
 
 
@@ -157,82 +152,41 @@ public class ArticleModel {
 
 
 
-    /** Performing search requests
-     *  The lists are downloaded in batches of size
-     *  and any listener is informed via the interface
-     *  */
-    /*members for performing article list request*/
-    private String SEARCH_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?titleHas=";
-    private String KEY;
-    private OnSearchListUpdateListener searchListUpdateListener;
-    /* Managing our list of articles */
-    private ArrayList<Article> searchList = new ArrayList<>();
+
+    /**
+     * The SearchListModel class manages the list of articles that appear in the search results.
+     */
+    public SearchListModel searchList = new SearchListModel();
+    /**
+     * Returns the list of articles that will show
+     * in the search results; this list is managed by
+     * the SearchListModel class.
+     * @return ArrayList List of articles
+     */
     public ArrayList<Article> getSearchList() {
-        return searchList;
+        return searchList.getSearchList();
     }
-
-    private Response.Listener<JSONArray> searchListener = new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            //handle response from server
-            searchList.clear();
-            try{
-                for(int i = 0; i < response.length(); i++) {
-                    //extract JSON object from response
-                    JSONObject object = response.getJSONObject(i);
-
-                    //build article with the data
-                    Article article = new Article(
-                            object.getString(IMAGE_URL),
-                            object.getInt(RECORD_ID),
-                            object.getString(TITLE),
-                            object.getString(SHORT_INFO),
-                            object.getString(DATE)
-                    );
-
-                    //and add to list of Articles
-                    getSearchList().add(article);
-                }
-            }catch(JSONException e) {
-                //handle exception
-            }
-            notifySearchListener();
-        }
-    };
-    private Response.ErrorListener searchErrorListener = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            //handle error in response
-        }
-    };
-    /*searches for a set of articles with a certain title*/
+    /**
+     * Passes its parameters to the SearchListModel object
+     * for it to perform the search for articles with titles
+     * containing the key parameter.
+     * @param key String The string for searching titles.
+     * @param searchListUpdateListener A class that is listening for changes to the
+     *                                 list of articles being managed by the
+     *                                 SearchListModel object. This class should
+     *                                 implement the OnSearchListUpdateListener interface.
+     */
     public void loadSearchData(String key, OnSearchListUpdateListener searchListUpdateListener) {
-        //set calling class as listener
-        setOnSearchListUpdateListener(searchListUpdateListener);
-        //build request
-        String url = SEARCH_URL + key;
-        JsonArrayRequest request = new JsonArrayRequest(url, searchListener, searchErrorListener);
-
-        //make request
-        ArticlesApp.getInstance()
-                .getRequestQueue()
-                .add(request);
+        searchList.load(key, searchListUpdateListener);
     }
-    /*let the listener know about updates*/
-    private void notifySearchListener() {
-        if(searchListUpdateListener != null) {
-            searchListUpdateListener.onSearchListUpdate();
-        }
-    }
-    /*receive subscriptions for notifications from classes*/
-    private void setOnSearchListUpdateListener(OnSearchListUpdateListener searchListUpdateListener) {
-        this.searchListUpdateListener = searchListUpdateListener;
-    }
-    /*classes that need this data implement this interface*/
+    /**
+     * Each class that uses data from the search results should
+     * implement this interface to be informed when the list of
+     * results are available.
+     */
     public interface OnSearchListUpdateListener {
         void  onSearchListUpdate();
     }
-    /*end definition for members an methods for performing article list request(s)*/
 
 
 
