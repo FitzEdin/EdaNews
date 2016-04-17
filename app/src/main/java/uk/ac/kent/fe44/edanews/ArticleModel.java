@@ -38,9 +38,6 @@ public class ArticleModel {
             SHORT_INFO = "short_info", IMAGE_URL = "image_url";
 
 
-
-
-
     /**
      * The ArticleListModel class manages the main list of articles that are shown in the
      * newsfeed. It is first populated by copying articles from the MasterListModel, then
@@ -79,75 +76,24 @@ public class ArticleModel {
     }
 
 
-
-    /** Performing Article Detail requests
-     *  The detail for each article, ie, its contents
-     *  and web page url is downloaded with a second
-     *  network request.
-     *  */
-    /*members and methods for performing request for article's details*/
-    private String DETAILS_URL = "http://www.efstratiou.info/projects/newsfeed/getItem.php?id=";
-    private String CONTENTS = "contents";
-    private OnDetailsUpdateListener detailsUpdateListener;
-    private static int articleIndex;
-    private ArticleDetailsFragment me;
-
-    private Response.Listener<JSONObject> detailsListener = new Response.Listener<JSONObject>() {
-        @Override
-        public void onResponse(JSONObject response) {
-            //handle response from server
-            try{
-                //extract contents from JSON object response
-                getArticleList().get(articleIndex)
-                        .setContents(response.getString(CONTENTS));
-
-                //mark article as detailed /---/ prevents a second attempt at downloading same data
-                getArticleList().get(articleIndex)
-                        .setIsDetailed(true);
-
-            }catch(JSONException e) {
-                //handle exception
-            }
-            notifyDetailsListener();
-        }
-    };
-    private Response.ErrorListener detailsErrorListener = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            //handle error in response
-        }
-    };
-    /*loads the details of a particular article, by appending its id to DETAILS_URL*/
+    /**
+     * Populates the details of particular articles.
+     */
+    DetailsModel detailsModel = new DetailsModel();
+    /**
+     * Instructs a DetailsModel object to load data for a given article.
+     * @param articleId The record ID of the article; this identifies
+     *                  the article in the network resource.
+     * @param articleIndex The index of the article in the particular list.
+     * @param detailsUpdateListener The class that is reacting to changes to
+     *                              the article's details (may be null).
+     */
     public void loadArticleDetails(int articleId, int articleIndex, OnDetailsUpdateListener detailsUpdateListener) {
-        //set calling class as listener
-        if(detailsUpdateListener != null) {
-            setOnDetailsUpdateListener(detailsUpdateListener);
-        }
-        //localise index for use by the response listener
-        this.articleIndex = articleIndex;
-
-        //create url for particular article
-        String url = DETAILS_URL + articleId;
-
-        JsonObjectRequest request = new JsonObjectRequest(url, null, detailsListener, detailsErrorListener);
-        //make request
-        ArticlesApp.getInstance()
-                .getRequestQueue()
-                .add(request);
-    }
-    private void notifyDetailsListener() {
-        if(detailsUpdateListener != null) {
-            detailsUpdateListener.onDetailsUpdate();
-        }
-    }
-    /*receive subscriptions for notifications from classes*/
-    private void setOnDetailsUpdateListener(OnDetailsUpdateListener detailsUpdateListener) {
-        this.detailsUpdateListener = detailsUpdateListener;
+        detailsModel.load(articleId, articleIndex, detailsUpdateListener);
     }
     public interface OnDetailsUpdateListener {
         void onDetailsUpdate();
     }
-    /*end definition of members and methods for getting article's details*/
 
 
 
@@ -187,7 +133,6 @@ public class ArticleModel {
     public interface OnSearchListUpdateListener {
         void  onSearchListUpdate();
     }
-
 
 
     /** Manages the faves list; no network requests are
