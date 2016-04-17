@@ -16,7 +16,11 @@ import java.util.ArrayList;
 
 /**
  * Created by fitzroy on 28/01/2016.
- * Interacts with the Article class
+ *
+ * The main model class for the application. Control over
+ * specific parts of the model are delegated to subclasses
+ * of ListModel. Access to these subclasses is controlled
+ * via this class.
  */
 public class ArticleModel {
 
@@ -29,93 +33,51 @@ public class ArticleModel {
         return ourInstance;
     }
 
-    /* Managing our list of articles */
-    private ArrayList<Article> articleList = new ArrayList<>();
-    public ArrayList<Article> getArticleList() {
-        return articleList;
-    }
-
-
-    /** Performing Article List requests
-     *  The lists are downloaded in batches of size
-     *  and any listener is informed via the interface
-     *  */
     /*members for performing article list request*/
-    private static String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
-    private static String WEB_PAGE_URL = "http://www.eda.kent.ac.uk/school/news_article.aspx?aid=";
-    private String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
+    public static final String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
             SHORT_INFO = "short_info", IMAGE_URL = "image_url";
-    private OnListUpdateListener listUpdateListener;
-    private int mStart = 0;
-    private int size = 20;
 
-    private Response.Listener<JSONArray> netListener = new Response.Listener<JSONArray>() {
-        @Override
-        public void onResponse(JSONArray response) {
-            //handle response from server
-            if(mStart == 0){
-                articleList.clear();
-            }
-            try{
-                for(int i = 0; i < response.length(); i++) {
-                    //extract JSON object from response
-                    JSONObject object = response.getJSONObject(i);
 
-                    //build article with the data
-                    Article article = new Article(
-                            object.getString(IMAGE_URL),
-                            object.getInt(RECORD_ID),
-                            object.getString(TITLE),
-                            object.getString(SHORT_INFO),
-                            object.getString(DATE)
-                    );
 
-                    //add web url to article
-                    String url = WEB_PAGE_URL + article.getRecordID();
-                    article.setWeb_page(url);
 
-                    //and add to list of Articles
-                    getArticleList().add(article);
-                }
-            }catch(JSONException e) {
-                //handle exception
-            }
-            notifyListener();
-        }
-    };
-    private Response.ErrorListener errorListener = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            //handle error in response
-        }
-    };
-    /*loads a set of twenty articles*/
+
+    /**
+     * The ArticleListModel class manages the main list of articles that are shown in the
+     * newsfeed. It is first populated by copying articles from the MasterListModel, then
+     * via a network call as the user scrolls, OR newer articles are found online.
+     */
+    public ArticleListModel articleList = new ArticleListModel();
+    /**
+     * Returns the list of articles that will show
+     * in the newsfeed; this list is managed by
+     * the ArticleListModel class.
+     * @return ArrayList List of articles
+     */
+    public ArrayList<Article> getArticleList() {
+        return articleList.getArticleList();
+    }
+    /**
+     * Instructs the ArticleListModel object to
+     * load a set of articles into the newsfeed.
+     * The object decides where this data should
+     * be loaded from.
+     * @param listUpdateListener A class that is
+     *                           listening for changes
+     *                           to the list of articles
+     *                           being managed by the
+     *                           ArticleListModel object.
+     *                           This class should implement
+     *                           the OnListUpdateListener
+     *                           interface.
+     */
     public void loadData(OnListUpdateListener listUpdateListener) {
-        //set calling class as listener
-        setOnListUpdateListener(listUpdateListener);
-        //build request
-        String url = CLIENT_URL + mStart;
-        JsonArrayRequest request = new JsonArrayRequest(url, netListener, errorListener);
-
-        //make request
-        ArticlesApp.getInstance()
-                .getRequestQueue()
-                .add(request);
-
-        //set up for pulling next set of articles
-        mStart += size;
+        articleList.load(listUpdateListener);
     }
-    /*let the listener know about updates*/
-    private void notifyListener() {
-        if(listUpdateListener != null) {
-            listUpdateListener.onListUpdate();
-        }
-    }
-    /*receive subscriptions for notifications from classes*/
-    public void setOnListUpdateListener(OnListUpdateListener listUpdateListener) {
-        this.listUpdateListener = listUpdateListener;
-    }
-    /*classes that need this data implement this interface*/
+    /**
+     * Each class that uses data from the newsfeed should
+     * implement this interface to be informed when changes
+     * are made to the list of articles.
+     */
     public interface OnListUpdateListener {
         void onListUpdate();
     }
