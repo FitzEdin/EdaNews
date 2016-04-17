@@ -90,7 +90,9 @@ public class ArticleModel {
         }
     };
     /*loads a set of twenty articles*/
-    public void loadData() {
+    public void loadData(OnListUpdateListener listUpdateListener) {
+        //set calling class as listener
+        setOnListUpdateListener(listUpdateListener);
         //build request
         String url = CLIENT_URL + mStart;
         JsonArrayRequest request = new JsonArrayRequest(url, netListener, errorListener);
@@ -115,7 +117,7 @@ public class ArticleModel {
     }
     /*classes that need this data implement this interface*/
     public interface OnListUpdateListener {
-        void  onListUpdate();
+        void onListUpdate();
     }
     /*end definition for members an methods for performing article list request(s)*/
 
@@ -159,7 +161,11 @@ public class ArticleModel {
         }
     };
     /*loads the details of a particular article, by appending its id to DETAILS_URL*/
-    public void loadArticleDetails(int articleId, int articleIndex) {
+    public void loadArticleDetails(int articleId, int articleIndex, OnDetailsUpdateListener detailsUpdateListener) {
+        //set calling class as listener
+        if(detailsUpdateListener != null) {
+            setOnDetailsUpdateListener(detailsUpdateListener);
+        }
         //localise index for use by the response listener
         this.articleIndex = articleIndex;
 
@@ -178,7 +184,7 @@ public class ArticleModel {
         }
     }
     /*receive subscriptions for notifications from classes*/
-    public void setOnDetailsUpdateListener(OnDetailsUpdateListener detailsUpdateListener) {
+    private void setOnDetailsUpdateListener(OnDetailsUpdateListener detailsUpdateListener) {
         this.detailsUpdateListener = detailsUpdateListener;
     }
     public interface OnDetailsUpdateListener {
@@ -238,7 +244,9 @@ public class ArticleModel {
         }
     };
     /*searches for a set of articles with a certain title*/
-    public void loadSearchData(String key) {
+    public void loadSearchData(String key, OnSearchListUpdateListener searchListUpdateListener) {
+        //set calling class as listener
+        setOnSearchListUpdateListener(searchListUpdateListener);
         //build request
         String url = SEARCH_URL + key;
         JsonArrayRequest request = new JsonArrayRequest(url, searchListener, searchErrorListener);
@@ -255,7 +263,7 @@ public class ArticleModel {
         }
     }
     /*receive subscriptions for notifications from classes*/
-    public void setOnSearchListUpdateListener(OnSearchListUpdateListener searchListUpdateListener) {
+    private void setOnSearchListUpdateListener(OnSearchListUpdateListener searchListUpdateListener) {
         this.searchListUpdateListener = searchListUpdateListener;
     }
     /*classes that need this data implement this interface*/

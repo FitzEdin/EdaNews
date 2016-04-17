@@ -89,8 +89,7 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
-        model.setOnDetailsUpdateListener(this);
-        model.loadArticleDetails(articleId, articleIndex);
+        model.loadArticleDetails(articleId, articleIndex, this);
     }
 
     @Override

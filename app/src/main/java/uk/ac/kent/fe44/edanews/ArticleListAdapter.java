@@ -37,8 +37,10 @@ public class ArticleListAdapter extends ListAdapter {
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
         Article article = model.getArticleList().get(position);
-        //grab article's details as it comes into view
-        model.loadArticleDetails(article.getRecordID(), position);
+        //grab article's details as it comes into view; does
+        //not need to listen for response because the aim is
+        //to populate the article object itself
+        model.loadArticleDetails(article.getRecordID(), position, null);
         holder.setData(article);
     }
 

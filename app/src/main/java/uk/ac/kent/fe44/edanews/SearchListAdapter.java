@@ -35,7 +35,7 @@ public class SearchListAdapter extends ListAdapter {
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
         Article article = model.getSearchList().get(position);
         //grab article's details as it comes into view
-        model.loadArticleDetails(article.getRecordID(), position);
+        model.loadArticleDetails(article.getRecordID(), position, null);
         holder.setData(article);
     }
 

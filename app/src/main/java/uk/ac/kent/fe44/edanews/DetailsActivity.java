@@ -156,8 +156,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
-        model.setOnDetailsUpdateListener(this);
-        model.loadArticleDetails(articleId, itemIndex);
+        model.loadArticleDetails(articleId, itemIndex, this);
     }
 
     @Override

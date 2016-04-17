@@ -105,8 +105,7 @@ public class SearchListFragment extends ListFragment
         ArticleModel model = ArticleModel.getInstance();
 
         //perform search and listen for response
-        model.loadSearchData(key);
-        model.setOnSearchListUpdateListener(this);
+        model.loadSearchData(key, this);
     }
 
     @Override

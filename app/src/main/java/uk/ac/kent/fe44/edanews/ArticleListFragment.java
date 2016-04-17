@@ -47,59 +47,30 @@ public class ArticleListFragment extends ListFragment
 
         tryForNetwork();
 
-
-        int spanCount = 1;
-
         Configuration config = getResources().getConfiguration();
 
         //set span count based on screen size and orientation
         final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
-        if(isLarge) {
-            //handle large screens, @least 600x1024
-            switch (config.orientation) {
-                case Configuration.ORIENTATION_LANDSCAPE:
-                    spanCount = 3;      //
-                    break;
-                case Configuration.ORIENTATION_PORTRAIT:
-                    spanCount = 2;      //
-                    break;
-            }
-        }else{
-            //handle everything smaller than 600x1024
-            switch (config.orientation) {
-                case Configuration.ORIENTATION_LANDSCAPE:
-                    spanCount = 2;      //
-                    break;
-                case Configuration.ORIENTATION_PORTRAIT:
-                    spanCount = 1;      //
-                    break;
-            }
-        }
+        int spanCount = getSpanCount(config, isLarge);
 
         //set up layout manager
-        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        gridLayoutManager.scrollToPosition(0);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (isLarge) {
-                    //for large screens in all orientations
-                    if (((position % 4) == 0) || ((position % 4) == 3)) {
-                        return 2;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return 1;
-                }
-            }
-        });
+        setUpLayoutManager(isLarge, spanCount);
 
         //set up list adapter
         listAdapter = new ArticleListAdapter(this);
 
-        //set up visual elements
+        //set up the list view
+        setUpListView(view);
+
+        return view;
+    }
+
+    /**
+     * configure the list view with the newly created
+     * listAdapter, and the layoutManager
+     * @param view The fragment to place the list view in
+     */
+    private void setUpListView(View view) {
         listView = (RecyclerView)view.findViewById(R.id.article_list_view);
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
@@ -122,8 +93,72 @@ public class ArticleListFragment extends ListFragment
                 }
             }
         });
+    }
 
-        return view;
+    /**
+     * Determine how many columns each article in the layout
+     * occupies based on its position in the list.
+     * @param isLarge Boolean describing whether or not the
+     *                device's screen is large.
+     * @param spanCount The number of columns available in
+     *                  the layout; this is determined by
+     *                  getSpanCount()
+     */
+    private void setUpLayoutManager(final boolean isLarge, int spanCount) {
+        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        gridLayoutManager.scrollToPosition(0);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (isLarge) {
+                    //for large screens in all orientations
+                    if (((position % 4) == 0) || ((position % 4) == 3)) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return 1;
+                }
+            }
+        });
+    }
+
+    /**
+     * Set the number of columns available in
+     * the recycler view's layout based on the
+     * size of the screen and orientation.
+     * @param config System configurations
+     * @param isLarge Boolean; whether or not
+     *                the device screen is large.
+     * @return spanCount The number of columns to
+     * set in the layout for this particular device.
+     */
+    private int getSpanCount(Configuration config, boolean isLarge) {
+        int spanCount = 1;
+        if(isLarge) {
+            //handle large screens, @least 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 3;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 2;      //
+                    break;
+            }
+        }else{
+            //handle everything smaller than 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 2;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 1;      //
+                    break;
+            }
+        }
+        return spanCount;
     }
 
     @Override
@@ -178,10 +213,7 @@ public class ArticleListFragment extends ListFragment
     private void getData() {
         ArticleModel model = ArticleModel.getInstance();
 
-        //listen for eventual response
-        model.setOnListUpdateListener(this);
-
-        //load data from network
-        model.loadData();
+        //load data from network and listen for response
+        model.loadData(this);
     }
 }
