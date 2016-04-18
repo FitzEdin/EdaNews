@@ -1,5 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -33,9 +35,21 @@ public class ArticleListActivity extends ListActivity
     private View.OnClickListener onFabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+            //get center of searchBar for animation
+            int cx = searchBar.getWidth()/2;
+            int cy = searchBar.getHeight()/2;
+
+            float finalRadius = (float) Math.hypot(cx, cy);
+
+            Animator anim = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                anim = ViewAnimationUtils.createCircularReveal(searchBar, cx, cy, 0, finalRadius);
+                anim.setDuration(600);
+            }
             //toggle searchBar and searchFab visibility
             searchFab.setVisibility(View.INVISIBLE);
             searchBar.setVisibility(View.VISIBLE);
+            anim.start();
 
             //prep the text view for capturing input
             searchTextView.setText("");
