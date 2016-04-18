@@ -262,6 +262,8 @@ public class ArticleListActivity extends ListActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (searchBar.getVisibility() == View.VISIBLE) {
+            closeSearchBar(searchBar);
         } else {
             switch (callerId) {
                 case 2:
