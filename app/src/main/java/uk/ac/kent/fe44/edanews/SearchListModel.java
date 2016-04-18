@@ -1,5 +1,7 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.support.annotation.NonNull;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -13,10 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by fe44 on 17/04/16.
  */
-public class SearchListModel {
+public class SearchListModel extends ListModel {
 
-    /** List of search results. */
-    private ArrayList<Article> searchList = new ArrayList<>();
     private ArticleModel.OnSearchListUpdateListener searchListUpdateListener;
 
     private String SEARCH_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?titleHas=";
@@ -48,23 +48,18 @@ public class SearchListModel {
         @Override
         public void onResponse(JSONArray response) {
             //handle response from server
-            searchList.clear();
+            list.clear();
             try{
                 for(int i = 0; i < response.length(); i++) {
                     //extract JSON object from response
                     JSONObject object = response.getJSONObject(i);
-
-                    //build article with the data
-                    Article article = new Article(
-                            object.getString(ArticleModel.IMAGE_URL),
-                            object.getInt(ArticleModel.RECORD_ID),
-                            object.getString(ArticleModel.TITLE),
-                            object.getString(ArticleModel.SHORT_INFO),
-                            object.getString(ArticleModel.DATE)
-                    );
+                    //check the master list for existence of this article
+                    //if this article is there already, then get that old instance
+                    //otherwise parse the new data
+                    Article article = getArticle(object);
 
                     //and add to list of Articles
-                    getSearchList().add(article);
+                    getList().add(article);
                 }
             }catch(JSONException e) {
                 //handle exception
@@ -78,16 +73,4 @@ public class SearchListModel {
             //handle error in response
         }
     };
-
-    /**
-     * Return the list of search results.
-     * @return ArrayList The list of search results.
-     */
-    public ArrayList<Article> getSearchList() {
-        return searchList;
-    }
-
-    public void setSearchList(ArrayList<Article> searchList) {
-        this.searchList = searchList;
-    }
 }

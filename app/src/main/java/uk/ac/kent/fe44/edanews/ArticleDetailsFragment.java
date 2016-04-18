@@ -1,7 +1,6 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Fragment;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

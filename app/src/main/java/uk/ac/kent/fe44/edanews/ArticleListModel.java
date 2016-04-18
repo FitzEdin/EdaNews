@@ -1,5 +1,7 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.support.annotation.NonNull;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -13,9 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by fe44 on 17/04/16.
  */
-public class ArticleListModel {
+public class ArticleListModel extends ListModel {
     /** List of articles that will appear in the newsfeed. */
-    private ArrayList<Article> articleList = new ArrayList<>();
     /** An object that is listening for changes to the newsfeed list. */
     private ArticleModel.OnListUpdateListener listUpdateListener;
 
@@ -26,8 +27,6 @@ public class ArticleListModel {
 
     /** The base url to make requests to for data. */
     private static String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
-    /** The base url for constructing an article's web page */
-    private static String WEB_PAGE_URL = "http://www.eda.kent.ac.uk/school/news_article.aspx?aid=";
 
     /**
      * Populates this object's list of articles from multiple
@@ -72,28 +71,15 @@ public class ArticleListModel {
         public void onResponse(JSONArray response) {
             //handle response from server
             if(mStart == 0){
-                articleList.clear();
+                list.clear();
             }
             try{
                 for(int i = 0; i < response.length(); i++) {
                     //extract JSON object from response
                     JSONObject object = response.getJSONObject(i);
-
-                    //build article with the data
-                    Article article = new Article(
-                            object.getString(ArticleModel.IMAGE_URL),
-                            object.getInt(ArticleModel.RECORD_ID),
-                            object.getString(ArticleModel.TITLE),
-                            object.getString(ArticleModel.SHORT_INFO),
-                            object.getString(ArticleModel.DATE)
-                    );
-
-                    //add web url to article
-                    String url = WEB_PAGE_URL + article.getRecordID();
-                    article.setWeb_page(url);
-
+                    Article article = getArticle(object);
                     //and add to list of Articles
-                    getArticleList().add(article);
+                    getList().add(article);
                 }
             }catch(JSONException e) {
                 //handle exception
@@ -107,12 +93,4 @@ public class ArticleListModel {
             //handle error in response
         }
     };
-
-    public ArrayList<Article> getArticleList() {
-        return articleList;
-    }
-
-    public void setArticleList(ArrayList<Article> articleList) {
-        this.articleList = articleList;
-    }
 }

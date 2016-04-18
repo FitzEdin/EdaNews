@@ -1,17 +1,5 @@
 package uk.ac.kent.fe44.edanews;
 
-import android.view.View;
-import android.widget.ProgressBar;
-
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 /**
@@ -33,9 +21,6 @@ public class ArticleModel {
         return ourInstance;
     }
 
-    /*members for performing article list request*/
-    public static final String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
-            SHORT_INFO = "short_info", IMAGE_URL = "image_url";
 
 
     /**
@@ -43,7 +28,7 @@ public class ArticleModel {
      * newsfeed. It is first populated by copying articles from the MasterListModel, then
      * via a network call as the user scrolls, OR newer articles are found online.
      */
-    public ArticleListModel articleList = new ArticleListModel();
+    public ArticleListModel articleModel = new ArticleListModel();
     /**
      * Returns the list of articles that will show
      * in the newsfeed; this list is managed by
@@ -51,7 +36,7 @@ public class ArticleModel {
      * @return ArrayList List of articles
      */
     public ArrayList<Article> getArticleList() {
-        return articleList.getArticleList();
+        return articleModel.getList();
     }
     /**
      * Instructs the ArticleListModel object to
@@ -64,7 +49,7 @@ public class ArticleModel {
      *                           the OnListUpdateListener interface.
      */
     public void loadData(OnListUpdateListener listUpdateListener) {
-        articleList.load(listUpdateListener);
+        articleModel.load(listUpdateListener);
     }
     /**
      * Each class that uses data from the newsfeed should
@@ -96,13 +81,10 @@ public class ArticleModel {
     }
 
 
-
-
-
     /**
      * The SearchListModel class manages the list of articles that appear in the search results.
      */
-    public SearchListModel searchList = new SearchListModel();
+    public SearchListModel searchModel = new SearchListModel();
     /**
      * Returns the list of articles that will show
      * in the search results; this list is managed by
@@ -110,7 +92,7 @@ public class ArticleModel {
      * @return ArrayList List of articles
      */
     public ArrayList<Article> getSearchList() {
-        return searchList.getSearchList();
+        return searchModel.getList();
     }
     /**
      * Passes its parameters to the SearchListModel object
@@ -123,7 +105,7 @@ public class ArticleModel {
      *                                 implement the OnSearchListUpdateListener interface.
      */
     public void loadSearchData(String key, OnSearchListUpdateListener searchListUpdateListener) {
-        searchList.load(key, searchListUpdateListener);
+        searchModel.load(key, searchListUpdateListener);
     }
     /**
      * Each class that uses data from the search results should
@@ -162,7 +144,7 @@ public class ArticleModel {
         //mark article as favourite in ArticleList
         getArticleList().get(position).setIsFave(true);
         //add it to list of Faves
-        //favesList is no longer persistent getFavesList().add(getArticleList().get(position));
+        //favesList is no longer persistent getFavesList().add(getList().get(position));
         //notify whoever is listening
         notifyFavesListener();
     }
