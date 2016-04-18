@@ -44,7 +44,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
                         faveFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     }else {
                         //add to faves list
-                        model.addToFaves(itemIndex);
+                        model.addToFaves(itemIndex, callerId);
 
                         //change icon
                         faveFab.setImageResource(R.drawable.ic_favorite_black_24dp);

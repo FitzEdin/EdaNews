@@ -33,12 +33,77 @@ public class SearchListFragment extends ListFragment
 //        searchFor(key);
 
 
-        int spanCount = 1;
 
         Configuration config = getResources().getConfiguration();
 
         //set span count based on screen size and orientation
         final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
+        int spanCount = getSpanCount(config, isLarge);
+
+        //set up layout manager
+        setUpLayoutManager(isLarge, spanCount);
+
+        //set up list adapter
+        listAdapter = new SearchListAdapter(this);
+
+        //set up visual elements
+        setUpListView(view);
+        return view;
+    }
+
+    /**
+     * configure the list view with the newly created
+     * listAdapter, and the layoutManager
+     * @param view The fragment to place the list view in
+     */
+    protected void setUpListView(View view) {
+        listView = (RecyclerView)view.findViewById(R.id.search_list_view);
+        listView.setLayoutManager(gridLayoutManager);
+        listView.setAdapter(listAdapter);
+    }
+
+    /**
+     * Determine how many columns each article in the layout
+     * occupies based on its position in the list.
+     * @param isLarge Boolean describing whether or not the
+     *                device's screen is large.
+     * @param spanCount The number of columns available in
+     *                  the layout; this is determined by
+     *                  getSpanCount()
+     */
+    protected void setUpLayoutManager(final boolean isLarge, int spanCount) {
+        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        gridLayoutManager.scrollToPosition(0);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if (isLarge) {
+                    //for large screens in all orientations
+                    if (((position % 4) == 0) || ((position % 4) == 3)) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return 1;
+                }
+            }
+        });
+    }
+
+    /**
+     * Set the number of columns available in
+     * the recycler view's layout based on the
+     * size of the screen and orientation.
+     * @param config System configurations
+     * @param isLarge Boolean; whether or not
+     *                the device screen is large.
+     * @return spanCount The number of columns to
+     * set in the layout for this particular device.
+     */
+    protected int getSpanCount(Configuration config, boolean isLarge) {
+        int spanCount = 1;
         if(isLarge) {
             //handle large screens, @least 600x1024
             switch (config.orientation) {
@@ -60,35 +125,7 @@ public class SearchListFragment extends ListFragment
                     break;
             }
         }
-
-        //set up layout manager
-        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        gridLayoutManager.scrollToPosition(0);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                if (isLarge) {
-                    //for large screens in all orientations
-                    if (((position % 4) == 0) || ((position % 4) == 3)) {
-                        return 2;
-                    } else {
-                        return 1;
-                    }
-                } else {
-                    return 1;
-                }
-            }
-        });
-
-        //set up list adapter
-        listAdapter = new SearchListAdapter(this);
-
-        //set up visual elements
-        listView = (RecyclerView)view.findViewById(R.id.search_list_view);
-        listView.setLayoutManager(gridLayoutManager);
-        listView.setAdapter(listAdapter);
-        return view;
+        return spanCount;
     }
 
     @Override

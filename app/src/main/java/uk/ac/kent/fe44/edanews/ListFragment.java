@@ -2,6 +2,7 @@ package uk.ac.kent.fe44.edanews;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
@@ -25,6 +26,33 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
     public ListFragment() {
         // Required empty public constructor
     }
+
+    /**
+     * configure the list view with the newly created
+     * listAdapter, and the layoutManager
+     * @param view The fragment to place the list view in
+     */
+    abstract protected void setUpListView(View view);/**
+     * Determine how many columns each article in the layout
+     * occupies based on its position in the list.
+     * @param isLarge Boolean describing whether or not the
+     *                device's screen is large.
+     * @param spanCount The number of columns available in
+     *                  the layout; this is determined by
+     *                  getSpanCount()
+     */
+    abstract protected void setUpLayoutManager(final boolean isLarge, int spanCount);
+    /**
+     * Set the number of columns available in
+     * the recycler view's layout based on the
+     * size of the screen and orientation.
+     * @param config System configurations
+     * @param isLarge Boolean; whether or not
+     *                the device screen is large.
+     * @return spanCount The number of columns to
+     * set in the layout for this particular device.
+     */
+    abstract protected int getSpanCount(Configuration config,  boolean isLarge);
 
     // .onCreateView is overridden by all children
 

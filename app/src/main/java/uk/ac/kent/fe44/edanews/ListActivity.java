@@ -117,4 +117,8 @@ public abstract class ListActivity extends AppCompatActivity
         // Create the AlertDialog object and return it
         return builder.create();
     }
+
+    public int getCallerId() {
+        return callerId;
+    }
 }

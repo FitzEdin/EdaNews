@@ -49,17 +49,18 @@ public class DBModel {
      * @param article The Article object to be added to the database
      */
     public void addArticle(Article article) {
+        int fave = ( article.isFave() ) ? 1 : 0;
+        int save = ( article.isSaved() ) ? 1 : 0;
         ContentValues values = new ContentValues();
+        values.put(ArticlesDBHelper.COLUMN_IMAGE_URL, article.getImageURL());
         values.put(ArticlesDBHelper.COLUMN_ID, article.getRecordID());
         values.put(ArticlesDBHelper.COLUMN_TITLE, article.getTitle());
         values.put(ArticlesDBHelper.COLUMN_SHORT_INFO, article.getShortInfo());
         values.put(ArticlesDBHelper.COLUMN_DATE, article.getDate());
         values.put(ArticlesDBHelper.COLUMN_CONTENTS, article.getContents());
         values.put(ArticlesDBHelper.COLUMN_WEB_PAGE, article.getWeb_page());
-        values.put(ArticlesDBHelper.COLUMN_IMAGE_URL, article.getImageURL());
-        values.put(ArticlesDBHelper.COLUMN_IS_FAVE, article.isFave());
-        values.put(ArticlesDBHelper.COLUMN_IS_SAVED, article.isSaved());
-        values.put(ArticlesDBHelper.COLUMN_IS_DETAILED, article.isDetailed());
+        values.put(ArticlesDBHelper.COLUMN_IS_FAVE, fave);
+        values.put(ArticlesDBHelper.COLUMN_IS_SAVED, save);
 
         long insertId = database.insert(ArticlesDBHelper.TABLENAME, null, values);
     }
@@ -71,16 +72,15 @@ public class DBModel {
      */
     public Cursor getArticles() {
         String[] allColumns = {
+                ArticlesDBHelper.COLUMN_IMAGE_URL,
                 ArticlesDBHelper.COLUMN_ID,
                 ArticlesDBHelper.COLUMN_TITLE,
                 ArticlesDBHelper.COLUMN_SHORT_INFO,
                 ArticlesDBHelper.COLUMN_DATE,
                 ArticlesDBHelper.COLUMN_CONTENTS,
                 ArticlesDBHelper.COLUMN_WEB_PAGE,
-                ArticlesDBHelper.COLUMN_IMAGE_URL,
                 ArticlesDBHelper.COLUMN_IS_FAVE,
-                ArticlesDBHelper.COLUMN_IS_SAVED,
-                ArticlesDBHelper.COLUMN_IS_DETAILED
+                ArticlesDBHelper.COLUMN_IS_SAVED
         };
 
         dbCursor = database.query(

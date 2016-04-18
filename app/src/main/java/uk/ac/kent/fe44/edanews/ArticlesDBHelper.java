@@ -23,23 +23,21 @@ public class ArticlesDBHelper extends SQLiteOpenHelper {
     public final static String COLUMN_IMAGE_URL = "imageURL";
     public final static String COLUMN_IS_FAVE = "isFave";
     public final static String COLUMN_IS_SAVED = "isSaved";
-    public final static String COLUMN_IS_DETAILED = "isDetailed";
 
     public final static String DATABASE_NAME = "articles.db";
     public final static int DATABASE_VERSION = 1;
 
     private static final String DATABASE_CREATE = "CREATE TABLE "
             + TABLENAME + "("
+            + COLUMN_IMAGE_URL + " TEXT NOT NULL, "
             + COLUMN_ID + " INTEGER PRIMARY KEY, "
             + COLUMN_TITLE + " TEXT NOT NULL, "
             + COLUMN_SHORT_INFO + " TEXT NOT NULL, "
             + COLUMN_DATE + " TEXT NOT NULL, "
             + COLUMN_CONTENTS + " TEXT NOT NULL, "
             + COLUMN_WEB_PAGE + " TEXT NOT NULL, "
-            + COLUMN_IMAGE_URL + " TEXT NOT NULL, "
             + COLUMN_IS_FAVE + " INTEGER NOT NULL, "
-            + COLUMN_IS_SAVED + " INTEGER NOT NULL, "
-            + COLUMN_IS_DETAILED + " INTEGER NOT NULL;";
+            + COLUMN_IS_SAVED + " INTEGER NOT NULL;";
 
     /**
      * Constructor for the DBHelper class

@@ -30,6 +30,8 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
     protected ListFragment fragment;
     private String ELLIPSIS = "...";
 
+    int adapterId;
+
     //constructor
     public ListAdapter(ListFragment fragment) {
         super();
@@ -108,7 +110,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                     model.removeFromFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                 }else {
-                    model.addToFaves(position);
+                    model.addToFaves(position, adapterId);
                     ic.setImageResource(R.drawable.ic_favorite_black_24dp);
                 }
             }

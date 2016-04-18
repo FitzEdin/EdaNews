@@ -70,7 +70,7 @@ public class ArticleListFragment extends ListFragment
      * listAdapter, and the layoutManager
      * @param view The fragment to place the list view in
      */
-    private void setUpListView(View view) {
+    protected void setUpListView(View view) {
         listView = (RecyclerView)view.findViewById(R.id.article_list_view);
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
@@ -104,7 +104,7 @@ public class ArticleListFragment extends ListFragment
      *                  the layout; this is determined by
      *                  getSpanCount()
      */
-    private void setUpLayoutManager(final boolean isLarge, int spanCount) {
+    protected void setUpLayoutManager(final boolean isLarge, int spanCount) {
         gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
@@ -135,7 +135,7 @@ public class ArticleListFragment extends ListFragment
      * @return spanCount The number of columns to
      * set in the layout for this particular device.
      */
-    private int getSpanCount(Configuration config, boolean isLarge) {
+    protected int getSpanCount(Configuration config, boolean isLarge) {
         int spanCount = 1;
         if(isLarge) {
             //handle large screens, @least 600x1024

@@ -27,35 +27,46 @@ public class FavesListFragment extends ListFragment {
         View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
 
 
-        int spanCount = 2;
 
         Configuration config = getResources().getConfiguration();
 
         //set span count based on screen size and orientation
         final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
-        if(isLarge) {
-            //handle large screens, @least 600x1024
-            switch (config.orientation) {
-                case Configuration.ORIENTATION_LANDSCAPE:
-                    spanCount = 4;      //
-                    break;
-                case Configuration.ORIENTATION_PORTRAIT:
-                    spanCount = 3;      //
-                    break;
-            }
-        }else{
-            //handle everything smaller than 600x1024
-            switch (config.orientation) {
-                case Configuration.ORIENTATION_LANDSCAPE:
-                    spanCount = 3;      //
-                    break;
-                case Configuration.ORIENTATION_PORTRAIT:
-                    spanCount = 2;      //
-                    break;
-            }
-        }
+        int spanCount = getSpanCount(config, isLarge);
 
         //set up layout manager
+        setUpLayoutManager(isLarge, spanCount);
+
+        //set up list adapter
+        listAdapter = new FavesListAdapter(this);
+
+        //set up the list view
+        setUpListView(view);
+
+        return view;
+    }
+
+    /**
+     * configure the list view with the newly created
+     * listAdapter, and the layoutManager
+     * @param view The fragment to place the list view in
+     */
+    protected void setUpListView(View view) {
+        listView = (RecyclerView)view.findViewById(R.id.faves_list_view);
+        listView.setLayoutManager(gridLayoutManager);
+        listView.setAdapter(listAdapter);
+    }
+
+    /**
+     * Determine how many columns each article in the layout
+     * occupies based on its position in the list.
+     * @param isLarge Boolean describing whether or not the
+     *                device's screen is large.
+     * @param spanCount The number of columns available in
+     *                  the layout; this is determined by
+     *                  getSpanCount()
+     */
+    protected void setUpLayoutManager(final boolean isLarge, int spanCount) {
         gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
@@ -79,17 +90,42 @@ public class FavesListFragment extends ListFragment {
                 }
             }
         });
+    }
 
-
-        //set up list adapter
-        listAdapter = new FavesListAdapter(this);
-
-        //set up visual elements
-        listView = (RecyclerView)view.findViewById(R.id.faves_list_view);
-        listView.setLayoutManager(gridLayoutManager);
-        listView.setAdapter(listAdapter);
-
-        return view;
+    /**
+     * Set the number of columns available in
+     * the recycler view's layout based on the
+     * size of the screen and orientation.
+     * @param config System configurations
+     * @param isLarge Boolean; whether or not
+     *                the device screen is large.
+     * @return spanCount The number of columns to
+     * set in the layout for this particular device.
+     */
+    protected int getSpanCount(Configuration config, boolean isLarge) {
+        int spanCount = 2;
+        if(isLarge) {
+            //handle large screens, @least 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 4;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 3;      //
+                    break;
+            }
+        }else{
+            //handle everything smaller than 600x1024
+            switch (config.orientation) {
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    spanCount = 3;      //
+                    break;
+                case Configuration.ORIENTATION_PORTRAIT:
+                    spanCount = 2;      //
+                    break;
+            }
+        }
+        return spanCount;
     }
 
     @Override

@@ -165,7 +165,7 @@ public class ArticleListActivity extends ListActivity
 
     /**
      * Perform a search for the key provided; the fragment is swapped in
-     * if not existing previously. Each time it is handed a new key
+     * if not existing previously. Each time it is handed a new key.
      * @param key
      */
     public void searchFor(String key) {
@@ -186,7 +186,7 @@ public class ArticleListActivity extends ListActivity
             transaction.commit();
         }
 
-        searchFragment.searchFor(key);
+        if(searchFragment != null) {    searchFragment.searchFor(key);  }
     }
 
     /**

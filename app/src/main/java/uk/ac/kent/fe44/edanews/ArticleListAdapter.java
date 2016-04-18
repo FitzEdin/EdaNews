@@ -29,6 +29,7 @@ public class ArticleListAdapter extends ListAdapter {
                         false
                 );
 
+        adapterId = 0;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

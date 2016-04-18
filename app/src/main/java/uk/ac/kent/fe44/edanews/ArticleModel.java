@@ -1,5 +1,10 @@
 package uk.ac.kent.fe44.edanews;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +24,104 @@ public class ArticleModel {
     }
     public static ArticleModel getInstance() {
         return ourInstance;
+    }
+
+
+    /**
+     * Array list mirroring the DB.
+     */
+    private ArrayList<Article> masterList = new ArrayList<Article>();
+    /**
+     * instance of the dbModel
+     */
+    private DBModel dbModel;
+
+    /**
+     * Grab all the articles in the database and place into the masterList
+     * If the db is empty, or the operation fails then return false; otherwise return true
+     */
+    public boolean loadMasterList(Context context) {
+        dbModel = new DBModel(context);
+        try {
+            dbModel.open();
+            if(dbModel.isEmpty()) {
+                return false;
+            }else{
+                Cursor cursor = dbModel.getArticles();
+                for(int i = 0; i < cursor.getCount(); i++) {
+                    masterList.add(getArticle(cursor, i));
+                }
+                return true;
+            }
+        } catch (SQLException e){
+            Log.e("Error opening database", e.toString());
+            return false;
+        }
+    }
+    /**
+     * Used to get individual articles from the dbCursor when populating the masterList
+     * @param cursor
+     * @param position
+     * @return
+     */
+    private Article getArticle(Cursor cursor, int position) {
+        cursor.moveToPosition(position);
+        int fave = cursor.getInt(7);
+        boolean isFave = ( (fave == 1)?(true):(false) );
+        Article article = new Article(
+                cursor.getString(0),    //imageURL
+                cursor.getInt(1),       //recordID
+                cursor.getString(2),    //title
+                cursor.getString(3),    //short_info
+                cursor.getString(4),    //date
+                cursor.getString(5),    //contents
+                cursor.getString(6),    //web_page
+                isFave                  //isFave
+        );
+        return article;
+    }
+    /**
+     * Get the master list
+     */
+    public ArrayList<Article> getMasterList() {
+        return masterList;
+    }
+    /**
+     * Add an article to master list.
+     */
+    public void addToMaster(Article article) {
+        masterList.add(article);
+    }
+    /**
+     * determine whether an article is already in the master list
+     * @param articleRecordID The recordID of the article under question
+     * @return boolean whether or not the target article is already in masterList
+     */
+    public boolean isInMaster(int articleRecordID) {
+        for(Article a:getMasterList()){
+            if(a.getRecordID() == articleRecordID){ return true;    }
+        }
+        return false;
+    }
+     /**
+     * Returns an article in the masterList
+     * @param recordId Unique recordId of the article in the masterList
+     * @return The target article
+     */
+    public Article getArticleFromMaster(int recordId) {
+        for(Article a:getMasterList()) {
+            if(a.getRecordID() == recordId){ return a;    }
+        }
+
+        return null;
+    }
+    /**
+     * Dump all the articles in the masterList to the database
+     */
+    public void dumpMasterList() {
+        for(Article a : getMasterList()) {
+            dbModel.addArticle(a);
+        }
     }
 
 
@@ -140,12 +243,27 @@ public class ArticleModel {
     public void setFavesList(ArrayList<Article> favesList) {
         //TODO: populate faves list with items from memory
     }
-    public void addToFaves(int position){
-        //mark article as favourite in ArticleList
-        getArticleList().get(position).setIsFave(true);
+    public void addToFaves(int position, int adapterId){
+        //mark article as favourite in particular List
+        Article article;
+        int recordId = 0;
+        switch (adapterId) {
+            case 2:     //searchList
+                article = getSearchList().get(position);
+                recordId = article.getRecordID();
+                article.setIsFave(true);
+                break;
+            default:     //newsfeed
+                article = getArticleList().get(position);
+                recordId = article.getRecordID();
+                article.setIsFave(true);
+                break;
+        }
+        //update the masterList
+        addToMaster(article);
         //add it to list of Faves
         //favesList is no longer persistent getFavesList().add(getList().get(position));
-        //notify whoever is listening
+        //notify the view that is listening
         notifyFavesListener();
     }
     public void removeFromFaves(Article article) {
