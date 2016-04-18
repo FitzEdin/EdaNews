@@ -26,7 +26,7 @@ public class SearchListAdapter extends ListAdapter {
                         false
                 );
 
-        adapterId = 2;
+        adapterId = 3;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

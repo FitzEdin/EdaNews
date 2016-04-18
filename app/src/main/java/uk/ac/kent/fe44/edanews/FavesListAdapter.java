@@ -29,7 +29,7 @@ public class FavesListAdapter extends ListAdapter {
                         false
                 );
 
-        adapterId = 1;
+        adapterId = 2;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

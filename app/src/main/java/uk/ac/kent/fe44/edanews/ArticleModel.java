@@ -37,28 +37,6 @@ public class ArticleModel {
     private DBModel dbModel;
 
     /**
-     * Grab all the articles in the database and place into the masterList
-     * If the db is empty, or the operation fails then return false; otherwise return true
-     */
-    public boolean loadMasterList(Context context) {
-        dbModel = new DBModel(context);
-        try {
-            dbModel.open();
-            if(dbModel.isEmpty()) {
-                return false;
-            }else{
-                Cursor cursor = dbModel.getArticles();
-                for(int i = 0; i < cursor.getCount(); i++) {
-                    masterList.add(getArticle(cursor, i));
-                }
-                return true;
-            }
-        } catch (SQLException e){
-            Log.e("Error opening database", e.toString());
-            return false;
-        }
-    }
-    /**
      * Used to get individual articles from the dbCursor when populating the masterList
      * @param cursor
      * @param position
@@ -81,6 +59,38 @@ public class ArticleModel {
         return article;
     }
     /**
+     * Grab all the articles in the database and place into the masterList
+     * If the db is empty, or the operation fails then return false; otherwise return true
+     */
+    public boolean loadMasterList(Context context) {
+        dbModel = DBModel.getInstance(context);
+        try {
+            dbModel.open();
+            if(dbModel.isEmpty()) {
+                dbModel.close();
+                return false;
+            }else{
+                Cursor cursor = dbModel.getArticles();
+                for(int i = 0; i < cursor.getCount(); i++) {
+                    masterList.add(getArticle(cursor, i));
+                }
+                dbModel.close();
+                return true;
+            }
+        } catch (SQLException e){
+            Log.e("Error opening database", e.toString());
+            return false;
+        }
+    }
+    /**
+     * Dump all the articles in the masterList to the database
+     */
+    public void dumpMasterList() {
+        for(Article a : getMasterList()) {
+            dbModel.addArticle(a);
+        }
+    }
+    /**
      * Get the master list
      */
     public ArrayList<Article> getMasterList() {
@@ -90,16 +100,33 @@ public class ArticleModel {
      * Add an article to master list.
      */
     public void addToMaster(Article article) {
-        masterList.add(article);
+        if(isInMaster(article.getRecordID())) {
+            //ignore
+        }else {
+            masterList.add(article);
+        }
+    }
+    /**
+     * Remove an article from the masterList based on its recordId
+     * @param recordId The recordId of the article to be removed from the masterList.
+     */
+    public void removeFromMaster(int recordId) {
+        Article a;
+        int index = 0;
+        for(int i = 0; i < masterList.size() ; i++) {
+            a = masterList.get(i);
+            if(a.getRecordID() == recordId) {    index = i;    }
+        }
+        masterList.remove(index);
     }
     /**
      * determine whether an article is already in the master list
-     * @param articleRecordID The recordID of the article under question
+     * @param recordId The recordID of the article under question
      * @return boolean whether or not the target article is already in masterList
      */
-    public boolean isInMaster(int articleRecordID) {
+    public boolean isInMaster(int recordId) {
         for(Article a:getMasterList()){
-            if(a.getRecordID() == articleRecordID){ return true;    }
+            if(a.getRecordID() == recordId){ return true;    }
         }
         return false;
     }
@@ -112,16 +139,7 @@ public class ArticleModel {
         for(Article a:getMasterList()) {
             if(a.getRecordID() == recordId){ return a;    }
         }
-
         return null;
-    }
-    /**
-     * Dump all the articles in the masterList to the database
-     */
-    public void dumpMasterList() {
-        for(Article a : getMasterList()) {
-            dbModel.addArticle(a);
-        }
     }
 
 
@@ -231,48 +249,46 @@ public class ArticleModel {
     // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
     private OnFavesUpdateListener favesUpdateListener;
 
-    public ArrayList<Article> getFavesList() {
-        ArrayList<Article> favesList = new ArrayList<>();
-        for (Article a : getArticleList()) {
-            if(a.isFave()){
-                favesList.add(a);
-            }
-        }
-        return favesList;
-    }
+    public ArrayList<Article> getFavesList() {  return getMasterList(); }
     public void setFavesList(ArrayList<Article> favesList) {
         //TODO: populate faves list with items from memory
     }
     public void addToFaves(int position, int adapterId){
         //mark article as favourite in particular List
         Article article;
-        int recordId = 0;
         switch (adapterId) {
-            case 2:     //searchList
+            case 3:     //searchList
                 article = getSearchList().get(position);
-                recordId = article.getRecordID();
                 article.setIsFave(true);
                 break;
             default:     //newsfeed
                 article = getArticleList().get(position);
-                recordId = article.getRecordID();
                 article.setIsFave(true);
                 break;
         }
         //update the masterList
         addToMaster(article);
-        //add it to list of Faves
-        //favesList is no longer persistent getFavesList().add(getList().get(position));
         //notify the view that is listening
         notifyFavesListener();
     }
     public void removeFromFaves(Article article) {
         //get position of this article in the ArticleList
-        int articleListPosition = getArticleList().indexOf(article);
-        //unmark article as favourite in ArticleList
-        (getArticleList().get(articleListPosition)).setIsFave(false);
+        int position;
+
+        position = getArticleList().indexOf(article);
+        if(position != -1) {
+            //unmark article as favourite in ArticleList
+            (getArticleList().get(position)).setIsFave(false);
+        }
+
+        position = getSearchList().indexOf(article);
+        if(position != -1) {
+            //unmark article as favourite in SearchList
+            (getSearchList().get(position)).setIsFave(false);
+        }
+
         //remove it from list of Faves
-        // favesList is no longer persistent getFavesList().remove(article);
+        removeFromMaster(article.getRecordID());
         //notify whoever is listening
         notifyFavesListener();
     }

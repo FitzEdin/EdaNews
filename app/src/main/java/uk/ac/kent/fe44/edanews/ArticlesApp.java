@@ -19,6 +19,10 @@ public class ArticlesApp extends Application {
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
 
+    public static final int ARTICLE_CALLER_ID = 0;
+    public static final int FAVES_CALLER_ID = 1;
+    public static final int SEARCH_CALLER_ID = 2;
+
     public final static String TITLE = "title", SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     public final static String TAG_PEEK_ARTICLE = "peekArticleTag";
     public final static String TRANSITION_CARD = "article_card",

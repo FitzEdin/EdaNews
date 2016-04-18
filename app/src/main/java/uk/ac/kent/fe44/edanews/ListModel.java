@@ -21,18 +21,28 @@ abstract public class ListModel {
 
     @NonNull
     protected Article getArticle(JSONObject object) throws JSONException {
-        //build article with the data
-        Article article = new Article(
-                object.getString(IMAGE_URL),
-                object.getInt(RECORD_ID),
-                object.getString(TITLE),
-                object.getString(SHORT_INFO),
-                object.getString(DATE)
-        );
+        Article article;
+        //check for pre-existence in MasterList
+        ArticleModel model = ArticleModel.getInstance();
+        int recordId = object.getInt(RECORD_ID);
+        if(model.isInMaster(recordId)) {
+            //skip parsing and return pre-existing article
+            article = model.getArticleFromMaster(recordId);
+        }else {
+            //build article with the data
+            article = new Article(
+                    object.getString(IMAGE_URL),
+                    object.getInt(RECORD_ID),
+                    object.getString(TITLE),
+                    object.getString(SHORT_INFO),
+                    object.getString(DATE)
+            );
 
-        //add web url to article
-        String url = WEB_PAGE_URL + article.getRecordID();
-        article.setWeb_page(url);
+            //add web url to article
+            String url = WEB_PAGE_URL + article.getRecordID();
+            article.setWeb_page(url);
+        }
+
         return article;
     }
 

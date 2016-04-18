@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -105,8 +106,10 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 int position = getAdapterPosition();
                 Article article = getList().get(position);
 
+                Toast.makeText(fragment.getActivity(), "Faved: "+getAdapterPosition(), Toast.LENGTH_SHORT).show();
+
                 //if a fave
-                if(article.isFave()) {
+                if(model.isInMaster(article.getRecordID())) {
                     model.removeFromFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                 }else {
@@ -170,7 +173,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             //no need to change the share icon
 
             // force the recyclerView to redraw icons correctly for each article
-            if(article.isFave()) {  faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
+            if(model.isInMaster(article.getRecordID())) {  faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
             if(article.isSaved()) { savedIc.setImageResource(R.drawable.ic_watch_later_black_24dp); }
         }
     }

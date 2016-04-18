@@ -11,23 +11,21 @@ import java.sql.SQLException;
  * Created by fe44 on 17/04/16.
  */
 public class DBModel {
-    private static DBModel ourInstance;
+    private static DBModel ourInstance = new DBModel();
 
     private SQLiteDatabase database;
-    private ArticlesDBHelper dbHelper;
+    private static ArticlesDBHelper dbHelper;
     private Cursor dbCursor;
 
-    public static DBModel getInstance() {
+    public static DBModel getInstance(Context context) {
+        dbHelper = new ArticlesDBHelper(context);
         return ourInstance;
     }
 
     /**
-     * Initialise the dbHelper variable
-     * @param context
+     *
      */
-    public DBModel(Context context) {
-        ourInstance = this;
-        dbHelper = new ArticlesDBHelper(context);
+    private DBModel() {
     }
 
     /**
