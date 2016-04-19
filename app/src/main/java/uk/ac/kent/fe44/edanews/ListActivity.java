@@ -82,22 +82,27 @@ public abstract class ListActivity extends AppCompatActivity
         Article article = getList().get(position);
 
         //prep bundle for fragment
-        Bundle args = new Bundle();
-        args.putString(ArticlesApp.TITLE, article.getTitle());
-        args.putString(ArticlesApp.SHORT_INFO, article.getShortInfo());
-        args.putString(ArticlesApp.IMAGE_URL, article.getImageURL());
-
-        pkDialog.setArguments(args);    //pass bundle to fragment
-        pkDialog.show(getFragmentManager(), ArticlesApp.TAG_PEEK_ARTICLE);
+//        Bundle args = new Bundle();
+//        args.putString(ArticlesApp.TITLE, article.getTitle());
+//        args.putString(ArticlesApp.SHORT_INFO, article.getShortInfo());
+//        args.putString(ArticlesApp.IMAGE_URL, article.getImageURL());
+//
+//        pkDialog.setArguments(args);    //pass bundle to fragment
+//        pkDialog.show(getFragmentManager(), ArticlesApp.TAG_PEEK_ARTICLE);
 
         //prep intent for peek activity
-//        Intent p = new Intent(this, PeekActivity.class);
-//
-//        p.putExtra(ArticlesApp.IMAGE_URL, article.getImageURL());
-//        p.putExtra(ArticlesApp.TITLE, article.getTitle());
-//        p.putExtra(ArticlesApp.SHORT_INFO, article.getShortInfo());
-//
-//        startActivity(p);
+        Intent p = new Intent(this, PeekActivity.class);
+
+        //send article title, image, short info
+        p.putExtra(ArticlesApp.IMAGE_URL, article.getImageURL());
+        p.putExtra(ArticlesApp.TITLE, article.getTitle());
+        p.putExtra(ArticlesApp.SHORT_INFO, article.getShortInfo());
+
+        //send what's needed to launch the details activity
+        p.putExtra(ITEM_ID, position);
+        p.putExtra(CALLER_ID, callerId);
+
+        startActivity(p);
     }
 
     /* define what happens when the long tap on the image is released */

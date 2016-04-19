@@ -67,7 +67,8 @@
     <string name="title_activity_faves">EDA Faves</string>
 
     <string name="dummy_date">14/12/1988</string>
-    <string name="dummy_title">Material is the metaphor</string>
+    <string name="dummy_title">Material is the metaphor Material is the metaphor
+        Material is the metaphor Material is the metaphor Material is the metaphor</string>
     <string name="dummy_short_info">
         A material metaphor is the unifying theory of a rationalized space and a system of motion.
         The material is grounded in tactile reality, inspired by the study of paper and ink, yet
@@ -114,7 +115,7 @@
     <string name="get_articles">http://www.efstratiou.info/projects/newsfeed/getList.php</string>
 
     <string name="title_activity_article_details">EDA News</string>
-    <string name="title_activity_article_peek">Tap to Close</string>
+    <string name="title_activity_article_peek"></string>
     <string name="title_activity_article_search">Search Results</string>
     <string name="title_none"></string>
 

@@ -30,63 +30,70 @@
         android:transitionName="article_card" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
 
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <!-- large image -->
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/peek_photo"
                 android:src="@drawable/ic_uok_logo_new"
 
-                android:layout_width="match_parent"
+                android:layout_width="180dp"
                 android:layout_height="162dp"
 
                 android:scaleType="centerCrop" />
 
-            <!-- article title -->
-            <TextView
-                android:id="@+id/peek_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="240dp"
+                android:layout_height="fill_parent"
 
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:paddingTop="4dp"
+                android:orientation="vertical">
 
-                android:gravity="center"
+                <!-- article title -->
+                <TextView
+                    android:id="@+id/peek_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:text="@string/dummy_title"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="20sp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="4dp"
 
-                android:lines="3" />
+                    android:gravity="center"
 
-            <!-- article short info -->
-            <TextView
-                android:id="@+id/peek_short_info"
+                    android:text="@string/dummy_title"
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="20sp"
 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                    android:lines="3" />
 
-                android:text="@string/dummy_short_info"
-                android:textColor="@color/colorTextSecondary"
-                android:textSize="16sp"
+                <!-- article short info -->
+                <TextView
+                    android:id="@+id/peek_short_info"
 
-                android:paddingLeft="4dp"
-                android:paddingBottom="2dp"
-                android:paddingRight="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
 
-                android:gravity="top"
+                    android:text="@string/dummy_short_info"
+                    android:textColor="@color/colorTextSecondary"
+                    android:textSize="16sp"
 
-                android:ellipsize="end" />
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="2dp"
+                    android:paddingRight="2dp"
+
+                    android:gravity="top"
+
+                    android:ellipsize="end" />
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="32dp"
+                android:layout_width="48dp"
+                android:layout_height="fill_parent"
 
-                android:orientation="horizontal"
+                android:orientation="vertical"
 
                 android:layout_marginTop="2dp"
 
@@ -100,8 +107,8 @@
                 <!-- read more icon -->
                 <ImageView
                     android:id="@+id/ic_close"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
 
                     android:layout_weight="1"
 
@@ -113,8 +120,8 @@
                 <!-- close icon -->
                 <ImageView
                     android:id="@+id/ic_more"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="0dp"
 
                     android:layout_weight="1"
 
