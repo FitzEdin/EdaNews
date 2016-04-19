@@ -26,7 +26,7 @@ public class SearchListAdapter extends ListAdapter {
                         false
                 );
 
-        adapterId = 3;
+        adapterId = ArticlesApp.SEARCH_CALLER_ID;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

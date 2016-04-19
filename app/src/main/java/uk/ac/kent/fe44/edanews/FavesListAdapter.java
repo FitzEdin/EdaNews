@@ -29,7 +29,7 @@ public class FavesListAdapter extends ListAdapter {
                         false
                 );
 
-        adapterId = 2;
+        adapterId = ArticlesApp.FAVES_CALLER_ID;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

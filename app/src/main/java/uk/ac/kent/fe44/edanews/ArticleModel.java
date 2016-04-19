@@ -262,7 +262,7 @@ public class ArticleModel {
         //mark article as favourite in particular List
         Article article;
         switch (adapterId) {
-            case 3:     //searchList
+            case ArticlesApp.SEARCH_CALLER_ID:     //searchList
                 article = getSearchList().get(position);
                 article.setIsFave(true);
                 break;

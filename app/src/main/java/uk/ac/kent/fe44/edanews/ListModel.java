@@ -14,8 +14,6 @@ abstract public class ListModel {
     protected ArrayList<Article> list = new ArrayList<>();
 
     /*members for performing article list request*/
-    public static final String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
-            SHORT_INFO = "short_info", IMAGE_URL = "image_url";
     /** The base url for constructing an article's web page */
     public static final String WEB_PAGE_URL = "http://www.eda.kent.ac.uk/school/news_article.aspx?aid=";
 
@@ -24,18 +22,18 @@ abstract public class ListModel {
         Article article;
         //check for pre-existence in MasterList
         ArticleModel model = ArticleModel.getInstance();
-        int recordId = object.getInt(RECORD_ID);
+        int recordId = object.getInt(ArticlesApp.RECORD_ID);
         if(model.isInMaster(recordId)) {
             //skip parsing and return pre-existing article
             article = model.getArticleFromMaster(recordId);
         }else {
             //build article with the data
             article = new Article(
-                    object.getString(IMAGE_URL),
-                    object.getInt(RECORD_ID),
-                    object.getString(TITLE),
-                    object.getString(SHORT_INFO),
-                    object.getString(DATE)
+                    object.getString(ArticlesApp.IMAGE_URL),
+                    object.getInt(ArticlesApp.RECORD_ID),
+                    object.getString(ArticlesApp.TITLE),
+                    object.getString(ArticlesApp.SHORT_INFO),
+                    object.getString(ArticlesApp.DATE)
             );
 
             //add web url to article

@@ -47,19 +47,19 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         //get the article from the correct list
         Article article = new Article();
         switch(caller){
-            case 1:
+            case ArticlesApp.ARTICLE_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getArticleList()
                         .get(articleIndex);
                 break;
-            case 2:
+            case ArticlesApp.FAVES_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getFavesList()
                         .get(articleIndex);
                 break;
-            case 3:
+            case ArticlesApp.SEARCH_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getSearchList()

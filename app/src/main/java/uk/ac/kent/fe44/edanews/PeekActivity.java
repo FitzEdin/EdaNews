@@ -30,9 +30,6 @@ public class PeekActivity extends AppCompatActivity {
     private ImageView moreIc;
     private ImageView closeIc;
 
-    private String ITEM_ID = "ITEM_ID";
-    private String CALLER_ID = "CALLER_ID";
-
     private Intent i;
 
     //event listeners
@@ -81,35 +78,16 @@ public class PeekActivity extends AppCompatActivity {
 
         //prepare intent for detailsActivity
         //load values from intent
-        int position = p.getIntExtra(ITEM_ID, 0);
-        int callerId = p.getIntExtra(CALLER_ID, 1);
+        int position = p.getIntExtra(ArticlesApp.ITEM_ID, 0);
+        int callerId = p.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //get info for detailsActivity intent
         i = new Intent(this, ArticleDetailsActivity.class);
-        i.putExtra(ITEM_ID, position);
-        i.putExtra(CALLER_ID, callerId);
+        i.putExtra(ArticlesApp.ITEM_ID, position);
+        i.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         //add listeners to buttons
         moreIc.setOnClickListener(moreICTap);
         closeIc.setOnClickListener(closeICTap);
     }
-
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        int action = MotionEventCompat.getActionMasked(event);
-//
-//        switch (action) {
-//            case (MotionEvent.ACTION_UP):
-//                Toast.makeText(this, "You raised your finger", Toast.LENGTH_SHORT).show();
-//                return true;
-//
-//            case (MotionEvent.ACTION_DOWN):
-//                Toast.makeText(this, "You are pressing down", Toast.LENGTH_SHORT).show();
-//                return true;
-//
-//            default:
-////                Toast.makeText(this, "You moved your finger", Toast.LENGTH_SHORT).show();
-//                return false;
-//        }
-//    }
 }

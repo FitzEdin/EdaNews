@@ -29,7 +29,7 @@ public class ArticleListAdapter extends ListAdapter {
                         false
                 );
 
-        adapterId = 1;
+        adapterId = ArticlesApp.ARTICLE_CALLER_ID;
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

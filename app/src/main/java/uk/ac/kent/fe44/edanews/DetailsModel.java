@@ -12,7 +12,6 @@ import org.json.JSONObject;
  */
 public class DetailsModel {
     private String DETAILS_URL = "http://www.efstratiou.info/projects/newsfeed/getItem.php?id=";
-    private String CONTENTS = "contents";
     private ArticleModel.OnDetailsUpdateListener detailsUpdateListener;
     private static int articleIndex;
 
@@ -54,7 +53,7 @@ public class DetailsModel {
                 ArticleModel.getInstance()
                         .getArticleList()
                         .get(articleIndex)
-                        .setContents(response.getString(CONTENTS));
+                        .setContents(response.getString(ArticlesApp.CONTENTS));
 
                 //mark article as detailed /---/ prevents a second attempt at downloading same data
                 ArticleModel.getInstance()

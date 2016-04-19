@@ -112,7 +112,7 @@ public class ArticleListActivity extends ListActivity
         ArticleModel.getInstance().loadMasterList(this);
 
         //set up caller id for ArticleDetailsActivity
-        callerId = 1;
+        callerId = ArticlesApp.ARTICLE_CALLER_ID;
 
         navView = (NavigationView) findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
@@ -147,9 +147,9 @@ public class ArticleListActivity extends ListActivity
      */
     public ArrayList<Article> getList(){
         switch (callerId) {
-            case 3:
+            case ArticlesApp.SEARCH_CALLER_ID:
                 return ArticleModel.getInstance().getSearchList();
-            case 2:
+            case ArticlesApp.FAVES_CALLER_ID:
                 return ArticleModel.getInstance().getFavesList();
             default:
                 return ArticleModel.getInstance().getArticleList();
@@ -172,9 +172,9 @@ public class ArticleListActivity extends ListActivity
      * @param key
      */
     public void searchFor(String key) {
-        if(callerId != 3) {
+        if(callerId != ArticlesApp.SEARCH_CALLER_ID) {
             //swap in the search fragment
-            callerId = 3;
+            callerId = ArticlesApp.SEARCH_CALLER_ID;
             getSupportActionBar().setTitle(R.string.title_activity_article_search);
 
             // Create fragment and give it an argument specifying the article it should show
@@ -275,8 +275,8 @@ public class ArticleListActivity extends ListActivity
             closeSearchBar(searchBar);
         } else {
             switch (callerId) {
-                case 2:
-                case 3:
+                case ArticlesApp.FAVES_CALLER_ID:
+                case ArticlesApp.SEARCH_CALLER_ID:
                     goHome();
                     break;
                 default:
@@ -293,12 +293,12 @@ public class ArticleListActivity extends ListActivity
 
         switch (id){
             case R.id.nav_home:
-                if(callerId != 1) {
+                if(callerId != ArticlesApp.ARTICLE_CALLER_ID) {
                     goHome();
                 }
                 break;
             case R.id.nav_faves:
-                if(callerId != 2) {
+                if(callerId != ArticlesApp.FAVES_CALLER_ID) {
                     goFaves();
                 }
                 break;
@@ -339,7 +339,7 @@ public class ArticleListActivity extends ListActivity
     }
 
     private void goFaves() {
-        callerId = 2;
+        callerId = ArticlesApp.FAVES_CALLER_ID;
 
         getSupportActionBar().setTitle(R.string.title_activity_faves);
 
@@ -357,7 +357,7 @@ public class ArticleListActivity extends ListActivity
 
     private void goHome() {
         //go home, Roger !
-        callerId = 1;
+        callerId = ArticlesApp.ARTICLE_CALLER_ID;
         getSupportActionBar().setTitle(R.string.app_name);
         // Create fragment and give it an argument specifying the article it should show
         ArticleListFragment homeFragment = new ArticleListFragment();

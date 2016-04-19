@@ -26,8 +26,6 @@ import java.util.ArrayList;
 public abstract class ListActivity extends AppCompatActivity
         implements ListFragment.OnListItemClickedListener {
 
-    protected final static String ITEM_ID = "ITEM_ID";
-    protected final static String CALLER_ID = "CALLER_ID";
     protected final static String PLAIN_TEXT = "text/plain";
     protected int callerId;
 
@@ -70,8 +68,8 @@ public abstract class ListActivity extends AppCompatActivity
     public void onItemClicked(int position, Bundle bundle) {
         Intent i = new Intent(this, ArticleDetailsActivity.class);
 
-        i.putExtra(ITEM_ID, position);
-        i.putExtra(CALLER_ID, callerId);
+        i.putExtra(ArticlesApp.ITEM_ID, position);
+        i.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         startActivity(i, bundle);
     }
@@ -99,8 +97,8 @@ public abstract class ListActivity extends AppCompatActivity
         p.putExtra(ArticlesApp.SHORT_INFO, article.getShortInfo());
 
         //send what's needed to launch the details activity
-        p.putExtra(ITEM_ID, position);
-        p.putExtra(CALLER_ID, callerId);
+        p.putExtra(ArticlesApp.ITEM_ID, position);
+        p.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         startActivity(p);
     }

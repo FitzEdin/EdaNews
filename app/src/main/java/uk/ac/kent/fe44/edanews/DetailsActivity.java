@@ -25,8 +25,6 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
     private int itemIndex;
     private int callerId;
 
-    private String ITEM_ID = "ITEM_ID";
-    private String CALLER_ID = "CALLER_ID";
     private static FloatingActionButton faveFab;
 
     /* handle taps on fab */
@@ -70,8 +68,8 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
 
         // get extra values to pass on to fragment
         Intent i = getIntent();
-        itemIndex = i.getIntExtra(ITEM_ID, 0);
-        callerId = i.getIntExtra(CALLER_ID, 0);
+        itemIndex = i.getIntExtra(ArticlesApp.ITEM_ID, 0);
+        callerId = i.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //get a handle on the fab button
         faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
@@ -85,17 +83,17 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
 
         //take from the correct list based on the parent activity
         switch (callerId){
-            case 1:
+            case ArticlesApp.ARTICLE_CALLER_ID:
                 article = model.getArticleList().get(itemIndex);
                 //set correct icon
                 setCorrectIcon();
                 break;
-            case 2:
+            case ArticlesApp.FAVES_CALLER_ID:
                 //hide fab button if we got here via FavesList
                 faveFab.setVisibility(View.INVISIBLE);
                 article = model.getFavesList().get(itemIndex);
                 break;
-            case 3:
+            case ArticlesApp.SEARCH_CALLER_ID:
                 article = model.getSearchList().get(itemIndex);
                 //set correct icon
                 setCorrectIcon();
@@ -115,19 +113,19 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
         //get the article from the correct list
         Article article = new Article();
         switch(caller){
-            case 1:
+            case ArticlesApp.ARTICLE_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getArticleList()
                         .get(index);
                 break;
-            case 2:
+            case ArticlesApp.FAVES_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getFavesList()
                         .get(index);
                 break;
-            case 3:
+            case ArticlesApp.SEARCH_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
                         .getSearchList()

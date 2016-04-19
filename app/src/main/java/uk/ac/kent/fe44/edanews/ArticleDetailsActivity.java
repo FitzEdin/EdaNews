@@ -16,8 +16,6 @@ public class ArticleDetailsActivity extends AppCompatActivity {
     private int itemId;
     private int callerId;
 
-    private String ITEM_ID = "ITEM_ID";
-    private String CALLER_ID = "CALLER_ID";
     private static FloatingActionButton faveFab;
 
     /* handle taps on fab */
@@ -61,8 +59,8 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         // get extra values to pass on to fragment
         Intent i = getIntent();
-        itemId = i.getIntExtra(ITEM_ID, 0);
-        callerId = i.getIntExtra(CALLER_ID, 0);
+        itemId = i.getIntExtra(ArticlesApp.ITEM_ID, 0);
+        callerId = i.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //get a handle on the fab button
         faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
@@ -71,17 +69,17 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         //take from the correct list based on the parent activity
         switch (callerId){
-            case 1:
+            case ArticlesApp.ARTICLE_CALLER_ID:
                 article = model.getArticleList().get(itemId);
                 //set correct icon
                 setCorrectIcon();
                 break;
-            case 2:
+            case ArticlesApp.FAVES_CALLER_ID:
                 //hide fab button if we got here via FavesList
                 faveFab.setVisibility(View.INVISIBLE);
                 article = model.getFavesList().get(itemId);
                 break;
-            case 3:
+            case ArticlesApp.SEARCH_CALLER_ID:
                 article = model.getSearchList().get(itemId);
                 //set correct icon
                 setCorrectIcon();
