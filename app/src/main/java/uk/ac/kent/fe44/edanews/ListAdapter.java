@@ -106,8 +106,6 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 int position = getAdapterPosition();
                 Article article = getList().get(position);
 
-                Toast.makeText(fragment.getActivity(), "Faved: "+getAdapterPosition(), Toast.LENGTH_SHORT).show();
-
                 //if a fave
                 if(model.isInMaster(article.getRecordID())) {
                     model.removeFromFaves(article);

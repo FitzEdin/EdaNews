@@ -27,7 +27,7 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                 public void onClick(View view) {
 
                     //toggle article's fave status
-                    if(article.isFave()) {
+                    if(model.isInMaster(article.getRecordID())) {
                         //remove from faves list
                         model.removeFromFaves(article);
 
@@ -96,11 +96,11 @@ public class ArticleDetailsActivity extends AppCompatActivity {
     @Override
     public void onStop() {
         super.onStop();
-        ArticleModel.getInstance().dumpMasterList(this);
+        ArticleModel.getInstance().saveMasterList(this);
     }
 
     private void setCorrectIcon() {
-        if(article.isFave()){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
+        if(model.isInMaster(article.getRecordID())){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
         else{   faveFab.setImageResource(R.drawable.ic_favorite_border_white_24dp); }
     }
 }

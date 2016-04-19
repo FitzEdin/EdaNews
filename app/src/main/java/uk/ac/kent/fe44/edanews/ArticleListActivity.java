@@ -108,6 +108,9 @@ public class ArticleListActivity extends ListActivity
                     .add(R.id.list_fragment, firstFragment).commit();
         }
 
+        //load master list from database
+        ArticleModel.getInstance().loadMasterList(this);
+
         //set up caller id for ArticleDetailsActivity
         callerId = 1;
 
@@ -222,16 +225,13 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onStart() {
         super.onStart();
-        //TODO: remove this toast
-        Toast.makeText(this, "Loading Master List", Toast.LENGTH_SHORT).show();
-        ArticleModel.getInstance().loadMasterList(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
         //save data
-        ArticleModel.getInstance().dumpMasterList(this);
+        ArticleModel.getInstance().saveMasterList(this);
     }
 
 /*
@@ -303,7 +303,7 @@ public class ArticleListActivity extends ListActivity
                 }
                 break;
             case R.id.nav_saved:
-                Toast.makeText(this, "CallerId: "+callerId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Yet to be implemented", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_EDA:
                 d = createDialog(getString(R.string.school_name), getString(R.string.school_about));

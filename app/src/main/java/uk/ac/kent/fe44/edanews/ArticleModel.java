@@ -63,7 +63,7 @@ public class ArticleModel {
      * If the db is empty, or the operation fails then return false; otherwise return true
      */
     public boolean loadMasterList(Context context) {
-        masterList.clear();
+        masterList.clear(); //may be in memory when the app is invisible
         dbModel = DBModel.getInstance(context);
         try {
             dbModel.open();
@@ -81,10 +81,12 @@ public class ArticleModel {
             return false;
         }
     }
+
     /**
-     * Dump all the articles in the masterList to the database
+     *
+     * @param context
      */
-    public void dumpMasterList(Context context) {
+    public void saveMasterList(Context context) {
         dbModel = DBModel.getInstance(context);
         dbModel.deleteAll();
         for(Article a : getMasterList()) {
