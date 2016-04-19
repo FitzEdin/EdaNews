@@ -96,9 +96,10 @@ public class Article {
         this.isFave = isFave;
         this.isSaved = isSaved;
 
-        // all saved articles would have been downloaded
-        // in their entirety once they came into view.
-        this.isDetailed = true;
+        //a saved/favourited article may not have been detailed before; if
+        //this is the case, then contents will be empty/null. Once this is
+        //the case, the article will be detailed once it is opened.
+        this.isDetailed = ( (contents != null) ? true : false );
     }
 
     /**
