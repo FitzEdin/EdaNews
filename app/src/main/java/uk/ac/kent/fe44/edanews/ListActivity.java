@@ -103,12 +103,6 @@ public abstract class ListActivity extends AppCompatActivity
         startActivity(p);
     }
 
-    /* define what happens when the long tap on the image is released */
-    @Override
-    public void onLongTapReleased(int position){
-            //pkDialog.dismiss();
-    }
-
 
     /*create the About dialog*/
     public Dialog createDialog(String title, String message) {

@@ -87,7 +87,6 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
         void onItemClicked(int position, Bundle bundle);
         void onItemShared(int position);
         void onLongTap(int position);
-        void onLongTapReleased(int position);
     }
 
     public void onItemClicked(int position, Bundle bundle) {
@@ -103,11 +102,5 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
     public void onLongTap(int position) {
         //perform peek action
         mListenerActivity.onLongTap(position);
-    }
-
-    /* define what happens when the long tap on the image is released */
-    public void onLongTapReleased(int position) {
-        //perform peek action
-        mListenerActivity.onLongTapReleased(position);
     }
 }

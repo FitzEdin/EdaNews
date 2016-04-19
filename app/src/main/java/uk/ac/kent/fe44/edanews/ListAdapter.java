@@ -81,22 +81,6 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 return true;
             }
         };
-        /* handle end of long click on article image */
-        protected NetworkImageView.OnTouchListener imgLongTapReleased
-                = new NetworkImageView.OnTouchListener(){
-            @Override
-            public boolean onTouch(View vw, MotionEvent motionEvent){
-                vw.onTouchEvent(motionEvent);
-                if((longPressing)
-                        && ( (motionEvent.getAction() == MotionEvent.ACTION_UP)
-                /*         || (motionEvent.getAction() == MotionEvent.ACTION_MOVE)*/ )
-                        ) {
-                    fragment.onLongTapReleased(getAdapterPosition());
-                    longPressing = false;
-                }
-                return true;
-            }
-        };
         /* handle tap on faves icon */
         protected ImageView.OnClickListener faveICTap
                 = new ImageView.OnClickListener(){
