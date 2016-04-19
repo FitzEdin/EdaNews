@@ -19,16 +19,23 @@ public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageLoa
     /*methods used for storing and retrieving images*/
     @Override
     public Bitmap getBitmap(String url) {
-        return get(url);
+        return get(formatUrl(url));
     }
     @Override
     public void putBitmap(String url, Bitmap bitmap) {
-        put(url, bitmap);
+        put(formatUrl(url), bitmap);
     }
 
     /*calculates size of bitmaps stored in cache*/
     @Override
     protected int sizeOf(String key, Bitmap value) {
         return value.getRowBytes() * value.getHeight();
+    }
+
+    private String formatUrl(String url) {
+        String[] parts = url.split(":");
+        String formattedUrl = "https:" + parts[1];
+
+        return formattedUrl;
     }
 }

@@ -41,25 +41,24 @@
                 android:src="@drawable/ic_uok_logo_new"
 
                 android:layout_width="180dp"
-                android:layout_height="162dp"
+                android:layout_height="180dp"
 
                 android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:layout_width="240dp"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
 
                 android:orientation="vertical">
 
                 <!-- article title -->
                 <TextView
                     android:id="@+id/peek_title"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
-                    android:paddingTop="4dp"
+                    android:padding="4dp"
 
                     android:gravity="center"
 
@@ -67,7 +66,7 @@
                     android:textColor="@color/colorTextPrimary"
                     android:textSize="20sp"
 
-                    android:lines="3" />
+                    android:maxLines="3" />
 
                 <!-- article short info -->
                 <TextView
@@ -76,22 +75,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
+                    android:padding="4dp"
+
+                    android:gravity="center_vertical"
+
                     android:text="@string/dummy_short_info"
                     android:textColor="@color/colorTextSecondary"
                     android:textSize="16sp"
 
-                    android:paddingLeft="4dp"
-                    android:paddingBottom="2dp"
-                    android:paddingRight="2dp"
-
-                    android:gravity="top"
-
-                    android:ellipsize="end" />
+                    android:maxLines="6" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="48dp"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
 
                 android:orientation="vertical"
 
@@ -103,7 +100,7 @@
 
                 android:gravity="center">
 
-                <!-- Icons: onClick functions are in .ArticleListActivity-->
+                <!-- Icons: onClick functions are in .PeekActivity-->
                 <!-- read more icon -->
                 <ImageView
                     android:id="@+id/ic_close"
