@@ -45,7 +45,9 @@ public class ArticleModel {
     private Article getArticle(Cursor cursor, int position) {
         cursor.moveToPosition(position);
         int fave = cursor.getInt(7);
+        int save = cursor.getInt(8);
         boolean isFave = ( (fave == 1)?(true):(false) );
+        boolean isSaved = ( (save == 1)?(true):(false) );
         Article article = new Article(
                 cursor.getString(0),    //imageURL
                 cursor.getInt(1),       //recordID
@@ -54,7 +56,8 @@ public class ArticleModel {
                 cursor.getString(4),    //date
                 cursor.getString(5),    //contents
                 cursor.getString(6),    //web_page
-                isFave                  //isFave
+                isFave,                 //isFave
+                isSaved                 //isSaved
         );
         return article;
     }

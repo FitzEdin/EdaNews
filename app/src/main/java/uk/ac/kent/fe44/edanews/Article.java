@@ -79,13 +79,13 @@ public class Article {
      * @param date String Date of the article in DD/MM/YYYY format
      * @param contents String Full contents of the article
      * @param web_page String Url of the article's web page
-     * @param isFave
-     * TODO: Add parameter for isSaved value
+     * @param isFave boolean Whether or not the article has been favourited.
+     * @param isSaved boolean Whether or not the article has been saved for reading later.
      * TODO: Change final line below to fix bug 5
      */
     public Article(
             String imageURL, int recordID, String title, String short_info,
-            String date, String contents, String web_page, boolean isFave) {
+            String date, String contents, String web_page, boolean isFave, boolean isSaved) {
         this.imageURL = imageURL;
         this.recordID = recordID;
         this.title = title;
@@ -94,6 +94,7 @@ public class Article {
         this.contents = contents;
         this.web_page = web_page;
         this.isFave = isFave;
+        this.isSaved = isSaved;
 
         // all saved articles would have been downloaded
         // in their entirety once they came into view.
