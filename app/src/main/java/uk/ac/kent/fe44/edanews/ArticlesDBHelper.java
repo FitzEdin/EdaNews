@@ -34,10 +34,10 @@ public class ArticlesDBHelper extends SQLiteOpenHelper {
             + COLUMN_TITLE + " TEXT NOT NULL, "
             + COLUMN_SHORT_INFO + " TEXT NOT NULL, "
             + COLUMN_DATE + " TEXT NOT NULL, "
-            + COLUMN_CONTENTS + " TEXT NOT NULL, "
+            + COLUMN_CONTENTS + " TEXT, "
             + COLUMN_WEB_PAGE + " TEXT NOT NULL, "
             + COLUMN_IS_FAVE + " INTEGER NOT NULL, "
-            + COLUMN_IS_SAVED + " INTEGER NOT NULL;";
+            + COLUMN_IS_SAVED + " INTEGER NOT NULL);";
 
     /**
      * Constructor for the DBHelper class

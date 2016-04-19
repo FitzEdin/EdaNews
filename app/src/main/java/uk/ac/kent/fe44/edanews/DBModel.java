@@ -42,6 +42,25 @@ public class DBModel {
         database.close();
     }
 
+
+    public void deleteArticle(int recordId) {
+        if(! isEmpty()) {
+            String id = Integer.toString(recordId);
+            String[] str = new String[]{id};
+            database.delete(ArticlesDBHelper.TABLENAME, ArticlesDBHelper.COLUMN_ID + "=?", str);
+        }
+    }
+    /**
+     *
+     * @return
+     */
+    public int deleteAll() {
+        if(! isEmpty()) {
+            return database.delete(ArticlesDBHelper.TABLENAME, null, null);
+        }
+
+        return 0;
+    }
     /**
      * Add an article to the database.
      * @param article The Article object to be added to the database

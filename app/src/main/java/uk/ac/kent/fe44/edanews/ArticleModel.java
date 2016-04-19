@@ -63,18 +63,17 @@ public class ArticleModel {
      * If the db is empty, or the operation fails then return false; otherwise return true
      */
     public boolean loadMasterList(Context context) {
+        masterList.clear();
         dbModel = DBModel.getInstance(context);
         try {
             dbModel.open();
             if(dbModel.isEmpty()) {
-                dbModel.close();
                 return false;
             }else{
                 Cursor cursor = dbModel.getArticles();
                 for(int i = 0; i < cursor.getCount(); i++) {
                     masterList.add(getArticle(cursor, i));
                 }
-                dbModel.close();
                 return true;
             }
         } catch (SQLException e){
@@ -85,7 +84,9 @@ public class ArticleModel {
     /**
      * Dump all the articles in the masterList to the database
      */
-    public void dumpMasterList() {
+    public void dumpMasterList(Context context) {
+        dbModel = DBModel.getInstance(context);
+        dbModel.deleteAll();
         for(Article a : getMasterList()) {
             dbModel.addArticle(a);
         }
@@ -104,6 +105,7 @@ public class ArticleModel {
             //ignore
         }else {
             masterList.add(article);
+            dbModel.deleteArticle(article.getRecordID());
         }
     }
     /**
@@ -118,6 +120,7 @@ public class ArticleModel {
             if(a.getRecordID() == recordId) {    index = i;    }
         }
         masterList.remove(index);
+        dbModel.deleteArticle(recordId);
     }
     /**
      * determine whether an article is already in the master list

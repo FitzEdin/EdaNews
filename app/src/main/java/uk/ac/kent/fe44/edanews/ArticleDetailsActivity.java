@@ -93,6 +93,12 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         fragment.updateDetails(itemId, callerId);
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        ArticleModel.getInstance().dumpMasterList(this);
+    }
+
     private void setCorrectIcon() {
         if(article.isFave()){   faveFab.setImageResource(R.drawable.ic_favorite_white_24dp);    }
         else{   faveFab.setImageResource(R.drawable.ic_favorite_border_white_24dp); }
