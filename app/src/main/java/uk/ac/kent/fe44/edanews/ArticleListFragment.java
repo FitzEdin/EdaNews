@@ -47,14 +47,8 @@ public class ArticleListFragment extends ListFragment
 
         tryForNetwork();
 
-        Configuration config = getResources().getConfiguration();
-
-        //set span count based on screen size and orientation
-        final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
-        int spanCount = getSpanCount(config, isLarge);
-
-        //set up layout manager
-        setUpLayoutManager(isLarge, spanCount);
+        //prep for config
+        prepForConfig();
 
         //set up list adapter
         listAdapter = new ArticleListAdapter(this);

@@ -81,7 +81,6 @@ public class Article {
      * @param web_page String Url of the article's web page
      * @param isFave boolean Whether or not the article has been favourited.
      * @param isSaved boolean Whether or not the article has been saved for reading later.
-     * TODO: Change final line below to fix bug 5
      */
     public Article(
             String imageURL, int recordID, String title, String short_info,

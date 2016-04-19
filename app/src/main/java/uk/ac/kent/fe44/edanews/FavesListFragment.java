@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 
 /**
@@ -25,23 +27,22 @@ public class FavesListFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
+        ImageView empty = (ImageView) view.findViewById(R.id.empty_list);
 
-
-
-        Configuration config = getResources().getConfiguration();
-
-        //set span count based on screen size and orientation
-        final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
-        int spanCount = getSpanCount(config, isLarge);
-
-        //set up layout manager
-        setUpLayoutManager(isLarge, spanCount);
+        //prep for config
+        prepForConfig();
 
         //set up list adapter
         listAdapter = new FavesListAdapter(this);
-
-        //set up the list view
-        setUpListView(view);
+        if(listAdapter.getItemCount() == 0) {
+            //show empty list image
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            //hide empty list image
+            empty.setVisibility(View.INVISIBLE);
+            //set up the list view
+            setUpListView(view);
+        }
 
         return view;
     }

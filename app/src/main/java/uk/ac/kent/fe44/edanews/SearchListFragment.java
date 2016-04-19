@@ -27,21 +27,8 @@ public class SearchListFragment extends ListFragment
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
 
-//        //get search key from intent
-//        String key = getActivity().getIntent().getStringExtra("key");
-//        //perform search
-//        searchFor(key);
-
-
-
-        Configuration config = getResources().getConfiguration();
-
-        //set span count based on screen size and orientation
-        final boolean isLarge = config.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
-        int spanCount = getSpanCount(config, isLarge);
-
-        //set up layout manager
-        setUpLayoutManager(isLarge, spanCount);
+        //prep for config
+        prepForConfig();
 
         //set up list adapter
         listAdapter = new SearchListAdapter(this);

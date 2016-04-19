@@ -27,6 +27,22 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
         // Required empty public constructor
     }
 
+    private void prepForConfig(Configuration newConfig) {
+        Configuration config = getResources().getConfiguration();
+        //set span count based on screen size and orientation
+        final boolean isLarge = newConfig.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
+        int spanCount = getSpanCount(newConfig, isLarge);
+
+        //set up layout manager
+        setUpLayoutManager(isLarge, spanCount);
+    }
+
+    protected void prepForConfig() {
+        Configuration config = getResources().getConfiguration();
+        //set span count based on screen size and orientation
+        prepForConfig(config);
+    }
+
     /**
      * configure the list view with the newly created
      * listAdapter, and the layoutManager
@@ -54,7 +70,6 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
      */
     abstract protected int getSpanCount(Configuration config,  boolean isLarge);
 
-    // .onCreateView is overridden by all children
 
     @Override
     public void onAttach(Activity activity) {
@@ -71,6 +86,14 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
     public void onDetach() {
         super.onDetach();
         mListenerActivity = null;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+
+        prepForConfig(newConfig);
+        setUpListView(this.getView());
     }
 
     /*refresh data set with new information*/
