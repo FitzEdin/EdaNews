@@ -323,30 +323,13 @@ public class ArticleListActivity extends ListActivity
                 }
                 break;
             case R.id.nav_EDA:
-                d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
-                d.show();
+                goFar(ArticlesApp.DEPT_EXTRA_ID);
                 break;
             case R.id.nav_developer:
-                d = createDialog(getString(R.string.about_developer), getString(R.string.developer_about));
-                d.show();
+                goFar(ArticlesApp.DEVELOPER_EXTRA_ID);
                 break;
             case R.id.nav_app:
-                Intent s = new Intent(this, ScrollingActivity.class);
-                startActivity(s);
-                d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
-                d.show();
-                break;
-            case R.id.nav_contact_EDA:
-                d = createDialog(getString(R.string.school_name), getString(R.string.school_contact));
-                d.show();
-                break;
-            case R.id.nav_contact_developer:
-                d = createDialog(getString(R.string.developer_name), getString(R.string.developer_contact));
-                d.show();
-                break;
-            case R.id.nav_settings:
-                //d = createDialog("Sorry", "That doesn't do anything yet.");
-                //d.show();
+                goFar(ArticlesApp.APP_EXTRA_ID);
                 break;
         }
 
@@ -382,5 +365,11 @@ public class ArticleListActivity extends ListActivity
         transaction.replace(R.id.list_fragment, newFrag);
         // Commit the transaction
         transaction.commit();
+    }
+
+    private void goFar(int location) {
+        Intent s = new Intent(this, ScrollingActivity.class);
+        s.putExtra(ArticlesApp.EXTRA_ID, location);
+        startActivity(s);
     }
 }

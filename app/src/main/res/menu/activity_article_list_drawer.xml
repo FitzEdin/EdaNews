@@ -44,28 +44,4 @@
         </menu>
     </item>
 
-    <item android:title="@string/contact_category">
-        <menu>
-            <item
-                android:id="@+id/nav_contact_EDA"
-                android:icon="@drawable/ic_local_post_office_black_24dp"
-
-                android:title="@string/contact_school" />
-
-            <item
-                android:id="@+id/nav_contact_developer"
-                android:icon="@drawable/contact_mail"
-
-                android:title="@string/contact_developer" />
-        </menu>
-    </item>
-
-    <group>
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings_black_24dp"
-
-            android:title="@string/settings_category"/>
-    </group>
-
 </menu>
