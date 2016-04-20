@@ -258,9 +258,9 @@ public class ArticleModel {
     public ArrayList<Article> getFavesList() {
         return favesModel.getList();
     }
-    public void addToFaves(int position, int adapterId){
+    public void addToFaves(Article article){
         //mark article as favourite in particular List
-        favesModel.add(position, adapterId);
+        favesModel.add(article);
     }
     public void removeFromFaves(Article article) {
         favesModel.remove(article);
@@ -286,9 +286,9 @@ public class ArticleModel {
     public ArrayList<Article> getSavedList() {
         return savedModel.getList();
     }
-    public void addToSaved(int position, int adapterId){
+    public void addToSaved(Article article){
         //mark article as saved in particular List
-        savedModel.add(position, adapterId);
+        savedModel.add(article);
     }
     public void removeFromSaved(Article article) {
         savedModel.remove(article);

@@ -42,7 +42,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
                         faveFab.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     }else {
                         //add to faves list
-                        model.addToFaves(itemIndex, callerId);
+                        model.addToFaves(article);
 
                         //change icon
                         faveFab.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -125,9 +125,10 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
                         .get(index);
                 break;
             case ArticlesApp.FAVES_CALLER_ID:
+            case ArticlesApp.SAVED_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
-                        .getFavesList()
+                        .getMasterList()
                         .get(index);
                 break;
             case ArticlesApp.SEARCH_CALLER_ID:

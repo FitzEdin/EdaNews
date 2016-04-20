@@ -25,29 +25,32 @@ public class SavedModel {
             (model.getSearchList().get(position)).setIsSaved(false);
         }
 
-        //remove it from list of Saved
-        model.removeFromMaster(article.getRecordID());
+        //if the model is in the masterList
+        if( model.isInMaster(article.getRecordID()) ) {
+            //..and it is not marked as fave
+            if( article.isFave() == false) {
+                //..throw it away
+                model.removeFromMaster(article.getRecordID());
+            }else { //it is marked as fave
+                //unmark as saved
+                model.getArticleFromMaster(article.getRecordID()).setIsSaved(false);
+            }
+        }
         //notify whoever is listening
         notifySavedListener();
     }
 
-    public void add(int position, int adapterId) {
+    public void add(Article article) {
         //mark article as saved in particular List
         ArticleModel model = ArticleModel.getInstance();
 
-        Article article;
-        switch (adapterId) {
-            case ArticlesApp.SEARCH_CALLER_ID:     //searchList
-                article = model.getSearchList().get(position);
-                article.setIsSaved(true);
-                break;
-            default:     //newsfeed
-                article = model.getArticleList().get(position);
-                article.setIsSaved(true);
-                break;
-        }
+        article.setIsSaved(true);
         //update the masterList
-        model.addToMaster(article);
+        if(model.isInMaster(article.getRecordID())){
+            model.getArticleFromMaster(article.getRecordID()).setIsSaved(true);
+        }else{
+            model.addToMaster(article);
+        }
         //notify the view that is listening
         notifySavedListener();
     }

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/article_card"
+
+    android:layout_width="match_parent"
+    android:layout_height="244dp"
+
+    android:layout_marginTop="@dimen/card_top_margin"
+    android:layout_marginBottom="@dimen/card_bottom_margin"
+    android:layout_marginLeft="@dimen/card_left_margin"
+    android:layout_marginRight="@dimen/card_right_margin"
+
+    card_view:cardCornerRadius="@dimen/card_corner_radius"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardElevation="@dimen/elevation"
+
+    card_view:cardPreventCornerOverlap="true"
+    android:transitionName="article_card">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="244dp"
+        android:orientation="vertical"
+
+        android:focusable="true"
+        android:clickable="true" >
+
+        <!-- large image -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/article_photo"
+            android:src="@drawable/ic_uok_logo_new"
+
+            android:layout_width="fill_parent"
+            android:layout_height="156dp"
+
+            android:scaleType="centerCrop"
+
+            android:transitionName="article_photo" />
+
+        <!-- article title -->
+        <TextView
+            android:id="@+id/article_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="6dp"
+
+            android:text="@string/dummy_title"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp"
+
+            android:gravity="center"
+
+            android:lines="2"
+            android:maxLength="25"
+
+            android:transitionName="article_title" />
+
+        <!-- article date -->
+        <TextView
+            android:id="@+id/article_date"
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+
+            android:text="@string/dummy_date"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="14sp"
+
+            android:paddingBottom="4dp"
+
+            android:gravity="center"
+
+            android:lines="1"
+            android:maxLength="10"
+
+            android:transitionName="article_date" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+
+            android:orientation="horizontal"
+
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+
+            android:gravity="center">
+
+            <!-- Icons: onClick functions are in .ArticleListActivity-->
+            <!-- favourites icon -->
+            <ImageView
+                android:id="@+id/ic_faves"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+
+                android:layout_weight="1"
+
+                android:src="@drawable/ic_favorite_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- save later icon -->
+            <ImageView
+                android:id="@+id/ic_save"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+
+                android:layout_weight="1"
+
+                android:src="@drawable/ic_watch_later_outline_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- share icon -->
+            <ImageView
+                android:id="@+id/ic_share"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+
+                android:layout_weight="1"
+
+                android:src="@drawable/ic_share_black_24dp"
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

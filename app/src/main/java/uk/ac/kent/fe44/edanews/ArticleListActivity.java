@@ -289,6 +289,7 @@ public class ArticleListActivity extends ListActivity
             switch (callerId) {
                 case ArticlesApp.FAVES_CALLER_ID:
                 case ArticlesApp.SEARCH_CALLER_ID:
+                case ArticlesApp.SAVED_CALLER_ID:
                     goHome();
                     break;
                 default:
@@ -315,7 +316,9 @@ public class ArticleListActivity extends ListActivity
                 }
                 break;
             case R.id.nav_saved:
-                Toast.makeText(this, "Yet to be implemented", Toast.LENGTH_SHORT).show();
+                if(callerId != ArticlesApp.SAVED_CALLER_ID) {
+                    goSaved();
+                }
                 break;
             case R.id.nav_EDA:
                 d = createDialog(getString(R.string.school_name), getString(R.string.school_about));
@@ -348,6 +351,23 @@ public class ArticleListActivity extends ListActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void goSaved() {
+        callerId = ArticlesApp.SAVED_CALLER_ID;
+
+        getSupportActionBar().setTitle(R.string.title_activity_saved);
+
+        // Create fragment and give it an argument specifying the article it should show
+        SavedListFragment savedFragment = new SavedListFragment();
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment
+        transaction.replace(R.id.list_fragment, savedFragment);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
     private void goFaves() {

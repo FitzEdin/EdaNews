@@ -64,8 +64,12 @@
     <!-- faves -->
     <string name="faves_added">Added to Faves</string>
     <string name="faves_removed">Removed from Faves</string>
-    <string name="title_activity_faves">EDA Faves</string>
+    <string name="title_activity_faves">Fave Articles</string>
     <string name="no_faves">Papaya\'s my favourite fruit. What are your favourite articles?</string>
+
+    <!-- saved -->
+    <string name="title_activity_saved">Saved Articles</string>
+    <string name="no_saved">You haven\'t saved any articles, so I saved you this papaya instead.</string>
     <string name="no_search">Sorry! \nFound nothing but this juicy papaya.</string>
 
     <string name="dummy_date">14/12/1988</string>

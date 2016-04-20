@@ -61,8 +61,9 @@ public class DetailsModel {
                                 .get(articleIndex)
                                 .setContents(contents);
                         break;
-                    case ArticlesApp.FAVES_CALLER_ID:
-                        ArticleModel.getInstance()
+                    case ArticlesApp.FAVES_CALLER_ID:   // Individual lists cannot be used in this
+                    case ArticlesApp.SAVED_CALLER_ID:   // case since they are transient, and
+                        ArticleModel.getInstance()      // article indices will change.
                                 .getMasterList()
                                 .get(articleIndex)
                                 .setContents(contents);

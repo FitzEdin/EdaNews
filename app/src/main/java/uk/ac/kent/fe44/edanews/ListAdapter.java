@@ -41,6 +41,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
     /*handles layout for each item in the list*/
     public abstract class ViewHolder extends RecyclerView.ViewHolder {
+        protected Article article;
         protected Toolbar toolbar;
         protected FloatingActionButton fab;
         protected CardView card;
@@ -87,15 +88,13 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             @Override
             public void onClick(View v) {
                 ImageView ic = (ImageView)v;
-                int position = getAdapterPosition();
-                Article article = getList().get(position);
 
                 //if a fave
-                if(model.isInMaster(article.getRecordID())) {
+                if(article.isFave()) {
                     model.removeFromFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                 }else {
-                    model.addToFaves(position, adapterId);
+                    model.addToFaves(article);
                     ic.setImageResource(R.drawable.ic_favorite_black_24dp);
                 }
             }
@@ -105,19 +104,13 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             @Override
             public void onClick(View v) {
                 ImageView ic = (ImageView)v;
-                int position = getAdapterPosition();
-                Article article = getList().get(position);
 
                 //if saved before
                 if(article.isSaved()) {
-                    //remove from saved list
                     model.removeFromSaved(article);
-                    //change icon
                     ic.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
                 }else {
-                    //add to saved list
-                    model.addToSaved(position, adapterId);
-                    //change icon
+                    model.addToSaved(article);
                     ic.setImageResource(R.drawable.ic_watch_later_black_24dp);
                 }
             }
@@ -157,6 +150,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
 
         //add values from data model to each row
         public void setData(Article article) {
+            this.article = article;
             //protection for super long and super short titles
             int titleLength = article.getTitle().length() - 3;
             int length = (titleLength <= 20) ? titleLength : 20;
@@ -169,7 +163,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             //no need to change the share icon
 
             // force the recyclerView to redraw icons correctly for each article
-            if(model.isInMaster(article.getRecordID())) {  faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
+            if(article.isFave()) {  faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
             if(article.isSaved()) { savedIc.setImageResource(R.drawable.ic_watch_later_black_24dp); }
         }
     }

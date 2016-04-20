@@ -57,7 +57,7 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                         faveIc.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     }else {
                         //add to faves list
-                        model.addToFaves(itemId, callerId);
+                        model.addToFaves(article);
                         //change icon
                         faveIc.setImageResource(R.drawable.ic_favorite_black_24dp);
                     }
@@ -76,7 +76,7 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                         savedIc.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
                     }else {
                         //add to saved list
-                        model.addToSaved(itemId, callerId);
+                        model.addToSaved(article);
                         //change icon
                         savedIc.setImageResource(R.drawable.ic_watch_later_black_24dp);
                     }
