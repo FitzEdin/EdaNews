@@ -255,66 +255,21 @@ public class ArticleModel {
      *  */
     /*managing my faves list*/
     // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
-    private OnFavesUpdateListener favesUpdateListener;
+    private FavesModel favesModel = new FavesModel();
 
     public ArrayList<Article> getFavesList() {
-        ArrayList<Article> favesList = new ArrayList<>();
-        for(Article a : getMasterList()) {
-            if(a.isFave()) {
-                favesList.add(a);
-            }
-        }
-        return favesList; }
-    public void setFavesList(ArrayList<Article> favesList) {
-        //TODO: populate faves list with items from memory
+        return favesModel.getList();
     }
     public void addToFaves(int position, int adapterId){
         //mark article as favourite in particular List
-        Article article;
-        switch (adapterId) {
-            case ArticlesApp.SEARCH_CALLER_ID:     //searchList
-                article = getSearchList().get(position);
-                article.setIsFave(true);
-                break;
-            default:     //newsfeed
-                article = getArticleList().get(position);
-                article.setIsFave(true);
-                break;
-        }
-        //update the masterList
-        addToMaster(article);
-        //notify the view that is listening
-        notifyFavesListener();
+        favesModel.add(position, adapterId);
     }
     public void removeFromFaves(Article article) {
-        //get position of this article in the ArticleList
-        int position;
-
-        position = getArticleList().indexOf(article);
-        if(position != -1) {
-            //unmark article as favourite in ArticleList
-            (getArticleList().get(position)).setIsFave(false);
-        }
-
-        position = getSearchList().indexOf(article);
-        if(position != -1) {
-            //unmark article as favourite in SearchList
-            (getSearchList().get(position)).setIsFave(false);
-        }
-
-        //remove it from list of Faves
-        removeFromMaster(article.getRecordID());
-        //notify whoever is listening
-        notifyFavesListener();
-    }
-    private void notifyFavesListener() {
-        if(favesUpdateListener != null) {
-            favesUpdateListener.onFavesUpdate();
-        }
+        favesModel.remove(article);
     }
     /*receive subscriptions for notifications from classes*/
     public void setOnFavesUpdateListener(OnFavesUpdateListener favesUpdateListener) {
-        this.favesUpdateListener = favesUpdateListener;
+        favesModel.setFavesUpdateListener(favesUpdateListener);
     }
     public interface OnFavesUpdateListener {
         void onFavesUpdate();
