@@ -42,7 +42,7 @@ public class ArticlesApp extends Application {
 
         requestQueue = Volley.newRequestQueue(this);
 
-        int size = 4 * 1024 * 1024;
+        int size = 100 * 1024 * 1024;
         imageLoader = new ImageLoader(requestQueue, new LruBitmapCache(size));
     }
 

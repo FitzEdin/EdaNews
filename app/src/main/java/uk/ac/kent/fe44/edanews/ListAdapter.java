@@ -104,8 +104,24 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected ImageView.OnClickListener savedICTap = new ImageView.OnClickListener(){
             @Override
             public void onClick(View v) {
-                ImageView imgVw = (ImageView)v;
-                imgVw.setImageResource(R.drawable.ic_watch_later_black_24dp);
+                ImageView ic = (ImageView)v;
+                int position = getAdapterPosition();
+                Article article = getList().get(position);
+
+                //if saved before
+                if(article.isSaved()) {
+                    //remove from saved list
+                    article.setIsSaved(false);
+                    //TODO:            model.removeFromSaved(article);
+                    //change icon
+                    ic.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
+                }else {
+                    //add to saved list
+                    article.setIsSaved(true);
+                    //TODO:            model.addToSaved(itemId, callerId);
+                    //change icon
+                    ic.setImageResource(R.drawable.ic_watch_later_black_24dp);
+                }
             }
         };
         /* handle tap on share icon */
