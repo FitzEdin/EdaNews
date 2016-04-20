@@ -1,6 +1,9 @@
 package uk.ac.kent.fe44.edanews;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
@@ -57,4 +60,21 @@ public class ArticlesApp extends Application {
     public ImageLoader getImageLoader() {
         return imageLoader;
     }
+
+    //Source: previous project kn.muscovado.thadailygeek
+    //check that the network is available
+    public boolean networkIsAvailable() {
+        ConnectivityManager mngr = (ConnectivityManager)
+                getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = mngr.getActiveNetworkInfo();
+
+        boolean isAvailable = false;
+
+        //checks that the network is present && it's connected
+        if( ( networkInfo != null ) && ( networkInfo.isConnected() ) ){
+            isAvailable = true;		//network is up & running
+        }
+
+        return isAvailable;
+    }//end networkIsAvailable() method
 }

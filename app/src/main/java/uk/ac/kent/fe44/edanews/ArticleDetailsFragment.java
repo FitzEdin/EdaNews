@@ -76,12 +76,16 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
 
         if(article.getContents() == null) {
-            //show network message
-            articleContents.setText(R.string.loading_contents);
+            //show appropriate network message
+            if(ArticlesApp.getInstance().networkIsAvailable()) {
+                articleContents.setText(R.string.loading_contents);
 
-            //get a handle on article's record id for network request
-            articleId = article.getRecordID();
-            getArticleDetails();
+                //get a handle on article's record id for network request
+                articleId = article.getRecordID();
+                getArticleDetails();
+            }else{
+                articleContents.setText(R.string.no_network);
+            }
         }else{
             articleContents.setText(article.getContents());
         }

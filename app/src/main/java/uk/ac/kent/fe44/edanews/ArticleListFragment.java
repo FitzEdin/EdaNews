@@ -173,29 +173,12 @@ public class ArticleListFragment extends ListFragment
         loading = false;
     }
 
-    //Source: previous project kn.muscovado.thadailygeek
-    //check that the network is available
-    private boolean networkIsAvailable() {
-        ConnectivityManager mngr = (ConnectivityManager)
-                getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = mngr.getActiveNetworkInfo();
-
-        boolean isAvailable = false;
-
-        //checks that the network is present && it's connected
-        if( ( networkInfo != null ) && ( networkInfo.isConnected() ) ){
-            isAvailable = true;		//network is up & running
-        }
-
-        return isAvailable;
-    }//end networkIsAvailable() method
-
-    public void tryForNetwork(){
+    private void tryForNetwork(){
         //hide everything
         mProgressBar.setVisibility(View.INVISIBLE);
         noNetworkRetry.setVisibility(View.INVISIBLE);
 
-        if(networkIsAvailable()){   //network is there? grab things
+        if(ArticlesApp.getInstance().networkIsAvailable()){   //network is there? grab things
             //hide no network message if present, show fab+progress bar
             mProgressBar.setVisibility(View.VISIBLE);
             getData();
