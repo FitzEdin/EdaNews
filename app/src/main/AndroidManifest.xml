@@ -49,15 +49,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.ac.kent.fe44.edanews.ArticleListActivity" />
         </activity>
-        <activity
-            android:name=".DetailsActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_none"
-            android:parentActivityName=".ArticleListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="uk.ac.kent.fe44.edanews.ArticleListActivity" />
-        </activity>
     </application>
 
 </manifest>

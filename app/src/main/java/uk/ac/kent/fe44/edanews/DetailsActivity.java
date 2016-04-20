@@ -62,7 +62,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
             );
         }
         setContentView(R.layout.activity_scrolling);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.details_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.extra_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

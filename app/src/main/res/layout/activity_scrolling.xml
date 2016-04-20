@@ -34,8 +34,8 @@
 
             <!-- mind those scroll flags -->
 
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/detail_img"
+            <ImageView
+                android:id="@+id/extra_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -46,12 +46,10 @@
 
                 android:fitsSystemWindows="true"
 
-                app:layout_collapseMode="parallax"
-
-                android:transitionName="article_photo" />
+                app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/details_toolbar"
+                android:id="@+id/extra_toolbar"
 
                 android:layout_height="?attr/actionBarSize"
                 android:layout_width="match_parent"
@@ -64,78 +62,8 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        android:id="@+id/details_fragment"
+        android:id="@+id/extra_fragment"
 
         layout="@layout/content_scrolling" />
-
-    <!-- Search Bar -->
-    <LinearLayout
-        android:id="@+id/plus_bar"
-
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-
-        android:gravity="left"
-
-        android:layout_gravity="bottom"
-
-        android:elevation="@dimen/elevation"
-        android:background="@drawable/round_backed">
-
-        <!-- Icons: onClick functions are in .ArticleListActivity-->
-        <!-- favourites icon -->
-        <ImageView
-            android:id="@+id/ic_faves"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-
-            android:layout_weight="3"
-            android:padding="8dp"
-
-            android:src="@drawable/ic_favorite_border_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
-
-        <!-- save later icon -->
-        <ImageView
-            android:id="@+id/ic_save"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-
-            android:layout_weight="1"
-            android:padding="8dp"
-
-            android:src="@drawable/ic_watch_later_outline_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
-
-        <!-- share icon -->
-        <ImageView
-            android:id="@+id/ic_share"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-
-            android:layout_weight="3"
-            android:padding="8dp"
-
-            android:src="@drawable/ic_share_black_24dp"
-            android:tint="@color/colorPrimaryDark"/>
-
-    </LinearLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/plus_fab"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_gravity="bottom|right|end"
-        android:layout_marginRight="@dimen/fab_right_margin"
-        android:layout_marginBottom="@dimen/fab_bottom_margin"
-
-        android:src="@drawable/ic_home_black_24dp"
-        android:tint="@color/white"
-        app:rippleColor="@color/colorPrimaryDark"
-
-        android:transitionName="fab_button" />
 
 </android.support.design.widget.CoordinatorLayout>

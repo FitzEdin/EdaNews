@@ -61,6 +61,8 @@ public class ArticleListActivity extends ListActivity
                 closeSearchBar(searchTextView);
                 searchFor(searchText);
 
+                navView.setCheckedItem(R.id.nav_home);
+
                 handled = true;
             }
             return handled;
@@ -290,7 +292,7 @@ public class ArticleListActivity extends ListActivity
                 case ArticlesApp.FAVES_CALLER_ID:
                 case ArticlesApp.SEARCH_CALLER_ID:
                 case ArticlesApp.SAVED_CALLER_ID:
-                    goHome();
+                    goNear(ArticlesApp.ARTICLE_CALLER_ID);
                     break;
                 default:
                     super.onBackPressed();
@@ -307,17 +309,17 @@ public class ArticleListActivity extends ListActivity
         switch (id){
             case R.id.nav_home:
                 if(callerId != ArticlesApp.ARTICLE_CALLER_ID) {
-                    goHome();
+                    goNear(ArticlesApp.ARTICLE_CALLER_ID);
                 }
                 break;
             case R.id.nav_faves:
                 if(callerId != ArticlesApp.FAVES_CALLER_ID) {
-                    goFaves();
+                    goNear(ArticlesApp.FAVES_CALLER_ID);
                 }
                 break;
             case R.id.nav_saved:
                 if(callerId != ArticlesApp.SAVED_CALLER_ID) {
-                    goSaved();
+                    goNear(ArticlesApp.SAVED_CALLER_ID);
                 }
                 break;
             case R.id.nav_EDA:
@@ -329,6 +331,8 @@ public class ArticleListActivity extends ListActivity
                 d.show();
                 break;
             case R.id.nav_app:
+                Intent s = new Intent(this, ScrollingActivity.class);
+                startActivity(s);
                 d = createDialog(getString(R.string.about_app), getString(R.string.app_about));
                 d.show();
                 break;
@@ -341,8 +345,6 @@ public class ArticleListActivity extends ListActivity
                 d.show();
                 break;
             case R.id.nav_settings:
-                Intent s = new Intent(this, ScrollingActivity.class);
-                startActivity(s);
                 //d = createDialog("Sorry", "That doesn't do anything yet.");
                 //d.show();
                 break;
@@ -353,52 +355,31 @@ public class ArticleListActivity extends ListActivity
         return true;
     }
 
-    private void goSaved() {
-        callerId = ArticlesApp.SAVED_CALLER_ID;
+    private void goNear(int location) {
+        ListFragment newFrag;
+        callerId = location;    //one of the caller_ids outlined in ArticlesApp
 
-        getSupportActionBar().setTitle(R.string.title_activity_saved);
-
-        // Create fragment and give it an argument specifying the article it should show
-        SavedListFragment savedFragment = new SavedListFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.list_fragment, savedFragment);
-
-        // Commit the transaction
-        transaction.commit();
-    }
-
-    private void goFaves() {
-        callerId = ArticlesApp.FAVES_CALLER_ID;
-
-        getSupportActionBar().setTitle(R.string.title_activity_faves);
-
-        // Create fragment and give it an argument specifying the article it should show
-        FavesListFragment favesFragment = new FavesListFragment();
+        switch (location) {     //decide where to go
+            case ArticlesApp.SAVED_CALLER_ID:
+                getSupportActionBar().setTitle(R.string.title_activity_saved);
+                navView.setCheckedItem(R.id.nav_saved);
+                newFrag = new SavedListFragment();
+                break;
+            case ArticlesApp.FAVES_CALLER_ID:
+                getSupportActionBar().setTitle(R.string.title_activity_faves);
+                navView.setCheckedItem(R.id.nav_saved);
+                newFrag = new FavesListFragment();
+                break;
+            default:
+                getSupportActionBar().setTitle(R.string.app_name);
+                navView.setCheckedItem(R.id.nav_saved);
+                newFrag = new ArticleListFragment();
+                break;
+        }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
         // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.list_fragment, favesFragment);
-
-        // Commit the transaction
-        transaction.commit();
-    }
-
-    private void goHome() {
-        //go home, Roger !
-        callerId = ArticlesApp.ARTICLE_CALLER_ID;
-        getSupportActionBar().setTitle(R.string.app_name);
-        // Create fragment and give it an argument specifying the article it should show
-        ArticleListFragment homeFragment = new ArticleListFragment();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment
-        transaction.replace(R.id.list_fragment, homeFragment);
-
+        transaction.replace(R.id.list_fragment, newFrag);
         // Commit the transaction
         transaction.commit();
     }

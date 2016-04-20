@@ -65,7 +65,7 @@
     <string name="faves_added">Added to Faves</string>
     <string name="faves_removed">Removed from Faves</string>
     <string name="title_activity_faves">Fave Articles</string>
-    <string name="no_faves">Papaya\'s my favourite fruit. What are your favourite articles?</string>
+    <string name="no_faves">Papaya\'s my favourite fruit. Tap the heart to show me your favourite articles.</string>
 
     <!-- saved -->
     <string name="title_activity_saved">Saved Articles</string>
