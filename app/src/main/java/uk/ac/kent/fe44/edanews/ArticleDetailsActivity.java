@@ -123,9 +123,13 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         //take from the correct list based on the parent activity
         getArticle();
 
-        //set up plus bar and plus fab
-        setUpPlusFab();
-        setUpPlusBar();
+        //set up plus bar and plus fab if coming from search or article fragments
+        if( (callerId == ArticlesApp.ARTICLE_CALLER_ID) || (callerId == ArticlesApp.SEARCH_CALLER_ID) ){
+            setUpPlusFab();
+            setUpPlusBar();
+        }else {
+            hidePlus();
+        }
 
         ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
                 .findFragmentById(R.id.details_fragment);
@@ -209,5 +213,12 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         faveIc.setOnClickListener(faveICLstnr);
         savedIc.setOnClickListener(savedICLstnr);
         shareIc.setOnClickListener(shareICLstnr);
+    }
+    private void hidePlus() {
+        plusBar = (LinearLayout) findViewById(R.id.plus_bar);
+        plusFab = (FloatingActionButton) findViewById(R.id.plus_fab);
+
+        plusBar.setVisibility(View.INVISIBLE);
+        plusFab.setVisibility(View.INVISIBLE);
     }
 }
