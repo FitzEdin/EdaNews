@@ -21,19 +21,28 @@ import android.widget.Toast;
  */
 public class FavesListFragment extends ListFragment {
 
+    private View view;
+    private ImageView empty;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_faves_list, container, false);
-        ImageView empty = (ImageView) view.findViewById(R.id.empty_list);
+        view = inflater.inflate(R.layout.fragment_faves_list, container, false);
+        empty = (ImageView) view.findViewById(R.id.empty_list);
 
         //prep for config
         prepForConfig();
 
         //set up list adapter
         listAdapter = new FavesListAdapter(this);
+        showEmptyView();
+
+        return view;
+    }
+
+    private void showEmptyView() {
         if(listAdapter.getItemCount() == 0) {
             //show empty list image
             empty.setVisibility(View.VISIBLE);
@@ -43,8 +52,6 @@ public class FavesListFragment extends ListFragment {
             //set up the list view
             setUpListView(view);
         }
-
-        return view;
     }
 
     /**
@@ -71,17 +78,17 @@ public class FavesListFragment extends ListFragment {
         gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         gridLayoutManager.scrollToPosition(0);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
-            public int getSpanSize(int position){
-                if(isLarge) {
+            public int getSpanSize(int position) {
+                if (isLarge) {
                     //for large screens in all orientations
                     if (((position % 10) == 5) || ((position % 10) == 1)) {
                         return 2;
                     } else {
                         return 1;
                     }
-                }else{
+                } else {
                     //for small screens in all orientations
                     if ((position % 5) == 0) {
                         return 2;
@@ -134,5 +141,11 @@ public class FavesListFragment extends ListFragment {
         super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
+    }
+
+    @Override
+    public void onFavesUpdate() {
+        super.onFavesUpdate();
+        showEmptyView();
     }
 }

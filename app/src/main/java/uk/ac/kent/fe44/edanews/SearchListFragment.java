@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 /**
@@ -19,11 +20,15 @@ public class SearchListFragment extends ListFragment
         implements ArticleModel.OnSearchListUpdateListener{
 
     private ProgressBar mProgressBar;
+    private View view;
+    private ImageView empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //get the view and a handle on the progress Bar
-        View view = inflater.inflate(R.layout.fragment_search_list, container, false);
+        view = inflater.inflate(R.layout.fragment_search_list, container, false);
+        empty = (ImageView) view.findViewById(R.id.empty_list);
+
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
 
@@ -33,9 +38,20 @@ public class SearchListFragment extends ListFragment
         //set up list adapter
         listAdapter = new SearchListAdapter(this);
 
-        //set up visual elements
-        setUpListView(view);
+        showEmptyView();
         return view;
+    }
+
+    private void showEmptyView() {
+        if(listAdapter.getItemCount() == 0) {
+            //show empty list image
+            empty.setVisibility(View.VISIBLE);
+        }else {
+            //hide empty list image
+            empty.setVisibility(View.INVISIBLE);
+            //set up the list view
+            setUpListView(view);
+        }
     }
 
     /**
@@ -47,6 +63,7 @@ public class SearchListFragment extends ListFragment
         listView = (RecyclerView)view.findViewById(R.id.search_list_view);
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
+        listView.scrollToPosition(0);
     }
 
     /**
@@ -120,7 +137,7 @@ public class SearchListFragment extends ListFragment
         //inform the adapter and kill the progress bar
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();
-            listView.scrollToPosition(0);
+            showEmptyView();
             mProgressBar.setVisibility(View.INVISIBLE);
         }
     }

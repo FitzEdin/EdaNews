@@ -7,10 +7,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/colorBackground"
+    android:background="@drawable/bg_crossword"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ArticleListActivity" >
+
+    <ImageView
+        android:id="@+id/empty_list"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:src="@drawable/ic_uok_logo_new"
+
+        android:layout_centerInParent="true"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_view"
