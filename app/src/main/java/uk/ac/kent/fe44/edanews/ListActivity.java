@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public abstract class ListActivity extends AppCompatActivity
         implements ListFragment.OnListItemClickedListener {
 
-    protected final static String PLAIN_TEXT = "text/plain";
     protected int callerId;
 
     protected NavigationView navView;
@@ -59,7 +58,7 @@ public abstract class ListActivity extends AppCompatActivity
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, str);
-        sendIntent.setType(PLAIN_TEXT);
+        sendIntent.setType(ArticlesApp.PLAIN_TEXT);
         startActivity(Intent.createChooser(sendIntent, "Share on..."));
     }
 

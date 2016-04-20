@@ -32,6 +32,8 @@ public class ArticlesApp extends Application {
     public final static String TRANSITION_CARD = "article_card",
             TRANSITION_TOOLBAR = "toolbar", TRANSITION_FAB = "fab_button";
 
+    public final static String PLAIN_TEXT = "text/plain";
+
     @Override
     public void onCreate() {
         super.onCreate();

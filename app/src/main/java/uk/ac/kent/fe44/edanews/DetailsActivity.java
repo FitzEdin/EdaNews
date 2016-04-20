@@ -72,7 +72,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
         callerId = i.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //get a handle on the fab button
-        faveFab = (FloatingActionButton) findViewById(R.id.fave_fab);
+        faveFab = (FloatingActionButton) findViewById(R.id.plus_fab);
         //set click listener on fab
         faveFab.setOnClickListener(fabLstnr);
 
