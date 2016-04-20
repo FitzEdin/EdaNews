@@ -71,14 +71,12 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                     //toggle article's saved status
                     if(article.isSaved()) {
                         //remove from saved list
-                        article.setIsSaved(false);
-            //TODO:            model.removeFromSaved(article);
+                        model.removeFromSaved(article);
                         //change icon
                         savedIc.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
                     }else {
                         //add to saved list
-                        article.setIsSaved(true);
-            //TODO:            model.addToSaved(itemId, callerId);
+                        model.addToSaved(itemId, callerId);
                         //change icon
                         savedIc.setImageResource(R.drawable.ic_watch_later_black_24dp);
                     }
@@ -143,6 +141,9 @@ public class ArticleDetailsActivity extends AppCompatActivity {
                 break;
             case ArticlesApp.FAVES_CALLER_ID:
                 article = model.getFavesList().get(itemId);
+                break;
+            case ArticlesApp.SAVED_CALLER_ID:
+                article = model.getSavedList().get(itemId);
                 break;
             case ArticlesApp.SEARCH_CALLER_ID:
                 article = model.getSearchList().get(itemId);

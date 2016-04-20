@@ -155,5 +155,6 @@ public class SearchListFragment extends ListFragment
         super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
+        ArticleModel.getInstance().setOnSavedUpdateListener(this);
     }
 }

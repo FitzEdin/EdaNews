@@ -68,6 +68,12 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
                         .getSearchList()
                         .get(articleIndex);
                 break;
+            case ArticlesApp.SAVED_CALLER_ID:
+                article = ArticleModel
+                        .getInstance()
+                        .getSavedList()
+                        .get(articleIndex);
+                break;
         }
 
         //update UI with data

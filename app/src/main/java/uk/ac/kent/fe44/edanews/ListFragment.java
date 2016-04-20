@@ -15,7 +15,8 @@ import android.widget.Toast;
 /**
  * Created by fitzroy on 01/03/2016.
  */
-public abstract class ListFragment extends Fragment implements ArticleModel.OnFavesUpdateListener {
+public abstract class ListFragment extends Fragment
+        implements ArticleModel.OnFavesUpdateListener, ArticleModel.OnSavedUpdateListener {
 
     protected RecyclerView listView;
     protected GridLayoutManager gridLayoutManager;
@@ -99,6 +100,14 @@ public abstract class ListFragment extends Fragment implements ArticleModel.OnFa
     /*refresh data set with new information*/
     @Override
     public void onFavesUpdate() {
+        //change data set
+        if(listAdapter != null) {
+            listAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onSavedUpdate() {
         //change data set
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();

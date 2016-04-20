@@ -157,6 +157,8 @@ public class ArticleListActivity extends ListActivity
                 return ArticleModel.getInstance().getSearchList();
             case ArticlesApp.FAVES_CALLER_ID:
                 return ArticleModel.getInstance().getFavesList();
+            case ArticlesApp.SAVED_CALLER_ID:
+                return ArticleModel.getInstance().getSavedList();
             default:
                 return ArticleModel.getInstance().getArticleList();
         }

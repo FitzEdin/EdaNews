@@ -93,6 +93,11 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
                 faveFab.setVisibility(View.INVISIBLE);
                 article = model.getFavesList().get(itemIndex);
                 break;
+            case ArticlesApp.SAVED_CALLER_ID:
+                //hide fab button if we got here via FavesList
+                faveFab.setVisibility(View.INVISIBLE);
+                article = model.getSavedList().get(itemIndex);
+                break;
             case ArticlesApp.SEARCH_CALLER_ID:
                 article = model.getSearchList().get(itemIndex);
                 //set correct icon

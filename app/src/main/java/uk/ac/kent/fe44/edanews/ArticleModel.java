@@ -253,8 +253,6 @@ public class ArticleModel {
      * removeFromFaves(), respectively. Any listeners are
      * notified after each addition and deletion.
      *  */
-    /*managing my faves list*/
-    // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
     private FavesModel favesModel = new FavesModel();
 
     public ArrayList<Article> getFavesList() {
@@ -273,5 +271,33 @@ public class ArticleModel {
     }
     public interface OnFavesUpdateListener {
         void onFavesUpdate();
+    }
+
+
+    /** Manages the read later/saved list; no network requests are
+     * involved, and the list itself is transient. It is
+     * built dynamically using getSavedList(). Any additions
+     * and deletions are done using addToSaved() and
+     * removeFromSaved(), respectively. Any listeners are
+     * notified after each addition and deletion.
+     *  */
+    private SavedModel savedModel = new SavedModel();
+
+    public ArrayList<Article> getSavedList() {
+        return savedModel.getList();
+    }
+    public void addToSaved(int position, int adapterId){
+        //mark article as saved in particular List
+        savedModel.add(position, adapterId);
+    }
+    public void removeFromSaved(Article article) {
+        savedModel.remove(article);
+    }
+    /*receive subscriptions for notifications from classes*/
+    public void setOnSavedUpdateListener(OnSavedUpdateListener savedUpdateListener) {
+        savedModel.setSavedUpdateListener(savedUpdateListener);
+    }
+    public interface OnSavedUpdateListener {
+        void onSavedUpdate();
     }
 }

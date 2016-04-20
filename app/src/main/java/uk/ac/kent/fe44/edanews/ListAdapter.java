@@ -111,14 +111,12 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 //if saved before
                 if(article.isSaved()) {
                     //remove from saved list
-                    article.setIsSaved(false);
-                    //TODO:            model.removeFromSaved(article);
+                    model.removeFromSaved(article);
                     //change icon
                     ic.setImageResource(R.drawable.ic_watch_later_outline_black_24dp);
                 }else {
                     //add to saved list
-                    article.setIsSaved(true);
-                    //TODO:            model.addToSaved(itemId, callerId);
+                    model.addToSaved(position, adapterId);
                     //change icon
                     ic.setImageResource(R.drawable.ic_watch_later_black_24dp);
                 }

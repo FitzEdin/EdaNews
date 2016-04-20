@@ -160,6 +160,7 @@ public class ArticleListFragment extends ListFragment
         super.onResume();
         //listen for changes to the Faves List
         ArticleModel.getInstance().setOnFavesUpdateListener(this);
+        ArticleModel.getInstance().setOnSavedUpdateListener(this);
     }
 
     /*refresh data set with new information*/

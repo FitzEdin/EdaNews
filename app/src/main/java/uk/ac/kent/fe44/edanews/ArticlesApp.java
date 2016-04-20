@@ -25,6 +25,7 @@ public class ArticlesApp extends Application {
     public static final int ARTICLE_CALLER_ID = 1;
     public static final int FAVES_CALLER_ID = 2;
     public static final int SEARCH_CALLER_ID = 3;
+    public static final int SAVED_CALLER_ID = 4;
 
     public static final String ITEM_ID = "ITEM_ID";
     public static final String CALLER_ID = "CALLER_ID";
