@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 public class FavesListFragment extends ListFragment {
 
     private View view;
-    private ImageView empty;
+    private CardView empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -30,7 +31,7 @@ public class FavesListFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_faves_list, container, false);
-        empty = (ImageView) view.findViewById(R.id.empty_list);
+        empty = (CardView) view.findViewById(R.id.empty_list);
 
         //prep for config
         prepForConfig();

@@ -2,6 +2,7 @@ package uk.ac.kent.fe44.edanews;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,13 +22,13 @@ public class SearchListFragment extends ListFragment
 
     private ProgressBar mProgressBar;
     private View view;
-    private ImageView empty;
+    private CardView empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //get the view and a handle on the progress Bar
         view = inflater.inflate(R.layout.fragment_search_list, container, false);
-        empty = (ImageView) view.findViewById(R.id.empty_list);
+        empty = (CardView) view.findViewById(R.id.empty_list);
 
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);
