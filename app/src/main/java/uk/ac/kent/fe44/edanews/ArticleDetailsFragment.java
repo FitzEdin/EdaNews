@@ -22,6 +22,9 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
 
     private int articleId;
     private int articleIndex;
+    private Article article;
+
+    private int callerId;
 
     public ArticleDetailsFragment() {
         // Required empty public constructor
@@ -42,11 +45,11 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
     }
 
     /*populate the views with article's details*/
-    public void updateDetails(int index, int caller) {
+    public void updateDetails(int index, int callerId) {
         this.articleIndex = index;
+        this.callerId = callerId;
         //get the article from the correct list
-        Article article = new Article();
-        switch(caller){
+        switch(callerId){
             case ArticlesApp.ARTICLE_CALLER_ID:
                 article = ArticleModel
                         .getInstance()
@@ -72,31 +75,27 @@ public class ArticleDetailsFragment extends Fragment implements ArticleModel.OnD
         articleDate.setText(article.getDate());
         articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
 
-        if(article.isDetailed()) {
-            articleContents.setText(article.getContents());
-        }else{
+        if(article.getContents() == null) {
             //show network message
             articleContents.setText(R.string.loading_contents);
 
             //get a handle on article's record id for network request
             articleId = article.getRecordID();
             getArticleDetails();
+        }else{
+            articleContents.setText(article.getContents());
         }
     }
 
     /*prompts the ArticleModel class to get article's details from the network*/
-    public void getArticleDetails() {
+    private void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
-        model.loadArticleDetails(articleId, articleIndex, this);
+        model.loadArticleDetails(callerId, articleId, articleIndex, this);
     }
 
     @Override
     public void onDetailsUpdate() {
-        Article article = ArticleModel
-                .getInstance()
-                .getArticleList()
-                .get(articleIndex);
         articleContents.setText(article.getContents());
     }
 

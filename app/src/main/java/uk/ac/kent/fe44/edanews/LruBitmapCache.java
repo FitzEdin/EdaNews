@@ -34,8 +34,12 @@ public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageLoa
 
     private String formatUrl(String url) {
         String[] parts = url.split(":");
-        String formattedUrl = "https:" + parts[1];
-
+        String formattedUrl;
+        if(parts.length > 1) {
+            formattedUrl = "https:" + parts[1];
+        }else{
+            formattedUrl = "https:" + parts[0];
+        }
         return formattedUrl;
     }
 }

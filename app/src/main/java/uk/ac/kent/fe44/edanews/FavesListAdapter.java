@@ -38,6 +38,10 @@ public class FavesListAdapter extends ListAdapter {
     @Override
     public void onBindViewHolder(ListAdapter.ViewHolder holder, int position) {
         Article article = model.getFavesList().get(position);
+        //grab article's details as it comes into view
+        if(article.getContents() == null) {
+            model.loadArticleDetails(adapterId, article.getRecordID(), position, null);
+        }
         holder.setData(article);
     }
 

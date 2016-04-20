@@ -58,14 +58,6 @@ public class Article {
      * later reading.
      */
     private boolean isSaved = false;     //saved
-    /**
-     * The full contents of an Article is
-     * downloaded after a second network call.
-     * This boolean is flipped to {@code true} if
-     * the full contents have been saved, and is
-     * {@code false} otherwise.
-     */
-    private boolean isDetailed = false; //downloaded in its entirety
 
     /*Constructors*/
     /**
@@ -94,11 +86,6 @@ public class Article {
         this.web_page = web_page;
         this.isFave = isFave;
         this.isSaved = isSaved;
-
-        //a saved/favourited article may not have been detailed before; if
-        //this is the case, then contents will be empty/null. Once this is
-        //the case, the article will be detailed once it is opened.
-        this.isDetailed = ( (contents != null) ? true : false );
     }
 
     /**
@@ -247,22 +234,5 @@ public class Article {
      */
     public void setIsSaved(boolean isSaved) {
         this.isSaved = isSaved;
-    }
-
-    /**
-     * Determine whether or not the full contents of the Article has been downloaded.
-     * @return boolean {@code true} if the full contents of the Article has
-     * been downloaded, {@code false} otherwise
-     */
-    public boolean isDetailed() {
-        return isDetailed;
-    }
-    /**
-     * Set whether or not the full contents of the Article has been downloaded.
-     * @param isDetailed boolean {@code true} if the full contents
-     *                   of the Article has been downloaded, {@code false} otherwise
-     */
-    public void setIsDetailed(boolean isDetailed) {
-        this.isDetailed = isDetailed;
     }
 }

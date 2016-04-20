@@ -138,7 +138,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
         articleDate.setText(article.getDate());
         articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
 
-        if(article.isDetailed()) {
+        if(article.getContents() != null) {
             articleContents.setText(article.getContents());
         }else{
             //show network message
@@ -154,7 +154,7 @@ public class DetailsActivity extends AppCompatActivity implements ArticleModel.O
     public void getArticleDetails() {
         //get details
         ArticleModel model = ArticleModel.getInstance();
-        model.loadArticleDetails(articleId, itemIndex, this);
+        model.loadArticleDetails(callerId, articleId, itemIndex, this);
     }
 
     @Override

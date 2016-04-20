@@ -202,8 +202,8 @@ public class ArticleModel {
      * @param detailsUpdateListener The class that is reacting to changes to
      *                              the article's details (may be null).
      */
-    public void loadArticleDetails(int articleId, int articleIndex, OnDetailsUpdateListener detailsUpdateListener) {
-        detailsModel.load(articleId, articleIndex, detailsUpdateListener);
+    public void loadArticleDetails(int callerId, int articleId, int articleIndex, OnDetailsUpdateListener detailsUpdateListener) {
+        detailsModel.load(callerId, articleId, articleIndex, detailsUpdateListener);
     }
     public interface OnDetailsUpdateListener {
         void onDetailsUpdate();
@@ -257,7 +257,14 @@ public class ArticleModel {
     // dropped this; broke my model private ArrayList<Article> favesList = new ArrayList<>();
     private OnFavesUpdateListener favesUpdateListener;
 
-    public ArrayList<Article> getFavesList() {  return getMasterList(); }
+    public ArrayList<Article> getFavesList() {
+        ArrayList<Article> favesList = new ArrayList<>();
+        for(Article a : getMasterList()) {
+            if(a.isFave()) {
+                favesList.add(a);
+            }
+        }
+        return favesList; }
     public void setFavesList(ArrayList<Article> favesList) {
         //TODO: populate faves list with items from memory
     }

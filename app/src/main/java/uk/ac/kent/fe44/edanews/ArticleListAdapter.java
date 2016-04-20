@@ -41,7 +41,9 @@ public class ArticleListAdapter extends ListAdapter {
         //grab article's details as it comes into view; does
         //not need to listen for response because the aim is
         //to populate the article object itself
-        model.loadArticleDetails(article.getRecordID(), position, null);
+        if(article.getContents() == null) {
+            model.loadArticleDetails(adapterId, article.getRecordID(), position, null);
+        }
         holder.setData(article);
     }
 

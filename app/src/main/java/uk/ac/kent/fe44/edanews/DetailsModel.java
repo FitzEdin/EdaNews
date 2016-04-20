@@ -14,8 +14,10 @@ public class DetailsModel {
     private String DETAILS_URL = "http://www.efstratiou.info/projects/newsfeed/getItem.php?id=";
     private ArticleModel.OnDetailsUpdateListener detailsUpdateListener;
     private static int articleIndex;
+    private int callerId;
 
-    public void load(int articleId, int articleIndex, ArticleModel.OnDetailsUpdateListener detailsUpdateListener) {
+    public void load(int callerId, int articleId, int articleIndex, ArticleModel.OnDetailsUpdateListener detailsUpdateListener) {
+        this.callerId = callerId;
         //set calling class as listener
         if(detailsUpdateListener != null) {
             setOnDetailsUpdateListener(detailsUpdateListener);
@@ -50,16 +52,28 @@ public class DetailsModel {
             //handle response from server
             try{
                 //extract contents from JSON object response
-                ArticleModel.getInstance()
-                        .getArticleList()
-                        .get(articleIndex)
-                        .setContents(response.getString(ArticlesApp.CONTENTS));
-
-                //mark article as detailed /---/ prevents a second attempt at downloading same data
-                ArticleModel.getInstance()
-                        .getArticleList()
-                        .get(articleIndex)
-                        .setIsDetailed(true);
+                String contents = response.getString(ArticlesApp.CONTENTS);
+                //populate the right list
+                switch (callerId) {
+                    case ArticlesApp.ARTICLE_CALLER_ID:
+                        ArticleModel.getInstance()
+                                .getArticleList()
+                                .get(articleIndex)
+                                .setContents(contents);
+                        break;
+                    case ArticlesApp.FAVES_CALLER_ID:
+                        ArticleModel.getInstance()
+                                .getMasterList()
+                                .get(articleIndex)
+                                .setContents(contents);
+                        break;
+                    case ArticlesApp.SEARCH_CALLER_ID:
+                        ArticleModel.getInstance()
+                                .getSearchList()
+                                .get(articleIndex)
+                                .setContents(contents);
+                        break;
+                }
 
             }catch(JSONException e) {
                 //handle exception
