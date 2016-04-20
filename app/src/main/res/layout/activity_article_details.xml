@@ -50,7 +50,7 @@
         android:layout_gravity="bottom"
 
         android:elevation="@dimen/elevation"
-        android:background="@drawable/round_backed">
+        android:background="@color/white">
 
         <!-- Icons: onClick functions are in .ArticleListActivity-->
         <!-- favourites icon -->

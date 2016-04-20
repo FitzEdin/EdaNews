@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_uok_logo_new" />
+
+        android:src="@drawable/ic_uok_logo_new"
+        android:tint="@color/white"/>
 
     <TextView
         android:id="@+id/school_text_view"
@@ -25,6 +27,7 @@
         android:layout_height="24dp"
         android:paddingTop="0dp"
         android:text="@string/app_title"
+        android:textColor="@color/colorTextPrimary"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

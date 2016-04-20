@@ -29,11 +29,14 @@
             android:label="@string/title_activity_article_details"
             android:parentActivityName=".ArticleListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.ac.kent.fe44.edanews.ArticleListActivity" />
         </activity>
         <activity
             android:name=".ScrollingActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_scrolling"
+            android:label="@string/app_name"
             android:parentActivityName=".ArticleListActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
@@ -42,7 +45,7 @@
         </activity>
         <activity
             android:name=".PeekActivity"
-            android:label="@string/title_activity_article_peek"
+            android:label="@string/title_none"
             android:parentActivityName=".ArticleListActivity"
             android:theme="@style/Theme.Transparent" >
             <meta-data
