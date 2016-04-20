@@ -103,7 +103,10 @@
                 android:layout_weight="1"
 
                 android:src="@drawable/ic_favorite_border_black_24dp"
-                android:tint="@color/colorPrimaryDark"/>
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
             <!-- save later icon -->
             <ImageView
@@ -114,7 +117,10 @@
                 android:layout_weight="1"
 
                 android:src="@drawable/ic_watch_later_outline_black_24dp"
-                android:tint="@color/colorPrimaryDark"/>
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
 
             <!-- share icon -->
             <ImageView
@@ -125,7 +131,10 @@
                 android:layout_weight="1"
 
                 android:src="@drawable/ic_share_black_24dp"
-                android:tint="@color/colorPrimaryDark"/>
+                android:tint="@color/colorPrimaryDark"
+
+                android:clickable="true"
+                android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
 
     </LinearLayout>

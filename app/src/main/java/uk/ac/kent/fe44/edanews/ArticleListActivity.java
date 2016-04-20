@@ -35,17 +35,9 @@ public class ArticleListActivity extends ListActivity
     private View.OnClickListener onFabClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //get center of searchBar for animation
-            int cx = searchBar.getWidth()/2;
-            int cy = searchBar.getHeight()/2;
 
-            float finalRadius = (float) Math.hypot(cx, cy);
+            Animator anim = createAnimator(searchBar, 600);
 
-            Animator anim = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                anim = ViewAnimationUtils.createCircularReveal(searchBar, cx, cy, 0, finalRadius);
-                anim.setDuration(600);
-            }
             //toggle searchBar and searchFab visibility
             searchFab.setVisibility(View.INVISIBLE);
             searchBar.setVisibility(View.VISIBLE);
@@ -125,6 +117,20 @@ public class ArticleListActivity extends ListActivity
         toggle.syncState();
     }
 
+    private Animator createAnimator(View showMe, long duration) {
+        int cx = showMe.getWidth()/2;
+        int cy = showMe.getHeight()/2;
+
+        float finalRadius = (float) Math.hypot(cx, cy);
+
+        Animator anim = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            anim = ViewAnimationUtils.createCircularReveal(showMe, cx, cy, 0, finalRadius);
+            anim.setDuration(duration);
+        }
+        return anim;
+    }
+
     private void setUpSearch() {
         searchBar = (LinearLayout)findViewById(R.id.search_bar);
         searchTextView = (EditText) findViewById(R.id.search_text);
@@ -162,8 +168,12 @@ public class ArticleListActivity extends ListActivity
      */
     public void closeSearchBar(View v) {
         hideKeyboard(this);
+
+        Animator anim = createAnimator(searchFab, 300);
+
         searchBar.setVisibility(View.INVISIBLE);
         searchFab.setVisibility(View.VISIBLE);
+        anim.start();
     }
 
     /**
