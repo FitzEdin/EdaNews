@@ -3,6 +3,7 @@ package uk.ac.kent.fe44.edanews.controller;
 import android.animation.Animator;
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,19 @@ import uk.ac.kent.fe44.edanews.R;
 public class ScrollingActivity extends AppCompatActivity {
 
     private int extra;
+    private String location;
+
+    private View.OnClickListener mapLstnr = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Uri gmmIntentUri = Uri.parse(location);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(mapIntent);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +46,7 @@ public class ScrollingActivity extends AppCompatActivity {
         Intent i = this.getIntent();
         extra = i.getIntExtra(ArticlesApp.EXTRA_ID, ArticlesApp.APP_EXTRA_ID);
 
+        location = null;
         setContents();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,6 +56,8 @@ public class ScrollingActivity extends AppCompatActivity {
         //get a handle on screen items
         TextView contents = (TextView) findViewById(R.id.extra_contents);
         ImageView imgExtra = (ImageView) findViewById(R.id.extra_img);
+        FloatingActionButton mapFab = (FloatingActionButton) findViewById(R.id.map_fab);
+        mapFab.setOnClickListener(mapLstnr);
 
         //fill contents based on who called
         switch (extra) {
@@ -48,15 +65,22 @@ public class ScrollingActivity extends AppCompatActivity {
                 contents.setText(R.string.app_about);
                 getSupportActionBar().setTitle(R.string.about_app);
 
+                mapFab.setVisibility(View.INVISIBLE);
                 imgExtra.setImageResource(R.drawable.papaya);
                 break;
             case ArticlesApp.DEPT_EXTRA_ID:
                 contents.setText(R.string.school_about);
                 getSupportActionBar().setTitle(R.string.school_name);
+
+                mapFab.setVisibility(View.VISIBLE);
+                location = "google.streetview:cbll=51.2980532,1.0646347&cbp=0,280,0,0,0";
                 break;
             case ArticlesApp.DEVELOPER_EXTRA_ID:
                 contents.setText(R.string.developer_about);
                 getSupportActionBar().setTitle(R.string.about_developer);
+
+                mapFab.setVisibility(View.VISIBLE);
+                location = "geo:17.2639909,-62.7220057,10.01z";
 
                 Random rand = new Random();
                 int m = rand.nextInt(9);

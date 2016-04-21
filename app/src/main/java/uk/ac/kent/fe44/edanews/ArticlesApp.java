@@ -44,6 +44,7 @@ public class ArticlesApp extends Application {
             TRANSITION_TOOLBAR = "toolbar", TRANSITION_FAB = "fab_button";
 
     public final static String PLAIN_TEXT = "text/plain";
+    public final static String SAVED_COUNT = "saved_count";
 
     @Override
     public void onCreate() {

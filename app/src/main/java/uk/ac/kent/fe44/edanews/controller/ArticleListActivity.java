@@ -2,7 +2,6 @@ package uk.ac.kent.fe44.edanews.controller;
 
 import android.animation.Animator;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +24,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import uk.ac.kent.fe44.edanews.ReadLaterService;
 import uk.ac.kent.fe44.edanews.model.Article;
 import uk.ac.kent.fe44.edanews.ArticlesApp;
 import uk.ac.kent.fe44.edanews.view.ListFragment;
@@ -37,6 +37,8 @@ import uk.ac.kent.fe44.edanews.list.searchlist.SearchListFragment;
 
 public class ArticleListActivity extends ListActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Intent mServiceIntent;
 
     private static FloatingActionButton searchFab;
     private static LinearLayout searchBar;
@@ -242,6 +244,7 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onResume() {
         super.onResume();
+        launchService = true;
         setUpSearch();
     }
 
@@ -253,6 +256,16 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onStop() {
         super.onStop();
+        if(launchService) {
+            //start background service
+            final int count = ArticleModel.getInstance().getSavedList().size();
+
+            //intent to pass to background service
+            mServiceIntent = new Intent(this, ReadLaterService.class);
+            mServiceIntent.putExtra(ArticlesApp.SAVED_COUNT, count);
+            this.startService(mServiceIntent);
+        }
+
         //save data
         ArticleModel.getInstance().saveMasterList(this);
     }
@@ -281,7 +294,6 @@ public class ArticleListActivity extends ListActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Dialog d;
 
         switch (id){
             case R.id.nav_home:
@@ -316,6 +328,7 @@ public class ArticleListActivity extends ListActivity
     }
 
     private void goNear(int location) {
+        launchService = false;
         ListFragment newFrag;
         callerId = location;    //one of the caller_ids outlined in ArticlesApp
 
@@ -345,6 +358,7 @@ public class ArticleListActivity extends ListActivity
     }
 
     private void goFar(int location) {
+        launchService = false;
         Intent s = new Intent(this, ScrollingActivity.class);
         s.putExtra(ArticlesApp.EXTRA_ID, location);
         startActivity(s);

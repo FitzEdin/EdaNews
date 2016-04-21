@@ -23,6 +23,7 @@ public abstract class ListActivity extends AppCompatActivity
         implements ListFragment.OnListItemClickedListener {
 
     protected int callerId;
+    protected boolean launchService;
 
     protected NavigationView navView;
 
@@ -45,6 +46,7 @@ public abstract class ListActivity extends AppCompatActivity
     /*define what happens on sharing a list item*/
     @Override
     public void onItemShared(int position) {
+        launchService = false;
         Article article = getList().get(position);
         String str = article.getWeb_page();
 
@@ -58,6 +60,7 @@ public abstract class ListActivity extends AppCompatActivity
     /*define what happens on choosing a list item*/
     @Override
     public void onItemClicked(int position, Bundle bundle) {
+        launchService = false;
         Intent i = new Intent(this, ArticleDetailsActivity.class);
 
         i.putExtra(ArticlesApp.ITEM_ID, position);
@@ -69,6 +72,7 @@ public abstract class ListActivity extends AppCompatActivity
     /*define what happens when a long press is done on an item image */
     @Override
     public void onLongTap(int position) {
+        launchService = false;
         Article article = getList().get(position);
 
         //prep intent for peek activity
@@ -84,21 +88,5 @@ public abstract class ListActivity extends AppCompatActivity
         p.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         startActivity(p);
-    }
-
-
-    /*create the About dialog*/
-    public Dialog createDialog(String title, String message) {
-        // Use the Builder class for convenient dialog construction
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("Close", null);
-        // Create the AlertDialog object and return it
-        return builder.create();
-    }
-
-    public int getCallerId() {
-        return callerId;
     }
 }

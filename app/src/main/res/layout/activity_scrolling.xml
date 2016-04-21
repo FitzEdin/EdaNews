@@ -66,4 +66,18 @@
 
         layout="@layout/content_scrolling" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/map_fab"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="bottom|right|end"
+        android:layout_marginRight="@dimen/fab_right_margin"
+        android:layout_marginBottom="@dimen/fab_bottom_margin"
+
+        app:rippleColor="@color/colorPrimary"
+
+        android:src="@drawable/ic_place_white_48dp" />
+
 </android.support.design.widget.CoordinatorLayout>
