@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
 
-    tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsActivity">
+    tools:context="uk.ac.kent.fe44.edanews.controller.ArticleDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        class="uk.ac.kent.fe44.edanews.ArticleDetailsFragment"
+        class="uk.ac.kent.fe44.edanews.details.ArticleDetailsFragment"
         tools:layout="@layout/fragment_article_details" />
 
     <!-- Plus Bar -->

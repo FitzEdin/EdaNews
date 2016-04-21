@@ -12,7 +12,7 @@
     android:background="@drawable/bg_crossword"
     android:scrollbars="none"
 
-    tools:context="uk.ac.kent.fe44.edanews.ArticleDetailsFragment">
+    tools:context="uk.ac.kent.fe44.edanews.details.ArticleDetailsFragment">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"

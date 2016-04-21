@@ -12,7 +12,7 @@
 
     android:background="@drawable/bg_crossword"
 
-    tools:context="uk.ac.kent.fe44.edanews.ScrollingActivity">
+    tools:context="uk.ac.kent.fe44.edanews.controller.ScrollingActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

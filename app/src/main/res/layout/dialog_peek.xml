@@ -8,7 +8,7 @@
 
     android:gravity="center"
 
-    tools:context="uk.ac.kent.fe44.edanews.PeekActivity">
+    tools:context="uk.ac.kent.fe44.edanews.controller.PeekActivity">
 
     <include
         layout="@layout/peek_item"
