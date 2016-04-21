@@ -29,7 +29,6 @@ public abstract class ListFragment extends Fragment
     }
 
     private void prepForConfig(Configuration newConfig) {
-        Configuration config = getResources().getConfiguration();
         //set span count based on screen size and orientation
         final boolean isLarge = newConfig.isLayoutSizeAtLeast(Configuration.SCREENLAYOUT_SIZE_LARGE);
         int spanCount = getSpanCount(newConfig, isLarge);

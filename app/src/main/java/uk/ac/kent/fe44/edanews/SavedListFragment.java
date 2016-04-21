@@ -26,6 +26,7 @@ public class SavedListFragment extends ListFragment {
         empty = (CardView) view.findViewById(R.id.empty_saved_list);
 
         //prep for config
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         prepForConfig();
 
         //set up list adapter
@@ -68,9 +69,9 @@ public class SavedListFragment extends ListFragment {
      *                  getSpanCount()
      */
     protected void setUpLayoutManager(final boolean isLarge, int spanCount) {
-        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
+        gridLayoutManager.setSpanCount(spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        gridLayoutManager.scrollToPosition(0);
+        gridLayoutManager.scrollToPosition(gridLayoutManager.findFirstVisibleItemPosition());
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {

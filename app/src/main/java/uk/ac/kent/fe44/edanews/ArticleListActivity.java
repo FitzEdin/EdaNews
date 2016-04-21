@@ -350,12 +350,12 @@ public class ArticleListActivity extends ListActivity
                 break;
             case ArticlesApp.FAVES_CALLER_ID:
                 getSupportActionBar().setTitle(R.string.title_activity_faves);
-                navView.setCheckedItem(R.id.nav_saved);
+                navView.setCheckedItem(R.id.nav_faves);
                 newFrag = new FavesListFragment();
                 break;
             default:
                 getSupportActionBar().setTitle(R.string.app_name);
-                navView.setCheckedItem(R.id.nav_saved);
+                navView.setCheckedItem(R.id.nav_home);
                 newFrag = new ArticleListFragment();
                 break;
         }

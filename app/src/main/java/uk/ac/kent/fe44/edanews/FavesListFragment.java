@@ -33,6 +33,7 @@ public class FavesListFragment extends ListFragment {
         view = inflater.inflate(R.layout.fragment_faves_list, container, false);
         empty = (CardView) view.findViewById(R.id.empty_list);
 
+        gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         //prep for config
         prepForConfig();
 
@@ -76,9 +77,9 @@ public class FavesListFragment extends ListFragment {
      *                  getSpanCount()
      */
     protected void setUpLayoutManager(final boolean isLarge, int spanCount) {
-        gridLayoutManager = new GridLayoutManager(getActivity(), spanCount);
+        gridLayoutManager.setSpanCount(spanCount);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        gridLayoutManager.scrollToPosition(0);
+        gridLayoutManager.scrollToPosition(gridLayoutManager.findFirstVisibleItemPosition());
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {

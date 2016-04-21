@@ -41,7 +41,7 @@
                 android:src="@drawable/ic_uok_logo_new"
 
                 android:layout_width="180dp"
-                android:layout_height="180dp"
+                android:layout_height="fill_parent"
 
                 android:scaleType="centerCrop" />
 
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:padding="4dp"
+                    android:padding="6dp"
 
                     android:gravity="center_vertical"
 
