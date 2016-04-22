@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -108,12 +110,32 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         //describe what happens when the activity enters
         if(Build.VERSION.SDK_INT >= 21) {
-            getWindow().setSharedElementEnterTransition(
-                    TransitionInflater.from(this)
-                            .inflateTransition(R.transition.shared_image)
-            );
+            Transition shared
+                    = TransitionInflater.from(this)
+                            .inflateTransition(R.transition.shared_image);
+            getWindow().setSharedElementEnterTransition(shared);
         }
         setContentView(R.layout.activity_article_details);
+
+
+//        if(Build.VERSION.SDK_INT >= 21) {
+//            postponeEnterTransition();
+//
+//            final View decor = getWindow().getDecorView();
+//            decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+//                @Override
+//                public boolean onPreDraw() {
+//                    if(Build.VERSION.SDK_INT >= 21) {
+//                        decor.getViewTreeObserver().removeOnPreDrawListener(this);
+//                        startPostponedEnterTransition();
+//                    }
+//                    return true;
+//                }
+//            });
+//        }
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

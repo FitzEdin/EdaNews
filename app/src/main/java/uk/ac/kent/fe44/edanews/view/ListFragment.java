@@ -115,7 +115,7 @@ public abstract class ListFragment extends Fragment
     public interface OnListItemClickedListener {
         void onItemClicked(int position, Bundle bundle);
         void onItemShared(int position);
-        void onLongTap(int position);
+        void onLongTap(int position, Bundle bundle);
     }
 
     public void onItemClicked(int position, Bundle bundle) {
@@ -128,8 +128,8 @@ public abstract class ListFragment extends Fragment
         mListenerActivity.onItemShared(position);
     }
 
-    public void onLongTap(int position) {
+    public void onLongTap(int position, Bundle bundle) {
         //perform peek action
-        mListenerActivity.onLongTap(position);
+        mListenerActivity.onLongTap(position, bundle);
     }
 }

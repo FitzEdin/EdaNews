@@ -256,9 +256,10 @@ public class ArticleListActivity extends ListActivity
     @Override
     public void onStop() {
         super.onStop();
-        if(launchService) {
+
+        final int count = ArticleModel.getInstance().getSavedList().size();
+        if(launchService && (count > 0)) {
             //start background service
-            final int count = ArticleModel.getInstance().getSavedList().size();
 
             //intent to pass to background service
             mServiceIntent = new Intent(this, ReadLaterService.class);

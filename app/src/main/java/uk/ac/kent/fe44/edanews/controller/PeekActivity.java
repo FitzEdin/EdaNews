@@ -1,8 +1,14 @@
 package uk.ac.kent.fe44.edanews.controller;
 
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,6 +59,14 @@ public class PeekActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(Build.VERSION.SDK_INT >= 21) {
+            //describe what happens when the activity enters
+            getWindow().setSharedElementEnterTransition(
+                    TransitionInflater.from(this)
+                            .inflateTransition(R.transition.shared_image)
+            );
+        }
         setContentView(R.layout.activity_peek);
 
         //get a handle on the views

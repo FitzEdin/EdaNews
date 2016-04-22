@@ -18,8 +18,6 @@ import uk.ac.kent.fe44.edanews.controller.ArticleListActivity;
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
  * <p/>
- * TODO: Customize class - update intent actions, extra parameters and static
- * helper methods.
  */
 public class ReadLaterService extends IntentService {
 
@@ -34,12 +32,10 @@ public class ReadLaterService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final int count = intent.getIntExtra(SAVED_COUNT, 1);
-            Log.d("ReadLaterService", "Saved "+count+" articles");
             //set timer for 24 hours
             new CountDownTimer(10000, 1000) {
                 public void onTick(long millisUntilFinished) {  /*do nothing*/  }
                 public void onFinish() {
-                    Log.d("ReadLaterService", "Finished timer");
                     buildNotification(count);
                     Looper.myLooper().quit();
                 }
@@ -49,13 +45,17 @@ public class ReadLaterService extends IntentService {
     }
 
     public void buildNotification(int count) {
-        Log.d("ReadLaterService", "building notification "+count);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_stat_papaya)
                         .setContentTitle("EDA News Reader")
-                        .setContentText("There are " + count + " articles waiting to be read by you.")
+                        //assume 1 article
+                        .setContentText("There is " + count + " article waiting for you to read.")
                         .setAutoCancel(true);
+
+        if (count > 1) {
+            mBuilder.setContentText("There are " + count + " articles waiting for you to read.");
+        }
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, ArticleListActivity.class);
 

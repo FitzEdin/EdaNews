@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
 import android.transition.TransitionInflater;
 
 import java.util.ArrayList;
@@ -33,10 +34,10 @@ public abstract class ListActivity extends AppCompatActivity
 
         //describe what happens when the activity exits
         if(Build.VERSION.SDK_INT >= 21) {
-            getWindow().setSharedElementExitTransition(
-                    TransitionInflater.from(this)
-                            .inflateTransition(R.transition.shared_image)
-            );
+            Transition shared
+                    = TransitionInflater.from(this)
+                            .inflateTransition(R.transition.shared_image);
+            getWindow().setSharedElementExitTransition(shared);
         }
     }
 
@@ -71,7 +72,7 @@ public abstract class ListActivity extends AppCompatActivity
 
     /*define what happens when a long press is done on an item image */
     @Override
-    public void onLongTap(int position) {
+    public void onLongTap(int position, Bundle bundle) {
         launchService = false;
         Article article = getList().get(position);
 
@@ -87,6 +88,6 @@ public abstract class ListActivity extends AppCompatActivity
         p.putExtra(ArticlesApp.ITEM_ID, position);
         p.putExtra(ArticlesApp.CALLER_ID, callerId);
 
-        startActivity(p);
+        startActivity(p, bundle);
     }
 }

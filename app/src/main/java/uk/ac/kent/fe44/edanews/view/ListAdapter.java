@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v4.util.Pair;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,8 +52,6 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected ImageView savedIc;
         protected ImageView shareIc;
 
-        boolean longPressing = false;
-
         /*sub classes determine which list they are using*/
         protected abstract ArrayList<Article> getList();
 
@@ -60,13 +59,21 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected View.OnClickListener itemTap = new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+//                View statusBar = fragment.getActivity().findViewById(android.R.id.statusBarBackground);
+//                View navBar = fragment.getActivity().findViewById(android.R.id.navigationBarBackground);
+//
+//                if (statusBar != null) {
+//                    Pair<View, String> bob = Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME);
+//                }
                 //create an options object for transition
                 ActivityOptionsCompat optionsCompat
                         = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         fragment.getActivity(),
                         Pair.create((View) card, ArticlesApp.TRANSITION_CARD),
                         Pair.create((View) toolbar, ArticlesApp.TRANSITION_TOOLBAR),
-                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)
+                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)/*,
+                        Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
+                        Pair.create(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME)*/
                 );
                 fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }
@@ -76,8 +83,13 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 = new NetworkImageView.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                fragment.onLongTap(getAdapterPosition());
-                longPressing = true;
+                //create an options object for transition
+                ActivityOptionsCompat optionsCompat
+                        = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        fragment.getActivity(),
+                        Pair.create((View) card, ArticlesApp.TRANSITION_CARD)
+                );
+                fragment.onLongTap(getAdapterPosition(), optionsCompat.toBundle());
                 return true;
             }
         };
