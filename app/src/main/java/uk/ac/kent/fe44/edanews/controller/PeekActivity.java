@@ -59,14 +59,6 @@ public class PeekActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if(Build.VERSION.SDK_INT >= 21) {
-            //describe what happens when the activity enters
-            getWindow().setSharedElementEnterTransition(
-                    TransitionInflater.from(this)
-                            .inflateTransition(R.transition.shared_image)
-            );
-        }
         setContentView(R.layout.activity_peek);
 
         //get a handle on the views

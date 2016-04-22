@@ -72,7 +72,7 @@ public abstract class ListActivity extends AppCompatActivity
 
     /*define what happens when a long press is done on an item image */
     @Override
-    public void onLongTap(int position, Bundle bundle) {
+    public void onLongTap(int position) {
         launchService = false;
         Article article = getList().get(position);
 
@@ -88,6 +88,6 @@ public abstract class ListActivity extends AppCompatActivity
         p.putExtra(ArticlesApp.ITEM_ID, position);
         p.putExtra(ArticlesApp.CALLER_ID, callerId);
 
-        startActivity(p, bundle);
+        startActivity(p);
     }
 }

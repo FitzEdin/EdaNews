@@ -83,13 +83,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 = new NetworkImageView.OnLongClickListener(){
             @Override
             public boolean onLongClick(View v) {
-                //create an options object for transition
-                ActivityOptionsCompat optionsCompat
-                        = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        fragment.getActivity(),
-                        Pair.create((View) card, ArticlesApp.TRANSITION_CARD)
-                );
-                fragment.onLongTap(getAdapterPosition(), optionsCompat.toBundle());
+                fragment.onLongTap(getAdapterPosition());
                 return true;
             }
         };
