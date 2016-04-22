@@ -2,12 +2,14 @@ package uk.ac.kent.fe44.edanews.list.articlelist;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
+import android.graphics.LinearGradient;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,7 +28,7 @@ import uk.ac.kent.fe44.edanews.R;
 public class ArticleListFragment extends ListFragment
         implements ArticleModel.OnListUpdateListener {
 
-    private TextView noNetworkRetry;
+    private LinearLayout noNetworkRetry;
     private ProgressBar mProgressBar;
     private boolean loading = false;
 
@@ -38,7 +40,7 @@ public class ArticleListFragment extends ListFragment
         View view = inflater.inflate(R.layout.fragment_article_list, container, false);
 
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
-        noNetworkRetry = (TextView)view.findViewById(R.id.no_network_retry);
+        noNetworkRetry = (LinearLayout)view.findViewById(R.id.no_network_retry);
 
         noNetworkRetry.setOnClickListener(new View.OnClickListener() {
             @Override

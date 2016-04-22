@@ -3,7 +3,6 @@ package uk.ac.kent.fe44.edanews.list.faveslist;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

@@ -7,10 +7,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@drawable/bg_crossword"
+    android:background="@color/grey"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ArticleListActivity">
+    tools:context=".controller.ArticleListActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/article_list_view"
@@ -30,21 +30,41 @@
         android:progressTint="@color/colorPrimaryDark"
         android:layout_centerInParent="true"/>
 
-    <TextView
+    <LinearLayout
         android:id="@+id/no_network_retry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+
+        android:orientation="horizontal"
+
         android:layout_centerInParent="true"
 
-        android:padding="8dp"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation" >
 
-        android:clickable="true"
+        <!-- large image -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
 
-        android:text="@string/no_network_retry"
-        android:textSize="16sp"
-        android:textAlignment="center"
-        android:textColor="@color/colorTextPrimary"
+            android:padding="4dp"
 
-        android:background="@drawable/round"
-        android:elevation="@dimen/elevation"/>
+            android:src="@drawable/papaya" />
+
+        <!-- article title -->
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
+
+            android:text="@string/no_network_retry"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp"
+
+            android:gravity="center" />
+    </LinearLayout>
 </RelativeLayout>

@@ -14,8 +14,8 @@
     <dimen name="fab_bottom_margin">12dp</dimen>
 
     <!-- Tile Dimensions -->
-    <dimen name="tile_left_margin">1dp</dimen>
-    <dimen name="tile_right_margin">1dp</dimen>
-    <dimen name="tile_top_margin">1dp</dimen>
-    <dimen name="tile_bottom_margin">1dp</dimen>
+    <dimen name="tile_left_margin">3dp</dimen>
+    <dimen name="tile_right_margin">3dp</dimen>
+    <dimen name="tile_top_margin">3dp</dimen>
+    <dimen name="tile_bottom_margin">3dp</dimen>
 </resources>
