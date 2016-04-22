@@ -1,14 +1,8 @@
 package uk.ac.kent.fe44.edanews.controller;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -82,12 +76,12 @@ public class PeekActivity extends AppCompatActivity {
 
         //prepare intent for detailsActivity
         //load values from intent
-        int position = p.getIntExtra(ArticlesApp.ITEM_ID, 0);
+        int position = p.getIntExtra(ArticlesApp.ITEM_INDEX, 0);
         int callerId = p.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //get info for detailsActivity intent
         i = new Intent(this, ArticleDetailsActivity.class);
-        i.putExtra(ArticlesApp.ITEM_ID, position);
+        i.putExtra(ArticlesApp.ITEM_INDEX, position);
         i.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         //add listeners to buttons

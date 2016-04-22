@@ -33,7 +33,7 @@ public class ArticlesApp extends Application {
     public static final int DEVELOPER_EXTRA_ID = 6;
     public static final int APP_EXTRA_ID = 7;
 
-    public static final String ITEM_ID = "ITEM_ID";
+    public static final String ITEM_INDEX = "ITEM_INDEX";
     public static final String CALLER_ID = "CALLER_ID";
     public static final String EXTRA_ID = "EXTRA_ID";
 

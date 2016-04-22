@@ -11,22 +11,30 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.android.volley.toolbox.NetworkImageView;
 
 import uk.ac.kent.fe44.edanews.model.Article;
 import uk.ac.kent.fe44.edanews.ArticlesApp;
 import uk.ac.kent.fe44.edanews.R;
-import uk.ac.kent.fe44.edanews.details.ArticleDetailsFragment;
 import uk.ac.kent.fe44.edanews.model.ArticleModel;
 
-public class ArticleDetailsActivity extends AppCompatActivity {
+public class ArticleDetailsActivity extends AppCompatActivity
+        implements ArticleModel.OnDetailsUpdateListener {
 
     private ArticleModel model = ArticleModel.getInstance();
-    private Article article;
-    private int itemId;
-    private int callerId;
+    private Article article;    //the actual article
+    private int itemIndex;      //the index of the item in the list
+    private int callerId;       //identifies the list this article is being opened from
+
+    //visual elements
+    private TextView articleTitle;
+    private TextView articleDate;
+    private TextView articleContents;
+    private NetworkImageView articlePhoto;
 
     private static FloatingActionButton plusFab;
     private static LinearLayout plusBar;
@@ -38,8 +46,8 @@ public class ArticleDetailsActivity extends AppCompatActivity {
     /**
      * Respond to clicks on fab button.
      */
-    private View.OnClickListener onPlusFabClickListener
-            = new View.OnClickListener() {
+    private View.OnClickListener onPlusFabClickListener =
+            new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Animator anim = createAnimator(plusBar, 600);
@@ -118,23 +126,10 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_article_details);
 
 
-//        if(Build.VERSION.SDK_INT >= 21) {
-//            postponeEnterTransition();
-//
-//            final View decor = getWindow().getDecorView();
-//            decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-//                @Override
-//                public boolean onPreDraw() {
-//                    if(Build.VERSION.SDK_INT >= 21) {
-//                        decor.getViewTreeObserver().removeOnPreDrawListener(this);
-//                        startPostponedEnterTransition();
-//                    }
-//                    return true;
-//                }
-//            });
-//        }
-
-
+        articleTitle = (TextView)findViewById(R.id.detail_title);
+        articleDate = (TextView)findViewById(R.id.detail_date);
+        articleContents = (TextView)findViewById(R.id.detail_contents);
+        articlePhoto = (NetworkImageView)findViewById(R.id.detail_img);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
         setSupportActionBar(toolbar);
@@ -142,11 +137,12 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
         // get extra values to pass on to fragment
         Intent i = getIntent();
-        itemId = i.getIntExtra(ArticlesApp.ITEM_ID, 0);
+        itemIndex = i.getIntExtra(ArticlesApp.ITEM_INDEX, 0);
         callerId = i.getIntExtra(ArticlesApp.CALLER_ID, ArticlesApp.ARTICLE_CALLER_ID);
 
         //take from the correct list based on the parent activity
         getArticle();
+        updateUI();
 
         //set up plus bar and plus fab if coming from search or article fragments
         if( (callerId == ArticlesApp.ARTICLE_CALLER_ID) || (callerId == ArticlesApp.SEARCH_CALLER_ID) ){
@@ -155,27 +151,49 @@ public class ArticleDetailsActivity extends AppCompatActivity {
         }else {
             hidePlus();
         }
-
-        ArticleDetailsFragment fragment = (ArticleDetailsFragment)getFragmentManager()
-                .findFragmentById(R.id.details_fragment);
-        fragment.updateDetails(itemId, callerId);
     }
 
     private void getArticle() {
         switch (callerId){
             case ArticlesApp.ARTICLE_CALLER_ID:
-                article = model.getArticleList().get(itemId);
+                article = model.getArticleList().get(itemIndex);
                 break;
             case ArticlesApp.FAVES_CALLER_ID:
-                article = model.getFavesList().get(itemId);
+                article = model.getFavesList().get(itemIndex);
                 break;
             case ArticlesApp.SAVED_CALLER_ID:
-                article = model.getSavedList().get(itemId);
+                article = model.getSavedList().get(itemIndex);
                 break;
             case ArticlesApp.SEARCH_CALLER_ID:
-                article = model.getSearchList().get(itemId);
+                article = model.getSearchList().get(itemIndex);
                 break;
         }
+    }
+
+    private void updateUI() {
+        //update UI with data
+        articleTitle.setText(article.getTitle());
+        articleDate.setText(article.getDate());
+        articlePhoto.setImageUrl(article.getImageURL(), ArticlesApp.getInstance().getImageLoader());
+
+        if(article.getContents() == null) {
+            //show appropriate network message
+            if(ArticlesApp.getInstance().networkIsAvailable()) {
+                articleContents.setText(R.string.loading_contents);
+
+                //load the article's details from the model
+                model.loadArticleDetails(callerId, article.getRecordID(), itemIndex, this);
+            }else{
+                articleContents.setText(R.string.no_network);
+            }
+        }else{
+            articleContents.setText(article.getContents());
+        }
+    }
+
+    @Override
+    public void onDetailsUpdate() {
+        articleContents.setText(article.getContents());
     }
 
     @Override

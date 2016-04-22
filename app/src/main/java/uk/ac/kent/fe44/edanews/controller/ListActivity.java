@@ -1,7 +1,5 @@
 package uk.ac.kent.fe44.edanews.controller;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -64,7 +62,7 @@ public abstract class ListActivity extends AppCompatActivity
         launchService = false;
         Intent i = new Intent(this, ArticleDetailsActivity.class);
 
-        i.putExtra(ArticlesApp.ITEM_ID, position);
+        i.putExtra(ArticlesApp.ITEM_INDEX, position);
         i.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         startActivity(i, bundle);
@@ -85,7 +83,7 @@ public abstract class ListActivity extends AppCompatActivity
         p.putExtra(ArticlesApp.SHORT_INFO, article.getShortInfo());
 
         //send what's needed to launch the details activity
-        p.putExtra(ArticlesApp.ITEM_ID, position);
+        p.putExtra(ArticlesApp.ITEM_INDEX, position);
         p.putExtra(ArticlesApp.CALLER_ID, callerId);
 
         startActivity(p);

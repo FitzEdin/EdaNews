@@ -29,13 +29,9 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <fragment
+    <include
         android:id="@+id/details_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        class="uk.ac.kent.fe44.edanews.details.ArticleDetailsFragment"
-        tools:layout="@layout/fragment_article_details" />
+        layout="@layout/content_article_details" />
 
     <!-- Plus Bar -->
     <LinearLayout
