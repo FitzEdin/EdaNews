@@ -329,7 +329,7 @@ public class ArticleListActivity extends ListActivity
     }
 
     private void goNear(int location) {
-        launchService = false;
+        launchService = true;
         ListFragment newFrag;
         callerId = location;    //one of the caller_ids outlined in ArticlesApp
 
