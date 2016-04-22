@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
@@ -44,7 +45,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
         protected Article article;
         protected Toolbar toolbar;
         protected FloatingActionButton fab;
-        protected CardView card;
+        protected LinearLayout card;
         protected TextView title;
         protected TextView date;
         protected NetworkImageView photo;
@@ -71,9 +72,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                         fragment.getActivity(),
                         Pair.create((View) card, ArticlesApp.TRANSITION_CARD),
                         Pair.create((View) toolbar, ArticlesApp.TRANSITION_TOOLBAR),
-                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)/*,
-                        Pair.create(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
-                        Pair.create(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME)*/
+                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)
                 );
                 fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }
@@ -136,7 +135,7 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
             //get a handle on UI views
             toolbar = (Toolbar)fragment.getActivity().findViewById(R.id.list_toolbar);
             fab = (FloatingActionButton)fragment.getActivity().findViewById(R.id.search_fab);
-            card = (CardView)itemView.findViewById(R.id.article_card);
+            card = (LinearLayout)itemView.findViewById(R.id.article_card);
             title = (TextView)itemView.findViewById(R.id.article_title);
             date = (TextView)itemView.findViewById(R.id.article_date);
             photo = (NetworkImageView)itemView.findViewById(R.id.article_photo);

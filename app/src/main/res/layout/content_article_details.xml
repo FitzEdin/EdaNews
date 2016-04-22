@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
@@ -14,30 +13,15 @@
 
     tools:context="uk.ac.kent.fe44.edanews.details.ArticleDetailsActivity">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-
-        android:layout_marginRight="@dimen/card_right_margin"
-        android:layout_marginLeft="@dimen/card_left_margin"
-        android:layout_marginTop="@dimen/card_top_margin"
-        android:layout_marginBottom="@dimen/card_bottom_margin"
-
-        card_view:cardCornerRadius="@dimen/card_corner_radius"
-        card_view:cardBackgroundColor="@color/white"
-        card_view:cardElevation="@dimen/elevation"
-
-        card_view:cardPreventCornerOverlap="true"
-
-        android:transitionName="article_card" >
-
         <LinearLayout
             android:id="@+id/article_card"
 
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
 
-            android:orientation="vertical" >
+            android:orientation="vertical"
+
+            android:transitionName="article_card" >
 
             <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/detail_img"
@@ -104,7 +88,5 @@
                 android:gravity="left"/>
 
         </LinearLayout>
-
-    </android.support.v7.widget.CardView>
 
 </ScrollView>

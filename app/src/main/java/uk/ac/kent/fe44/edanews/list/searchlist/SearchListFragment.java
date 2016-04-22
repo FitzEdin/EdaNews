@@ -8,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+
+import java.util.LinkedHashMap;
 
 import uk.ac.kent.fe44.edanews.model.ArticleModel;
 import uk.ac.kent.fe44.edanews.view.ListFragment;
@@ -25,13 +28,13 @@ public class SearchListFragment extends ListFragment
 
     private ProgressBar mProgressBar;
     private View view;
-    private CardView empty;
+    private LinearLayout empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //get the view and a handle on the progress Bar
         view = inflater.inflate(R.layout.fragment_search_list, container, false);
-        empty = (CardView) view.findViewById(R.id.empty_list);
+        empty = (LinearLayout) view.findViewById(R.id.empty_list);
 
         mProgressBar = (ProgressBar)view.findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.VISIBLE);

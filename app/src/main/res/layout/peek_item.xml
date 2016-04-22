@@ -10,118 +10,108 @@
     android:gravity="center"
 
     android:orientation="vertical">
-
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/peek_card"
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:orientation="vertical"
+
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
 
-        card_view:cardCornerRadius="@dimen/card_corner_radius"
-        card_view:cardBackgroundColor="@color/white"
-        card_view:cardElevation="@dimen/elevation"
-
-        android:padding="3dp"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation"
 
         android:transitionName="article_card" >
 
-        <LinearLayout
+        <!-- large image -->
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/peek_photo"
+            android:src="@drawable/ic_uok_logo_new"
+
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+
+            android:scaleType="centerCrop" />
+
+        <!-- article title -->
+        <TextView
+            android:id="@+id/peek_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp"
+
+            android:gravity="center"
+
+            android:text="@string/dummy_title"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="20sp"
+
+            android:lines="3" />
+
+        <!-- article short info -->
+        <TextView
+            android:id="@+id/peek_short_info"
+
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
 
-            android:orientation="vertical">
+            android:text="@string/dummy_short_info"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="16sp"
 
-            <!-- large image -->
-            <com.android.volley.toolbox.NetworkImageView
-                android:id="@+id/peek_photo"
-                android:src="@drawable/ic_uok_logo_new"
+            android:paddingLeft="6dp"
+            android:paddingBottom="2dp"
+            android:paddingRight="6dp"
 
-                android:layout_width="match_parent"
-                android:layout_height="162dp"
+            android:gravity="top" />
 
-                android:scaleType="centerCrop" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
 
-            <!-- article title -->
-            <TextView
-                android:id="@+id/peek_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:orientation="horizontal"
 
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp"
-                android:paddingTop="4dp"
+            android:layout_marginTop="2dp"
 
-                android:gravity="center"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
 
-                android:text="@string/dummy_title"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="20sp"
+            android:gravity="center">
 
-                android:lines="3" />
+            <!-- Icons: onClick functions are in .ArticleListActivity-->
+            <!-- read more icon -->
+            <ImageView
+                android:id="@+id/ic_close"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
 
-            <!-- article short info -->
-            <TextView
-                android:id="@+id/peek_short_info"
+                android:layout_weight="1"
 
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:hapticFeedbackEnabled="true"
 
-                android:text="@string/dummy_short_info"
-                android:textColor="@color/colorTextSecondary"
-                android:textSize="16sp"
+                android:src="@drawable/ic_close_black_24dp"
+                android:tint="@color/colorPrimaryDark"/>
 
-                android:paddingLeft="6dp"
-                android:paddingBottom="2dp"
-                android:paddingRight="6dp"
+            <!-- close icon -->
+            <ImageView
+                android:id="@+id/ic_more"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
 
-                android:gravity="top" />
+                android:layout_weight="1"
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="32dp"
+                android:hapticFeedbackEnabled="true"
 
-                android:orientation="horizontal"
-
-                android:layout_marginTop="2dp"
-
-                android:paddingBottom="4dp"
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-
-                android:gravity="center">
-
-                <!-- Icons: onClick functions are in .ArticleListActivity-->
-                <!-- read more icon -->
-                <ImageView
-                    android:id="@+id/ic_close"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-
-                    android:layout_weight="1"
-
-                    android:hapticFeedbackEnabled="true"
-
-                    android:src="@drawable/ic_close_black_24dp"
-                    android:tint="@color/colorPrimaryDark"/>
-
-                <!-- close icon -->
-                <ImageView
-                    android:id="@+id/ic_more"
-                    android:layout_width="0dp"
-                    android:layout_height="fill_parent"
-
-                    android:layout_weight="1"
-
-                    android:hapticFeedbackEnabled="true"
-
-                    android:src="@drawable/ic_more_horiz_black_48dp"
-                    android:tint="@color/colorPrimaryDark"/>
-            </LinearLayout>
+                android:src="@drawable/ic_more_horiz_black_48dp"
+                android:tint="@color/colorPrimaryDark"/>
         </LinearLayout>
-
-    </android.support.v7.widget.CardView>
+    </LinearLayout>
 
 </LinearLayout>

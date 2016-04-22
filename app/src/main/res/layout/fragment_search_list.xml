@@ -12,52 +12,43 @@
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ArticleListActivity" >
-
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:id="@+id/empty_list"
 
         android:layout_width="300dp"
         android:layout_height="100dp"
 
+        android:orientation="horizontal"
+
         android:layout_centerInParent="true"
 
-        card_view:cardCornerRadius="@dimen/card_corner_radius"
-        card_view:cardBackgroundColor="@color/white"
-        card_view:cardElevation="@dimen/elevation"
+        android:background="@color/white"
+        android:elevation="@dimen/elevation" >
 
-        card_view:cardPreventCornerOverlap="true" >
-        <LinearLayout
+        <!-- large image -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:padding="4dp"
 
-            android:orientation="horizontal" >
+            android:src="@drawable/papaya" />
 
-            <!-- large image -->
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+        <!-- article title -->
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
 
-                android:padding="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="4dp"
 
-                android:src="@drawable/papaya" />
+            android:text="@string/no_search"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="16sp"
 
-            <!-- article title -->
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-
-                android:paddingLeft="8dp"
-                android:paddingRight="8dp"
-                android:paddingTop="4dp"
-
-                android:text="@string/no_search"
-                android:textColor="@color/colorTextPrimary"
-                android:textSize="16sp"
-
-                android:gravity="center" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+            android:gravity="center" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_view"

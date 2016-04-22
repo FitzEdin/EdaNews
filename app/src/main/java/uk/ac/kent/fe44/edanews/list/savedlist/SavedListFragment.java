@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import uk.ac.kent.fe44.edanews.model.ArticleModel;
 import uk.ac.kent.fe44.edanews.view.ListFragment;
@@ -19,7 +20,7 @@ import uk.ac.kent.fe44.edanews.R;
 public class SavedListFragment extends ListFragment {
 
     private View view;
-    private CardView empty;
+    private LinearLayout empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -27,7 +28,7 @@ public class SavedListFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_saved_list, container, false);
-        empty = (CardView) view.findViewById(R.id.empty_saved_list);
+        empty = (LinearLayout) view.findViewById(R.id.empty_saved_list);
 
         //prep for config
         gridLayoutManager = new GridLayoutManager(getActivity(), 1);

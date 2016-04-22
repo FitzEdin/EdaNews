@@ -1,142 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<?xml version="1.0" encoding="utf-8"?><LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/article_card"
 
     android:layout_width="match_parent"
     android:layout_height="404dp"
+    android:orientation="vertical"
 
-    android:layout_marginTop="@dimen/card_top_margin"
-    android:layout_marginBottom="@dimen/card_bottom_margin"
-    android:layout_marginLeft="@dimen/card_left_margin"
-    android:layout_marginRight="@dimen/card_right_margin"
+    android:layout_marginTop="@dimen/tile_top_margin"
+    android:layout_marginBottom="@dimen/tile_bottom_margin"
+    android:layout_marginLeft="@dimen/tile_left_margin"
+    android:layout_marginRight="@dimen/tile_right_margin"
 
-    card_view:cardCornerRadius="@dimen/card_corner_radius"
-    card_view:cardBackgroundColor="@color/white"
-    card_view:cardElevation="@dimen/elevation"
+    android:background="@color/white"
+    android:elevation="@dimen/elevation"
 
-    card_view:cardPreventCornerOverlap="true"
+    android:focusable="true"
+    android:clickable="true"
 
-    android:transitionName="article_card">
-    <LinearLayout
+    android:transitionName="article_card" >
 
+    <!-- large image -->
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/article_photo"
+        android:src="@drawable/ic_uok_logo_new"
+
+        android:layout_width="fill_parent"
+        android:layout_height="324dp"
+        android:scaleType="centerCrop"
+
+        android:transitionName="article_photo" />
+
+    <!-- article title -->
+    <TextView
+        android:id="@+id/article_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_height="42dp"
 
-        android:focusable="true"
-        android:clickable="true" >
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
 
-        <!-- large image -->
-        <com.android.volley.toolbox.NetworkImageView
-            android:id="@+id/article_photo"
-            android:src="@drawable/ic_uok_logo_new"
+        android:text="@string/dummy_title"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="24sp"
 
-            android:layout_width="fill_parent"
-            android:layout_height="324dp"
-            android:scaleType="centerCrop"
+        android:gravity="center"
 
-            android:transitionName="article_photo" />
+        android:lines="1"
+        android:maxLength="25"
 
-        <!-- article title -->
+        android:transitionName="article_title" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="32dp"
+
+        android:orientation="horizontal"
+
+        android:layout_marginTop="2dp"
+
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+
+        android:gravity="center">
+
+        <!-- article date -->
         <TextView
-            android:id="@+id/article_title"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:id="@+id/article_date"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
 
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="4dp"
+            android:layout_weight="2"
 
-            android:text="@string/dummy_title"
-            android:textColor="@color/colorTextPrimary"
-            android:textSize="24sp"
+            android:text="@string/dummy_date"
+            android:textColor="@color/colorTextSecondary"
+            android:textSize="20sp"
 
             android:gravity="center"
 
             android:lines="1"
-            android:maxLength="25"
+            android:maxLength="10"
 
-            android:transitionName="article_title" />
+            android:transitionName="article_date" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="32dp"
+        <!-- Icons: onClick functions are in .ArticleListActivity-->
+        <!-- favourites icon -->
+        <ImageView
+            android:id="@+id/ic_faves"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
 
-            android:orientation="horizontal"
+            android:layout_weight="1"
 
-            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_favorite_border_black_24dp"
+            android:tint="@color/colorPrimaryDark"
 
-            android:paddingBottom="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
-            android:gravity="center">
+        <!-- save later icon -->
+        <ImageView
+            android:id="@+id/ic_save"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
 
-            <!-- article date -->
-            <TextView
-                android:id="@+id/article_date"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
+            android:layout_weight="1"
 
-                android:layout_weight="2"
+            android:src="@drawable/ic_watch_later_outline_black_24dp"
+            android:tint="@color/colorPrimaryDark"
 
-                android:text="@string/dummy_date"
-                android:textColor="@color/colorTextSecondary"
-                android:textSize="20sp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
-                android:gravity="center"
+        <!-- share icon -->
+        <ImageView
+            android:id="@+id/ic_share"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
 
-                android:lines="1"
-                android:maxLength="10"
+            android:layout_weight="1"
 
-                android:transitionName="article_date" />
+            android:src="@drawable/ic_share_black_24dp"
+            android:tint="@color/colorPrimaryDark"
 
-            <!-- Icons: onClick functions are in .ArticleListActivity-->
-            <!-- favourites icon -->
-            <ImageView
-                android:id="@+id/ic_faves"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_favorite_border_black_24dp"
-                android:tint="@color/colorPrimaryDark"
-
-                android:clickable="true"
-                android:background="?attr/selectableItemBackgroundBorderless" />
-
-            <!-- save later icon -->
-            <ImageView
-                android:id="@+id/ic_save"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_watch_later_outline_black_24dp"
-                android:tint="@color/colorPrimaryDark"
-
-                android:clickable="true"
-                android:background="?attr/selectableItemBackgroundBorderless" />
-
-            <!-- share icon -->
-            <ImageView
-                android:id="@+id/ic_share"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-
-                android:layout_weight="1"
-
-                android:src="@drawable/ic_share_black_24dp"
-                android:tint="@color/colorPrimaryDark"
-
-                android:clickable="true"
-                android:background="?attr/selectableItemBackgroundBorderless" />
-        </LinearLayout>
-
+            android:clickable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
     </LinearLayout>
-</android.support.v7.widget.CardView>
+
+</LinearLayout>
