@@ -70,9 +70,11 @@ public abstract class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewH
                 ActivityOptionsCompat optionsCompat
                         = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         fragment.getActivity(),
-                        Pair.create((View) card, ArticlesApp.TRANSITION_CARD),
+                        //Pair.create((View) card, ArticlesApp.TRANSITION_CARD),
                         Pair.create((View) toolbar, ArticlesApp.TRANSITION_TOOLBAR),
-                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB)
+                        Pair.create((View) fab, ArticlesApp.TRANSITION_FAB),
+                        Pair.create((View) title, ArticlesApp.TRANSITION_TITLE),
+                        Pair.create((View) photo, ArticlesApp.TRANSITION_PHOTO)
                 );
                 fragment.onItemClicked(getAdapterPosition(), optionsCompat.toBundle());
             }

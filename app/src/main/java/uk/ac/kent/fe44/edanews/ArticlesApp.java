@@ -40,8 +40,10 @@ public class ArticlesApp extends Application {
     public final static String RECORD_ID = "record_id", TITLE = "title", DATE = "date",
             SHORT_INFO = "short_info", IMAGE_URL = "image_url", CONTENTS = "contents";
     public final static String TAG_PEEK_ARTICLE = "peekArticleTag";
-    public final static String TRANSITION_CARD = "article_card",
-            TRANSITION_TOOLBAR = "toolbar", TRANSITION_FAB = "fab_button";
+    public final static String TRANSITION_TITLE = "article_title",
+            TRANSITION_TOOLBAR = "toolbar",
+            TRANSITION_FAB = "fab_button",
+            TRANSITION_PHOTO = "article_photo";
 
     public final static String PLAIN_TEXT = "text/plain";
     public final static String SAVED_COUNT = "saved_count";
