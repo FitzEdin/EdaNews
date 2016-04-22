@@ -59,10 +59,7 @@ public class ReadLaterService extends IntentService {
         Intent resultIntent = new Intent(this, ArticleListActivity.class);
         resultIntent.putExtra(ArticlesApp.EXTRA_ID, ArticlesApp.SAVED_CALLER_ID);
 
-        // The stack builder object will contain an artificial back stack for the
-        // started Activity.
-        // This ensures that navigating backward from the Activity leads out of
-        // your application to the Home screen.
+        //create an artificial backstack
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         // Adds the back stack for the Intent (but not the Intent itself)
         stackBuilder.addParentStack(ArticleListActivity.class);
@@ -76,7 +73,7 @@ public class ReadLaterService extends IntentService {
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        // mId allows you to update the notification later on.
+        //perform the notification
         mNotificationManager.notify(1, mBuilder.build());
     }
 }

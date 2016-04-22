@@ -2,7 +2,6 @@ package uk.ac.kent.fe44.edanews.list.articlelist;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
-import android.graphics.LinearGradient;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import uk.ac.kent.fe44.edanews.model.ArticleModel;
 import uk.ac.kent.fe44.edanews.ArticlesApp;
@@ -88,7 +86,7 @@ public class ArticleListFragment extends ListFragment
 
                 if ((dy > 0)
                         && (!loading)
-                        && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 3
+                        && (totalItemCount - (visibleItemCount + pastVisibleItems)) <= 5
                         ) {
                     //Toast.makeText(getActivity(), "They see me scrolling", Toast.LENGTH_SHORT).show();
                     tryForNetwork();
@@ -102,6 +100,11 @@ public class ArticleListFragment extends ListFragment
                 getData(true);
             }
         });
+        refreshArticleList.setColorSchemeResources(
+                R.color.colorAccent,
+                R.color.colorPrimaryDark
+        );
+        refreshArticleList.setSize(0);
     }
 
     /**

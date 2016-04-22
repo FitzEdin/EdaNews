@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import java.util.LinkedHashMap;
-
 import uk.ac.kent.fe44.edanews.model.ArticleModel;
 import uk.ac.kent.fe44.edanews.view.ListFragment;
 import uk.ac.kent.fe44.edanews.R;

@@ -39,6 +39,7 @@ public class ArticleDetailsActivity extends AppCompatActivity
     private static FloatingActionButton plusFab;
     private static LinearLayout plusBar;
 
+    //action buttons in the plusBar
     private ImageView faveIc;
     private ImageView savedIc;
     private ImageView shareIc;
@@ -59,7 +60,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
         }
     };
 
-    /* handle taps on fave button */
+    /**
+     * handle taps on fave button
+     */
     private View.OnClickListener faveICLstnr =
             new View.OnClickListener() {
                 @Override
@@ -79,6 +82,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
                 }
             };
 
+    /**
+     * Handle clicks on the save button
+     */
     private View.OnClickListener savedICLstnr =
             new View.OnClickListener() {
                 @Override
@@ -98,6 +104,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
                 }
             };
 
+    /**
+     * Share the article online.
+     */
     private View.OnClickListener shareICLstnr =
             new View.OnClickListener() {
                 @Override
@@ -112,6 +121,11 @@ public class ArticleDetailsActivity extends AppCompatActivity
                 }
             };
 
+    /**
+     * Get the article from the appropriate list, and
+     * populate the views.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +138,6 @@ public class ArticleDetailsActivity extends AppCompatActivity
             getWindow().setSharedElementEnterTransition(shared);
         }
         setContentView(R.layout.activity_article_details);
-
 
         articleTitle = (TextView)findViewById(R.id.detail_title);
         articleDate = (TextView)findViewById(R.id.detail_date);
@@ -146,6 +159,7 @@ public class ArticleDetailsActivity extends AppCompatActivity
         updateUI();
 
         //set up plus bar and plus fab if coming from search or article fragments
+        //hide the plusBar if coming from the saved or faves list
         if( (callerId == ArticlesApp.ARTICLE_CALLER_ID) || (callerId == ArticlesApp.SEARCH_CALLER_ID) ){
             setUpPlusFab();
             setUpPlusBar();
@@ -154,6 +168,11 @@ public class ArticleDetailsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Retrieve the article from the correct list; the
+     * callerId identifies which list to pull the article
+     * from.
+     */
     private void getArticle() {
         switch (callerId){
             case ArticlesApp.ARTICLE_CALLER_ID:
@@ -171,6 +190,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Update the visual elements with data from the article.
+     */
     private void updateUI() {
         //update UI with data
         articleTitle.setText(article.getTitle());
@@ -192,11 +214,17 @@ public class ArticleDetailsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Handle response from
+     */
     @Override
     public void onDetailsUpdate() {
         articleContents.setText(article.getContents());
     }
 
+    /**
+     * Save the master list to the database.
+     */
     @Override
     public void onStop() {
         super.onStop();
@@ -212,6 +240,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Set the correct icons based on the properties of the article.
+     */
     private void setCorrectIcons() {
         if(model.isInMaster(article.getRecordID())) {
             if(article.isFave()) {   faveIc.setImageResource(R.drawable.ic_favorite_black_24dp); }
