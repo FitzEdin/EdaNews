@@ -20,11 +20,9 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
 
-        card_view:cardCornerRadius="6dp"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardElevation="@dimen/elevation"
-
-        card_view:cardPreventCornerOverlap="true"
 
         android:padding="3dp"
 
