@@ -131,8 +131,9 @@ public class ArticleDetailsActivity extends AppCompatActivity
         articleContents = (TextView)findViewById(R.id.detail_contents);
         articlePhoto = (NetworkImageView)findViewById(R.id.detail_img);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.list_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.details_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.title_activity_article_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // get extra values to pass on to fragment

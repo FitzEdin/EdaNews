@@ -10,6 +10,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:layout_gravity="fill_vertical"
+
     android:background="@drawable/bg_crossword"
 
     tools:context="uk.ac.kent.fe44.edanews.controller.ScrollingActivity">
@@ -19,6 +21,8 @@
         android:layout_height="wrap_content"
 
         android:orientation="vertical"
+
+        android:paddingBottom="80dp"
 
         android:layout_margin="@dimen/text_margin">
 
@@ -30,9 +34,6 @@
 
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
 
             android:text="@string/dummy_contents"
             android:textSize="21sp"

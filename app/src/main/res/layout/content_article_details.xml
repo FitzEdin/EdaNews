@@ -10,6 +10,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:layout_gravity="fill_vertical"
+
     android:background="@drawable/bg_crossword"
 
     tools:context="uk.ac.kent.fe44.edanews.details.ArticleDetailsActivity">
@@ -20,7 +22,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:orientation="vertical" >
+            android:orientation="vertical"
+
+            android:paddingBottom="80dp"
+
+            android:layout_margin="16dp" >
 
             <!-- Article Title -->
             <TextView
@@ -29,14 +35,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
-
                 android:text="@string/dummy_title"
                 android:textSize="24sp"
                 android:textColor="@color/colorTextPrimary"
 
-                android:gravity="center_horizontal|center_vertical"
+                android:gravity="center"
 
                 android:transitionName="article_title" />
 
@@ -64,8 +67,9 @@
 
                 android:layout_marginTop="8dp"
 
-                android:layout_marginLeft="@dimen/text_margin"
-                android:layout_marginRight="@dimen/text_margin"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="24dp"
 
                 android:text="@string/dummy_contents"
                 android:textSize="20sp"

@@ -11,13 +11,14 @@
     tools:context="uk.ac.kent.fe44.edanews.controller.ArticleDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:fitsSystemWindows="true"
+
         android:layout_height="400dp"
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
 
         android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/details_toolbar_layout"
             android:fitsSystemWindows="true"
 
             android:layout_width="match_parent"
@@ -36,6 +37,7 @@
 
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
+
                 android:src="@drawable/ic_uok_logo_new"
 
                 android:fitsSystemWindows="true"
@@ -45,15 +47,13 @@
                 android:transitionName="article_photo" />
 
             <android.support.v7.widget.Toolbar
-                android:id="@+id/list_toolbar"
+                android:id="@+id/details_toolbar"
 
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
 
-                android:title="@string/title_activity_article_details"
-
                 app:layout_collapseMode="pin"
-                app:layout_scrollFlags="snap|exitUntilCollapsed"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
 
                 android:transitionName="toolbar" />
@@ -63,6 +63,7 @@
 
     <include
         android:id="@+id/details_fragment"
+        android:paddingBottom="8dp"
         layout="@layout/content_article_details" />
 
     <!-- Plus Bar -->
