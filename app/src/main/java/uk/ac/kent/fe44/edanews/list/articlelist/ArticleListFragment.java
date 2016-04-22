@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.graphics.LinearGradient;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ public class ArticleListFragment extends ListFragment
     private LinearLayout noNetworkRetry;
     private ProgressBar mProgressBar;
     private boolean loading = false;
+    private SwipeRefreshLayout refreshArticleList;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -70,6 +72,8 @@ public class ArticleListFragment extends ListFragment
      * @param view The fragment to place the list view in
      */
     protected void setUpListView(View view) {
+        refreshArticleList =
+                (SwipeRefreshLayout)view.findViewById(R.id.refresh_article_list);
         listView = (RecyclerView)view.findViewById(R.id.article_list_view);
         listView.setLayoutManager(gridLayoutManager);
         listView.setAdapter(listAdapter);
@@ -90,6 +94,12 @@ public class ArticleListFragment extends ListFragment
                     tryForNetwork();
                     loading = true;
                 }
+            }
+        });
+        refreshArticleList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData(true);
             }
         });
     }
@@ -174,6 +184,7 @@ public class ArticleListFragment extends ListFragment
         if(listAdapter != null) {
             listAdapter.notifyDataSetChanged();
             mProgressBar.setVisibility(View.INVISIBLE);
+            refreshArticleList.setRefreshing(false);
         }
 
         loading = false;

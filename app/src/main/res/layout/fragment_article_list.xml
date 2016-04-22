@@ -12,14 +12,23 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".controller.ArticleListActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/article_list_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_article_list"
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="match_parent">
 
-        android:layout_marginTop="?attr/actionBarSize">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/article_list_view"
 
-    </android.support.v7.widget.RecyclerView>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginTop="?attr/actionBarSize">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar"

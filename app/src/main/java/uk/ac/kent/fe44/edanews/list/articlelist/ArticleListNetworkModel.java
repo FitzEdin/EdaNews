@@ -22,7 +22,7 @@ public class ArticleListNetworkModel extends ListNetworkModel {
     private ArticleModel.OnListUpdateListener listUpdateListener;
 
     /**  */
-    private int mStart = 0;
+    private int mStart = -20;
     /** The number fo articles to download from the network per request. */
     private int size = 20;
 
