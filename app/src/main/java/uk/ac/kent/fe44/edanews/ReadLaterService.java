@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import uk.ac.kent.fe44.edanews.controller.ArticleListActivity;
+import uk.ac.kent.fe44.edanews.model.Article;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -58,6 +59,7 @@ public class ReadLaterService extends IntentService {
         }
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, ArticleListActivity.class);
+        resultIntent.putExtra(ArticlesApp.EXTRA_ID, ArticlesApp.SAVED_CALLER_ID);
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.

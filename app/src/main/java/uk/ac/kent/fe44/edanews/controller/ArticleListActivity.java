@@ -113,21 +113,22 @@ public class ArticleListActivity extends ListActivity
                     .add(R.id.list_fragment, firstFragment).commit();
         }
 
-        //load master list from database
-        ArticleModel.getInstance().loadMasterList(this);
-
-        //set up caller id for ArticleDetailsActivity
-        callerId = ArticlesApp.ARTICLE_CALLER_ID;
-
         navView = (NavigationView) findViewById(R.id.nav_view);
         navView.setNavigationItemSelectedListener(this);
-        navView.setCheckedItem(R.id.nav_home);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        //load master list from database
+        ArticleModel.getInstance().loadMasterList(this);
+
+        //open the saved list if coming from the notification
+        Intent intent = getIntent();
+        callerId = intent.getIntExtra(ArticlesApp.EXTRA_ID, ArticlesApp.ARTICLE_CALLER_ID);
+        goNear(callerId);
     }
 
     private Animator createAnimator(View showMe, long duration) {
