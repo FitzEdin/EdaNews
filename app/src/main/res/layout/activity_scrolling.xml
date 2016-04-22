@@ -2,8 +2,12 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+
     tools:context="uk.ac.kent.fe44.edanews.controller.ScrollingActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -63,7 +67,6 @@
 
     <include
         android:id="@+id/extra_fragment"
-
         layout="@layout/content_scrolling" />
 
     <android.support.design.widget.FloatingActionButton

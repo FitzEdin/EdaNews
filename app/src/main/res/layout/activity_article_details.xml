@@ -11,21 +11,53 @@
     tools:context="uk.ac.kent.fe44.edanews.controller.ArticleDetailsActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
 
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/list_toolbar"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:fitsSystemWindows="true"
 
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="match_parent"
 
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:contentScrim="@color/colorPrimary"
+            app:statusBarScrim="@color/colorPrimaryDark"
 
-            android:transitionName="toolbar" />
+            app:layout_scrollFlags="scroll|exitUntilCollapsed" >
+
+            <com.android.volley.toolbox.NetworkImageView
+                android:id="@+id/detail_img"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_uok_logo_new"
+
+                android:fitsSystemWindows="true"
+
+                app:layout_collapseMode="parallax"
+
+                android:transitionName="article_photo" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/list_toolbar"
+
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+
+                android:title="@string/title_activity_article_details"
+
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="snap|exitUntilCollapsed"
+                app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay"
+
+                android:transitionName="toolbar" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
