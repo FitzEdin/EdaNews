@@ -30,16 +30,19 @@ public class ArticleListNetworkModel extends ListNetworkModel {
     private static String CLIENT_URL = "http://www.efstratiou.info/projects/newsfeed/getList.php?start=";
 
     /**
-     * Populates this object's list of articles from multiple
-     * sources. The first twenty articles are pulled from the
-     * MasterListModel, via the ArticleModel. A network call
-     * is then made to check for newer articles, which are
-     * added to the head of the list. When the list is
-     * scrolled, further network calls are made to populate
-     * the list of articles with older articles.
-     * @param listUpdateListener
+     * Populates this object's list of articles from the network. A call is made
+     * to check for articles, which are added to the head of the list. When the
+     * list is scrolled, further network calls are made to populate it with older
+     * articles.
+     * If refresh is true, then the list is cleared out and loaded with a new set of
+     * @param listUpdateListener The object listening for chages to this list.
+     * @param refresh boolean Whether or not to reload the articles from the service
      */
-    public void load(ArticleModel.OnListUpdateListener listUpdateListener) {
+    public void load(ArticleModel.OnListUpdateListener listUpdateListener, boolean refresh) {
+        if(refresh) {
+            mStart = 0;
+            list.clear();
+        }
         //set calling class as listener
         setOnListUpdateListener(listUpdateListener);
         //if mstart = 0, load data from the MasterList AND check for newer article

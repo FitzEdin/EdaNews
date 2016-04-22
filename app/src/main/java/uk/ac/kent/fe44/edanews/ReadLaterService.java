@@ -9,16 +9,14 @@ import android.os.CountDownTimer;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
-import android.widget.Toast;
 
 import uk.ac.kent.fe44.edanews.controller.ArticleListActivity;
-import uk.ac.kent.fe44.edanews.model.Article;
 
 /**
- * An {@link IntentService} subclass for handling asynchronous task requests in
- * a service on a separate handler thread.
- * <p/>
+ * <p>
+ * An {@link IntentService} subclass for notifying the user
+ * about saved articles to be read.
+ * </p>
  */
 public class ReadLaterService extends IntentService {
 

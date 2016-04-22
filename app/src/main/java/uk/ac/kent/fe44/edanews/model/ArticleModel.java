@@ -184,8 +184,8 @@ public class ArticleModel {
      *                           ArticleListNetworkModel object. This class should implement
      *                           the OnListUpdateListener interface.
      */
-    public void loadData(OnListUpdateListener listUpdateListener) {
-        articleModel.load(listUpdateListener);
+    public void loadData(OnListUpdateListener listUpdateListener, boolean refresh) {
+        articleModel.load(listUpdateListener, refresh);
     }
     /**
      * Each class that uses data from the newsfeed should

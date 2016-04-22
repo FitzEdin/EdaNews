@@ -187,16 +187,16 @@ public class ArticleListFragment extends ListFragment
         if(ArticlesApp.getInstance().networkIsAvailable()){   //network is there? grab things
             //hide no network message if present, show fab+progress bar
             mProgressBar.setVisibility(View.VISIBLE);
-            getData();
+            getData(false);
         }else {        //no network? hide progress bar and tell the user
             noNetworkRetry.setVisibility(View.VISIBLE);
         }
     }
 
-    private void getData() {
+    private void getData(boolean refresh) {
         ArticleModel model = ArticleModel.getInstance();
 
         //load data from network and listen for response
-        model.loadData(this);
+        model.loadData(this, refresh);
     }
 }
